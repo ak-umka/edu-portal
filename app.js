@@ -2,6 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const cookieParser = require('cookie-parser');
+
+const errorMiddleware = require('./middlewares/error-middleware');
+const router = require('./routes/auth-route');
 
 dotenv.config();
 
@@ -9,7 +13,10 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(cors());
+app.use(cookieParser());
 app.use(express.json());
+app.use('/api/v0/', router);
+app.use(errorMiddleware);
 
 
 const start = async () => {
