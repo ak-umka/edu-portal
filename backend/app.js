@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 
 const errorMiddleware = require('./middlewares/error-middleware');
 const router = require('./routes/auth-route');
+const postRouter = require('./routes/post-route');                          
 
 dotenv.config();
 
@@ -15,7 +16,7 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
-app.use('/api/v0/', router);
+app.use('/api/v0/', router, postRouter);
 app.use(errorMiddleware);
 
 

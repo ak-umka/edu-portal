@@ -42,14 +42,6 @@ class AuthController {
         }
     }
 
-    // async activate (req, res) {
-    //     try {
-            
-    //     } catch (error) {
-            
-    //     }
-    // }
-
     async refresh (req, res, next) {
         try {
             const { refreshToken } = req.cookies;
