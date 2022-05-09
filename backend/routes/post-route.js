@@ -7,7 +7,8 @@ const router = new Router();
 
 router.post('/createPost', authMiddleware,  PostController.createPost);
 router.get('/getPost/:id', PostController.getPost);
-router.get('/deletePost/:id', PostController.deletePost);
+router.post('/getPost/:id/comment', authMiddleware,  PostController.commentPost);
+router.delete('/deletePost/:id', authMiddleware, PostController.deletePost);
 router.get('/getPosts', PostController.getPosts);
 
 

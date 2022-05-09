@@ -2,6 +2,7 @@ const {validationResult} = require('express-validator');
 
 const ApiError = require('../exceptions/api-error');
 const postModel = require('../models/post-model');
+const commentPost = require('../models/comment-model');
 
 
 class PostController {
@@ -9,6 +10,7 @@ class PostController {
         try {
             const newPost = new postModel ({
                 title: req.body.title,
+                photo: req.body.photo,
                 content: req.body.content,
                 creator: req.user,
                 createdAt: new Date().toISOString()
@@ -58,6 +60,29 @@ class PostController {
             
         } catch (error) {
             console.log(error);
+        }
+    }
+
+    async commentPost (req, res, next) {
+        // const { id } = req.params;
+        try {
+            const comment = new commentPost ({
+                comment: req.body.comment,
+                author: req.user,
+                createdAt: new Date().toISOString()
+            });
+            await comment.save();
+            res.status(201).json(comment);
+            const post = await postModel.findById(req.params.id);
+            if (!post) {
+                return next(ApiError.NotFoundError('No post found'));
+            }
+            // console.log(post);
+            // console.log(post.comment)
+            post.comment.push(comment);
+            await post.save();
+        } catch (error) {
+            next(error);
         }
     }
 }
