@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { connect } from "react-redux";
-import { signup } from "@/redux/action/authAction";
+import { useDispatch,connect } from "react-redux";
+import { login } from "@/redux/action/authAction";
+import { useRouter } from "next/router";
 
 function SignIn(props) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const router = useRouter();
 
   const {
     register,
@@ -13,16 +15,17 @@ function SignIn(props) {
     formState: { errors },
   } = useForm();
 
+  const dispatch = useDispatch();
 
-  const onSubmit = async (data) => {
-    // await props.signup(data)
-    axios
-    .post("http://localhost:5000/api/v0/signup", data)
-    .then((response) => {
-      console.log(response.data);
-    })
-    .catch(e=>console.log(e));
-  };
+  function onSubmit(email, password) {
+    dispatch(login(email, password));
+  }
+
+useEffect(()=>{
+  if(props.errorMessage==="Login Successfully Completed"){
+    router.push("/")
+  }
+},[props.errorMessage])
 
   return (
     <section className="sign-in">
@@ -117,12 +120,10 @@ function SignIn(props) {
   );
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    signup: async (payload) => {
-      await dispatch(await signup(payload));
-    },
-  }
-}
+    errorMessage: state.auth.errorMessage,
+  };
+};
 
-export default connect(mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps) (SignIn);

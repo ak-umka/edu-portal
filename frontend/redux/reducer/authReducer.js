@@ -1,31 +1,46 @@
-import { SET_TOKENS, SET_LOGGED_IN, SET_USERS } from "../types";
+import {
+  SIGNUP_CONFIRMED,
+  SIGNUP_FAILED,
+  LOGIN_CONFIRMED,
+  LOGIN_FAILED
+} from "../action/authAction";
 
 const initialState = {
-  user: null,
-  logged: false,
-  tokens: [],
+  auth: {
+    email: "",
+    id: "",
+    accessToken: "",
+    refreshToken: "",
+  },
+  errorMessage: "",
 };
 
-export default function (state = initialState, action) {
-  const { type, payload } = action;
-  switch (type) {
-    case SET_USERS:
-      const user = payload ? { ...state.user, ...payload } : null;
-      return {
-        ...state,
-        user,
-      };
-    case SET_LOGGED_IN:
-      return {
-        ...state,
-        logged: payload,
-      };
-    case SET_TOKENS:
-      return {
-        ...state,
-        tokens: payload,
-      };
-    default:
-      return state;
+export function authReducer(state = initialState, action) {
+  if (action.type === SIGNUP_CONFIRMED) {
+    return {
+      ...state,
+      auth: action.payload,
+    };
   }
+  if (action.type === LOGIN_CONFIRMED){
+      return{
+          ...state,
+          auth:action.payload,
+          errorMessage: "Login Successfully Completed"
+      }
+  }
+  if (action.type === LOGIN_FAILED){
+    return{
+        ...state,
+        errorMessage: "Login Failed"
+    }
+}
+    if (action.type === SIGNUP_FAILED) {
+      return {
+        ...state,
+        errorMessage: action.payload,
+      };
+    }
+
+  return state;
 }
