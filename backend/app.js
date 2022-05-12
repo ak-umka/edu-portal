@@ -16,6 +16,7 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
+app.use('/upload/images', express.static('/upload/images'));
 app.use('/api/v0/', router, postRouter);
 app.use(errorMiddleware);
 

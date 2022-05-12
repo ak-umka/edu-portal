@@ -4,13 +4,12 @@ const ApiError = require('../exceptions/api-error');
 const postModel = require('../models/post-model');
 const commentPost = require('../models/comment-model');
 
-
 class PostController {
     async createPost (req, res, next) {
         try {
             const newPost = new postModel ({
                 title: req.body.title,
-                photo: req.body.photo,
+                photo: req.file.path,
                 content: req.body.content,
                 creator: req.user,
                 createdAt: new Date().toISOString()
