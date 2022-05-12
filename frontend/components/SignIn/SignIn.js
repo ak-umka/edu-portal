@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch,connect } from "react-redux";
 import { login } from "@/redux/action/authAction";
 import { useRouter } from "next/router";
+import { isAuthenticated } from "@/redux/selector/authSelector";
 
 function SignIn(props) {
   const [email, setEmail] = useState();
@@ -22,10 +23,11 @@ function SignIn(props) {
   }
 
 useEffect(()=>{
-  if(props.errorMessage==="Login Successfully Completed"){
+  if(props.isAuthenticated){
     router.push("/")
   }
-},[props.errorMessage])
+},[props.isAuthenticated])
+
 
   return (
     <section className="sign-in">
@@ -122,7 +124,7 @@ useEffect(()=>{
 
 const mapStateToProps = (state) => {
   return {
-    errorMessage: state.auth.errorMessage,
+    isAuthenticated: isAuthenticated(state)
   };
 };
 

@@ -2,7 +2,7 @@ import data from "@/public/data.json";
 
 function Footer() {
   return (
-    <footer className="footer">
+    <footer className="footer mt-auto">
       <div
         className="px-4 py-5 px-md-5 text-center text-lg-start"
         style={{ backgroundColor: "hsl(217, 10%, 50.8%)" }}

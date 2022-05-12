@@ -8,6 +8,9 @@ export const SIGNUP_FAILED = "SIGNUP_FAILED";
 export const LOGIN_CONFIRMED = "LOGIN_CONFIRMED";
 export const LOGIN_FAILED = "LOGIN_FAILED";
 
+//logout
+export const LOGOUT = "LOGOUT";
+
 //signup finction
 export function signup(email, password) {
   return (dispatch) => {
@@ -16,6 +19,7 @@ export function signup(email, password) {
       .then((response) => {
         dispatch(SignupConfirmed(response.data));
         localStorage.setItem('token', JSON.stringify(response.data.accessToken))
+        localStorage.setItem('user', JSON.stringify(response.data))
       })
       .catch((error) => {
         console.log(error.response.data.message)
@@ -58,9 +62,11 @@ export function login(email, password, token){
       .post(`http://localhost:5000/api/v0/signin`, email, password, config)
       .then((response)=>{
         dispatch(LoginConfirmed(response.data))
+        localStorage.setItem('token', JSON.stringify(response.data.accessToken))
+        localStorage.setItem('user', JSON.stringify(response.data))
       })
       .catch((error)=>{
-        dispatch(LoginFailed(error.response.data.error.message))
+        dispatch(LoginFailed(error.response.data))
       })
   }
 }
@@ -79,4 +85,11 @@ export function LoginFailed(data){
   }
 }
 
-//
+//logout
+
+export function logout(){
+  localStorage.removeItem('user');
+  return{
+    type:LOGOUT,
+  }
+}
