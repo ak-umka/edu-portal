@@ -9,7 +9,7 @@ class PostController {
         try {
             const newPost = new postModel ({
                 title: req.body.title,
-                photo: req.file.path,
+                photo: req.protocol + '://' + req.host + ':5000/' + req.file.path,
                 content: req.body.content,
                 creator: req.user,
                 createdAt: new Date().toISOString()
@@ -65,21 +65,20 @@ class PostController {
     async commentPost (req, res, next) {
         // const { id } = req.params;
         try {
-            const comment = new commentPost ({
+            const newComment = new commentPost ({
                 comment: req.body.comment,
                 author: req.user,
                 createdAt: new Date().toISOString()
             });
-            await comment.save();
-            res.status(201).json(comment);
+            const saveComment = await newComment.save();
+            // res.status(201).json(newComment);
             const post = await postModel.findById(req.params.id);
             if (!post) {
                 return next(ApiError.NotFoundError('No post found'));
             }
-            // console.log(post);
-            // console.log(post.comment)
-            post.comment.push(comment);
+            post.comment.push(saveComment);
             await post.save();
+            res.status(201).json(saveComment);
         } catch (error) {
             next(error);
         }
