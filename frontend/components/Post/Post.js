@@ -6,12 +6,15 @@ import { useEffect, useState } from "react";
 import Spinner from "../Loading/Loading";
 import { useRouter } from "next/router";
 import { isAuthenticated } from "@/redux/selector/authSelector";
+import moment from 'moment';
 
 function Post(props) {
   const router = useRouter();
   const { id } = router.query;
   const post = props.post;
   const [comment, setComment] = useState();
+  const formattedTime = moment(post?.createdAt).format('DD/MM/YYYY HH:mm');
+  
 
   useEffect(() => {
     console.log(id);
@@ -31,13 +34,13 @@ function Post(props) {
         <div className="row align-items-center justify-content-center">
           <div className="col text-center">
             <img
-              src={`http://localhost:5000/${post?.photo}`}
+              src={`${post?.photo}`}
               alt="..."
               className="post-image"
             />
           </div>
           <div className="col-6 text-center">
-            <p>Published: {post?.createdAt}</p>
+            <p>Published: {formattedTime}</p>
             <div className="d-flex justify-content-center">
               <div className="col-lg-6 col-12">
                 <h3 className="py-2">{post?.title}</h3>
