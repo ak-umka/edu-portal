@@ -2,14 +2,20 @@ import data from "@/public/data.json";
 import { connect, useDispatch } from "react-redux";
 import { logout } from "@/redux/action/authAction";
 import { isAuthenticated } from "@/redux/selector/authSelector";
+import {useEffect} from "react";
 
 function Header(props) {
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    console.log(props.isAuthenticated);
+  },[props.isAuthenticated])
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white">
       <div className="container mx-auto ">
-        <a className="navbar-brand m-4" href="/">
-          <h4 className="text-primary text-center">E-Portal</h4>
+        <a className="navbar-brand m-4 text-primary" href="/">
+          <strong>E-Portal</strong>
         </a>
         <button
           className="navbar-toggler"
@@ -24,20 +30,28 @@ function Header(props) {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            {data.navbar.navItems.map((item, idx) => (
-              <li className="nav-item" key={`${idx}`}>
-                <a
-                  className="nav-link active "
-                  aria-current="page"
-                  href={`${item.link}`}
-                >
-                  {item.name}
+            <li className="nav-item">
+              <a className="nav-link active " aria-current="page" href="/">
+                Home
+              </a>
+            </li>
+            {props.isAuthenticated ? (
+              <li className="nav-item">
+                <a className="nav-link active" aria-current="page" href="/create">
+                  Create
                 </a>
               </li>
-            ))}
+            ) : (
+              <></>
+            )}
           </ul>
           {props.isAuthenticated ? (
-            <a className="btn btn-outline-primary m-1" onClick={()=>dispatch(logout())}>Log out</a>
+            <a
+              className="btn btn-outline-primary m-1"
+              onClick={() => dispatch(logout())}
+            >
+              Log out
+            </a>
           ) : (
             <div className="auth-buttons">
               {data.navbar.buttons.map((button, idx) => (
@@ -59,7 +73,7 @@ function Header(props) {
 
 const mapStateToProps = (state) => {
   return {
-    isAuthenticated: isAuthenticated(state)
+    isAuthenticated: isAuthenticated(state),
   };
 };
 

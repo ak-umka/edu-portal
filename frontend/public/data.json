@@ -4,13 +4,25 @@
             {
                 "name":"Home", 
                 "link":"/"
-            },
-            {
-                "name":"Explore", 
-                "link":"/explore"
             }
         ],
         "buttons":[
+            {
+                "name":"Sign In",
+                "link":"/signin"
+            },
+            {
+                "name":"Sign Up",
+                "link":"/signup"
+            }
+        ]
+    },
+    "footer":{
+        "FooterItems":[
+            {
+                "name":"Home", 
+                "link":"/"
+            },
             {
                 "name":"Sign In",
                 "link":"/signin"
