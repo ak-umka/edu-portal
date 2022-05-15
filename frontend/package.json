@@ -26,7 +26,8 @@
     "react-yandex-maps": "^4.6.0",
     "redux": "^4.2.0",
     "redux-devtools-extension": "^2.13.9",
-    "redux-thunk": "^2.4.1"
+    "redux-thunk": "^2.4.1",
+    "reselect": "^4.1.5"
   },
   "devDependencies": {
     "eslint": "8.14.0",

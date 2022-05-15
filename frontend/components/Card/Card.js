@@ -1,11 +1,14 @@
 export default function Card(props) {
-  const post=props.post;
+  const post = props.post;
 
   return (
-    <div className="card border-0 shadow-sm mb-5 bg-white rounded-3" style={{ width: "18rem" }}>
+    <div
+      className="card border-0 shadow-sm mb-5 bg-white rounded-3"
+      style={{ width: "18rem" }}
+    >
       <img
-        src="https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg"
-        className="card-img-top p-2 rounded-4"
+        src={`http://localhost:5000/api/v0/${post?.photo}`}
+        className="card-img-top"
         alt="..."
       />
       <div className="card-body">
@@ -14,7 +17,7 @@ export default function Card(props) {
         </h6>
         <p className="card-text">Created: {post?.createdAt}</p>
         <div className="text-center">
-          <a className="btn btn-text text-primary">Read more</a>
+          <a className="btn btn-text text-primary" href={`/posts/${post?._id}`}>Read more</a>
         </div>
       </div>
     </div>

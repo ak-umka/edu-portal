@@ -4,7 +4,7 @@ import { faLocationDot, faPhone,  } from "@fortawesome/free-solid-svg-icons";
 
 function Footer() {
   return (
-    <footer className="footer mt-auto">
+    <footer className="footer">
       <div className="px-4 py-5 px-md-5 text-center text-lg-start">
         <div className="container">
           <div className="row gx-lg-5">

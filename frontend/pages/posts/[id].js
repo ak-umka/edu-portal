@@ -1,14 +1,15 @@
+import Post from "@/components/Post/Post";
 import Header from "@/components/Header/Header";
-import Explore from "@/components/Explore/Explore";
 import Footer from "@/components/Footer/Footer";
 
-
-export default function Home(){
-  return(
+function PostPage() {
+  return (
     <div className="main">
-      <Header/>
-      <Explore/>
+      <Header />
+      <Post />
       <Footer />
     </div>
-  )
+  );
 }
+
+export default PostPage;

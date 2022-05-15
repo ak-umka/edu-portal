@@ -1,9 +1,9 @@
-import { YMaps, Placemark, Map } from "react-yandex-maps";
 import Card from "../Card/Card";
 import { useDispatch, connect } from "react-redux";
 import { getPostsAction } from "@/redux/action/postsAction";
 import { bindActionCreators } from "redux";
 import { useEffect } from "react";
+import Spinner from "../Loading/Loading";
 
 function Explore(props) {
   const posts = props.posts;
@@ -29,7 +29,13 @@ function Explore(props) {
   return (
     <div className="explore">
       <div className="container mx-auto">
-        <div className="row">{displayPostCards}</div>
+        {posts.length === 0 ? (
+          <div className="spinner d-flex align-items-center justify-content-center">
+            <Spinner />{" "}
+          </div>
+        ) : (
+          <div className="row">{displayPostCards}</div>
+        )}
       </div>
     </div>
   );
