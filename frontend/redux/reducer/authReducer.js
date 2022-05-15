@@ -4,6 +4,7 @@ import {
   LOGIN_CONFIRMED,
   LOGIN_FAILED,
   LOGOUT,
+  REFRESH_TOKEN
 } from "../action/authAction";
 
 const initialState = {
@@ -53,6 +54,12 @@ export function authReducer(state = initialState, action) {
       errorMessage: action.payload,
     };
   }
-
+  if (action.type === REFRESH_TOKEN) {
+    return{
+      ...state,
+      auth: action.payload,
+      errorMessage: "Token is refreshed",
+    }
+  }
   return state;
 }

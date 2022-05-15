@@ -26,9 +26,7 @@ function SignUp(props) {
   return (
     <section className="sign-up">
       <div
-        className="px-4 py-5 px-md-5 text-center text-lg-start"
-        style={{ backgroundColor: "hsl(0, 0%, 96%)" }}
-      >
+        className="px-4 py-5 px-md-5 text-center text-lg-start">
         <div className="container">
           <div className="row gx-lg-5 align-items-center">
             <div className="col-lg-6 mb-5 mb-lg-0">
