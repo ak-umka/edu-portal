@@ -19,8 +19,6 @@ function Post(props) {
     props.users();
   }, [id]);
 
-  useEffect(() => {}, [props.isAuthenticated]);
-
   const onSubmit = (data) => {
     dispatch(postComment(data, id));
   };
