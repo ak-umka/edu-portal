@@ -14,15 +14,12 @@ function Explore(props) {
     }
   }, [props.getPostsAction]);
 
-  useEffect(() => {
-    console.log(props.posts);
-  }, [props.posts]);
 
   const displayPostCards =
     posts &&
     posts.map((post, idx) => (
-      <div className="col-4 d-flex justify-content-center">
-        <Card post={post} key={idx} />
+      <div key={idx} className="col-4 d-flex justify-content-center">
+        <Card post={post} />
       </div>
     ));
 

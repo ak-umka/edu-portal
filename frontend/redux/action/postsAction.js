@@ -10,6 +10,7 @@ export const EDIT_POST = "EDIT_POST";
 export const CONFIRMED_EDIT_POST = "CONFIRMED_EDIT_POST";
 export const CONFIRMED_DELETE_POST = "CONFIRMED_DELETE_POST";
 export const CONFIRMED_GET_POST = "CONFIRMED_GET_POST";
+export const COMMENTS = "COMMENTS";
 
 //get posts
 
@@ -34,11 +35,26 @@ export function getPost(id) {
     axios
       .get(`http://localhost:5000/api/v0/getPost/${id}`)
       .then((response) => {
-          dispatch(confirmedGetPost(response.data))
+        dispatch(confirmedGetPost(response.data));
       })
-      .catch((e)=>{
-          console.log(e)
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+}
+
+//post comments
+
+export function postComment(comment, id) {
+  return (dispatch) => {
+    axios
+      .post(`http://localhost:5000/api/v0/getPost/${id}/comment`, comment)
+      .then((response) => {
+        dispatch(comment(response.data));
       })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 }
 
@@ -57,5 +73,14 @@ export function confirmedGetPost(post) {
   return {
     type: CONFIRMED_GET_POST,
     payload: post,
+  };
+}
+
+//comments
+
+export function comment(data) {
+  return {
+    type: COMMENTS,
+    payload: data,
   };
 }
