@@ -1,40 +1,36 @@
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { getPost } from "@/redux/action/postsAction";
 import { users } from "@/redux/action/authAction";
 import { bindActionCreators } from "redux";
 import { useEffect, useState } from "react";
-import Spinner from "../Loading/Loading";
 import { useRouter } from "next/router";
 import { isAuthenticated } from "@/redux/selector/authSelector";
+import { postComment } from "@/redux/action/postsAction";
 
 function Post(props) {
   const router = useRouter();
   const { id } = router.query;
   const post = props.post;
   const [comment, setComment] = useState();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(id);
     props.getPost(id);
     props.users();
   }, [id]);
 
-  useEffect(() => {
-    console.log(post?.comment);
-  }, [post?.comment]);
+  useEffect(() => {}, [props.isAuthenticated]);
 
-  const onSubmit = (data) => {};
+  const onSubmit = (data) => {
+    dispatch(postComment(data, id));
+  };
 
   return (
     <div className="post">
       <div className="container mx-auto">
         <div className="row align-items-center justify-content-center">
           <div className="col text-center">
-            <img
-              src={`http://localhost:5000/${post?.photo}`}
-              alt="..."
-              className="post-image"
-            />
+            <img src={post?.photo} alt="..." className="post-image" />
           </div>
           <div className="col-6 text-center">
             <p>Published: {post?.createdAt}</p>
@@ -63,15 +59,12 @@ function Post(props) {
             </div>
             <div className="row justify-content-end">
               <div className="col-1">
-                {isAuthenticated ? (
-                  <button
-                    type="submit"
-                    className="btn btn-primary btn-block mb-4"
-                  >
+                {props.isAuthenticated ? (
+                  <button type="submit" className="btn btn-primary btn-block">
                     Publish
                   </button>
                 ) : (
-                  <button className="btn btn-primary btn-block mb-4" disabled>
+                  <button className="btn btn-primary btn-block" disabled>
                     Publish
                   </button>
                 )}
@@ -79,7 +72,7 @@ function Post(props) {
             </div>
           </form>
           {post?.comment.map((item, idx) => (
-            <p key={idx} className="py-4">
+            <p key={idx} className="content">
               {item}
             </p>
           ))}

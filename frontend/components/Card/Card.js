@@ -1,5 +1,6 @@
 export default function Card(props) {
   const post = props.post;
+  // const image = post?.photo.replace(/public/g,'');
 
   return (
     <div
@@ -7,7 +8,7 @@ export default function Card(props) {
       style={{ width: "18rem" }}
     >
       <img
-        src={`http://localhost:5000/api/v0/${post?.photo}`}
+        src={post?.photo}
         className="card-img-top"
         alt="..."
       />
