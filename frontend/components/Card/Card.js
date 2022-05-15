@@ -1,7 +1,10 @@
+import moment from 'moment';
+
 export default function Card(props) {
   const post = props.post;
-  // const image = post?.photo.replace(/public/g,'');
-
+  const formattedTime = moment(post?.createdAt).format('DD/MM/YYYY HH:mm');
+  console.log(formattedTime);
+  
   return (
     <div
       className="card border-0 shadow-sm mb-5 bg-white rounded-3"
@@ -16,7 +19,7 @@ export default function Card(props) {
         <h6 className="card-title">
           <strong>{post?.title}</strong>
         </h6>
-        <p className="card-text">Created: {post?.createdAt}</p>
+        <p className="card-text">Created: {formattedTime}</p>
         <div className="text-center">
           <a className="btn btn-text text-primary" href={`/posts/${post?._id}`}>Read more</a>
         </div>

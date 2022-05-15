@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { isAuthenticated } from "@/redux/selector/authSelector";
 import { postComment } from "@/redux/action/postsAction";
+import moment from 'moment';
 
 function Post(props) {
   const router = useRouter();
@@ -13,7 +14,8 @@ function Post(props) {
   const post = props.post;
   const [comment, setComment] = useState();
   const dispatch = useDispatch();
-
+  const formattedTime = moment(post?.createdAt).format('DD/MM/YYYY HH:mm');
+  
   useEffect(() => {
     props.getPost(id);
     props.users();
@@ -31,7 +33,7 @@ function Post(props) {
             <img src={post?.photo} alt="..." className="post-image" />
           </div>
           <div className="col-6 text-center">
-            <p>Published: {post?.createdAt}</p>
+            <p>Published: {formattedTime}</p>
             <div className="d-flex justify-content-center">
               <div className="col-lg-6 col-12">
                 <h3 className="py-2">{post?.title}</h3>
