@@ -14,6 +14,9 @@ function Explore(props) {
     }
   }, [props.getPostsAction]);
 
+  useEffect(() => {
+    console.log(posts.length);
+  }, [posts]);
 
   const displayPostCards =
     posts &&
@@ -26,6 +29,7 @@ function Explore(props) {
   return (
     <div className="explore">
       <div className="container mx-auto">
+        <h4 className="m-4">Top courses</h4>
         {posts.length === 0 ? (
           <div className="spinner d-flex align-items-center justify-content-center">
             <Spinner />{" "}

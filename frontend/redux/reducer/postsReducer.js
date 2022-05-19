@@ -19,7 +19,7 @@ const initialState = {
 };
 
 export function postsReducer(state = initialState, action) {
-  if (action.type === CONFIRMED_GET_POSTS) {
+  if (action.type === COMMENTS) {
     return {
       ...state,
       comment: action.payload,

@@ -19,8 +19,8 @@ export function getPostsAction() {
     axios
       .get("http://localhost:5000/api/v0/getPosts")
       .then((response) => {
-        let posts = formatPosts(response.data);
-        dispatch(confirmGetPosts(posts));
+        // let posts = formatPosts(response.data);
+        dispatch(confirmGetPosts(response.data));
       })
       .catch((e) => {
         console.log(e);
