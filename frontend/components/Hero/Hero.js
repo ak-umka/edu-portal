@@ -1,17 +1,20 @@
 function Hero() {
   return (
     <div className="hero">
-      <div className="row align-items-center">
-        <div className="col d-flex justify-content-center">
-          <div className="hero-content">
-            <h5 style={{ color: "#32383d" }}>
-              We empower you to learn what you love.
-            </h5>
-            <a className="btn btn-primary mt-4">Learn more</a>
+      <div className="container mx-auto">
+        <div
+          className="row align-items-center justify-content-center"
+          style={{ height: "400px" }}
+        >
+          <div className="col-6 text-center">
+            <h1>
+              The easiest and fastest way to{" "}
+              <div className="text-primary">Learn</div> in Agriculture
+            </h1>
+            <a className="btn btn-primary mt-4" href="/article">
+              Learn more
+            </a>
           </div>
-        </div>
-        <div className="col">
-          <img src="/img/hero/hero.svg" />
         </div>
       </div>
     </div>

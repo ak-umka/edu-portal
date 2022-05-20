@@ -109,7 +109,7 @@ useEffect(()=>{
                     </button>
                   </form>
                   <p>
-                    If you haven't registered yet, <a href="/signup">Sign Up</a>
+                    If you haven't registered yet, <a className="link-primary" href="/signup">Sign Up</a>
                   </p>
                 </div>
               </div>

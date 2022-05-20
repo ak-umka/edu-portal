@@ -7,7 +7,7 @@ function Header(props) {
   const dispatch = useDispatch();
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white">
+    <nav className="navbar navbar-expand-lg navbar-light">
       <div className="container mx-auto ">
         <a className="navbar-brand m-4 text-primary" href="/">
           <strong>E-Portal</strong>
@@ -32,7 +32,11 @@ function Header(props) {
             </li>
             {props.isAuthenticated ? (
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="/create">
+                <a
+                  className="nav-link active"
+                  aria-current="page"
+                  href="/create"
+                >
                   Create
                 </a>
               </li>
@@ -49,15 +53,12 @@ function Header(props) {
             </a>
           ) : (
             <div className="auth-buttons">
-              {data.navbar.buttons.map((button, idx) => (
-                <a
-                  className="btn btn-outline-primary m-1"
-                  key={`${idx}`}
-                  href={`${button.link}`}
-                >
-                  {button.name}
-                </a>
-              ))}
+              <a className="btn btn-outline-primary m-1" href="/signup">
+                Sign Up
+              </a>
+              <a className="btn btn-primary m-1" href="/signin">
+                Sign In
+              </a>
             </div>
           )}
         </div>

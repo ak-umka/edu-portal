@@ -3,12 +3,11 @@ import moment from 'moment';
 export default function Card(props) {
   const post = props.post;
   const formattedTime = moment(post?.createdAt).format('DD/MM/YYYY HH:mm');
-  console.log(formattedTime);
   
   return (
     <div
       className="card border-0 shadow-sm mb-5 bg-white rounded-3"
-      style={{ width: "18rem" }}
+      style={{ width: "14rem" }}
     >
       <img
         src={post?.photo}

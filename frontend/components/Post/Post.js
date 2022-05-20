@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { isAuthenticated } from "@/redux/selector/authSelector";
 import { postComment } from "@/redux/action/postsAction";
-import moment from 'moment';
+import moment from "moment";
 
 function Post(props) {
   const router = useRouter();
@@ -14,8 +14,8 @@ function Post(props) {
   const post = props.post;
   const [comment, setComment] = useState();
   const dispatch = useDispatch();
-  const formattedTime = moment(post?.createdAt).format('DD/MM/YYYY HH:mm');
-  
+  const formattedTime = moment(post?.createdAt).format("DD/MM/YYYY HH:mm");
+
   useEffect(() => {
     props.getPost(id);
     props.users();
@@ -43,39 +43,46 @@ function Post(props) {
           </div>
         </div>
         <p className="content">{post?.content}</p>
-        <div className="comment">
-          <h6>Comments</h6>
-          {/* Content */}
-          <form onSubmit={onSubmit}>
-            <div className="form-outline mb-4">
-              <textarea
-                type="text"
-                id="comment-form"
-                className="form-control"
-                rows="4"
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-              />
+        <div className="row justify-content-center">
+          <div className="col-8">
+            <div className="comment">
+              <h6>Comments</h6>
+              {/* Content */}
+              <form onSubmit={onSubmit}>
+                <div className="form-outline mb-4">
+                  <textarea
+                    type="text"
+                    id="comment-form"
+                    className="form-control"
+                    rows="5"
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                  />
+                </div>
+                <div className="row justify-content-end">
+                  <div className="col-2">
+                    {props.isAuthenticated ? (
+                      <button
+                        type="submit"
+                        className="btn btn-primary btn-block"
+                      >
+                        Publish
+                      </button>
+                    ) : (
+                      <button className="btn btn-primary btn-block" disabled>
+                        Publish
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </form>
+              {post?.comment.map((item, idx) => (
+                <p key={idx} className="content">
+                  {item}
+                </p>
+              ))}
             </div>
-            <div className="row justify-content-end">
-              <div className="col-1">
-                {props.isAuthenticated ? (
-                  <button type="submit" className="btn btn-primary btn-block">
-                    Publish
-                  </button>
-                ) : (
-                  <button className="btn btn-primary btn-block" disabled>
-                    Publish
-                  </button>
-                )}
-              </div>
-            </div>
-          </form>
-          {post?.comment.map((item, idx) => (
-            <p key={idx} className="content">
-              {item}
-            </p>
-          ))}
+          </div>
         </div>
       </div>
     </div>

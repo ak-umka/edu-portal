@@ -28,7 +28,7 @@ function Footer() {
 
             <div className="col-lg-4 mb-5 mb-lg-0">
               <h6 className="text-primary">Our location</h6>
-              <div className="d-flex align-items-center">
+              <div className="d-flex align-items-center ">
                 <FontAwesomeIcon icon={faLocationDot} />
                 <p className="m-2 px-2">Nur-Sultan, A. Jangeldın kóshesi, 123А</p>
               </div>

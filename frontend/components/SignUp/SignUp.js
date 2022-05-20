@@ -103,7 +103,7 @@ function SignUp(props) {
                     </button>
                   </form>
                   <p>
-                    If you've registered already, <a href="/signin">Sign In</a>
+                    If you've registered already, <a className="link-primary"  href="/signin">Sign In</a>
                   </p>
                 </div>
               </div>
