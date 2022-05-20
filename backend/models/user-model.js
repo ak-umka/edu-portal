@@ -10,6 +10,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    role: {
+        type: String,
+        ref: 'Role',
+    }
 });
 
 module.exports = mongoose.model('User', userSchema);

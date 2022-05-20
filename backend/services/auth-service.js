@@ -1,12 +1,10 @@
 const userModel = require('../models/user-model');
-// const MailService = require('../services/mail-service');
+const Role = require('../models/role');
 const TokenService = require('../services/token-service');
 const UserDto = require('../dtos/user-dto');
 const ApiError = require('../exceptions/api-error');
 
 const bcrypt = require('bcrypt');
-const uuid = require('uuid');
-
 
 class AuthService {
     async signup (email, password) {
@@ -14,10 +12,11 @@ class AuthService {
         if (checkUser) {
             throw ApiError.BadRequestError('User already exists');
         }
-        const hashedPassword = await bcrypt.hash(password, 3);
-        const user = await userModel.create({email, password: hashedPassword});
-        
 
+        const hashedPassword = await bcrypt.hash(password, 3);
+        const userRole = await Role.findOne({value: 'USER'});
+        const user = await userModel.create({email, password: hashedPassword, roles: [userRole.value]});
+        
         const userDto = new UserDto(user);
         const tokens = TokenService.generateToken({...userDto});
         await TokenService.saveToken(userDto.id, tokens.refreshToken);
