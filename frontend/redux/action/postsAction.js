@@ -17,7 +17,7 @@ export const COMMENTS = "COMMENTS";
 export function getPostsAction() {
   return (dispatch) => {
     axios
-      .get("http://localhost:5000/api/v0/getPosts")
+      .get("http://localhost:3001/api/v0/getPosts")
       .then((response) => {
         // let posts = formatPosts(response.data);
         dispatch(confirmGetPosts(response.data));
@@ -33,7 +33,7 @@ export function getPostsAction() {
 export function getPost(id) {
   return (dispatch) => {
     axios
-      .get(`http://localhost:5000/api/v0/getPost/${id}`)
+      .get(`http://localhost:3001/api/v0/getPost/${id}`)
       .then((response) => {
         dispatch(confirmedGetPost(response.data));
       })
@@ -48,7 +48,7 @@ export function getPost(id) {
 export function postComment(comment, id) {
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/v0/getPost/${id}/comment`, comment)
+      .post(`http://localhost:3001/api/v0/getPost/${id}/comment`, comment)
       .then((response) => {
         dispatch(comment(response.data));
       })

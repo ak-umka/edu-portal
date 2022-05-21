@@ -22,7 +22,7 @@ export const GET_USERS = "GET_USERS";
 export function signup(email, password) {
   return (dispatch) => {
     return axios
-      .post(`http://localhost:5000/api/v0/signup`, email, password)
+      .post(`http://localhost:3001/api/v0/signup`, email, password)
       .then((response) => {
         dispatch(SignupConfirmed(response.data));
         localStorage.setItem(
@@ -55,7 +55,7 @@ export function login(email, password, token) {
       headers: { Authorization: `Bearer ${token}` },
     };
     return axios
-      .post(`http://localhost:5000/api/v0/signin`, email, password, config)
+      .post(`http://localhost:3001/api/v0/signin`, email, password, config)
       .then((response) => {
         dispatch(LoginConfirmed(response.data));
         const accessToken = response.data.accessToken;
@@ -83,7 +83,7 @@ export function refresh() {
   return (dispatch) => {
     const user = JSON.parse(localStorage.getItem("user"));
     return axios
-      .get(`http://localhost:5000/api/v0/refresh`, user?.accessToken)
+      .get(`http://localhost:3001/api/v0/refresh`, user?.accessToken)
       .then((response) => {
         dispatch(refreshToken(response.data));
       })
@@ -98,7 +98,7 @@ export function refresh() {
 export function users() {
   return (dispatch) => {
     return axios
-      .get(`http://localhost:5000/api/v0/users`)
+      .get(`http://localhost:3001/api/v0/users`)
       .then((response) => {
         dispatch(getUsers(response.data));
       })
