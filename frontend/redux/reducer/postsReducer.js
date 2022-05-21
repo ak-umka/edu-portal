@@ -19,23 +19,23 @@ const initialState = {
 };
 
 export function postsReducer(state = initialState, action) {
-  if (action.type === COMMENTS) {
-    return {
-      ...state,
-      comment: action.payload,
-    };
+  switch (action.type) {
+    case COMMENTS:
+      return {
+        ...state,
+        comment: action.payload,
+      };
+    case CONFIRMED_GET_POSTS:
+      return {
+        ...state,
+        posts: action.payload,
+      };
+    case CONFIRMED_GET_POST:
+      return {
+        ...state,
+        post: action.payload,
+      };
+    default:
+      return state;
   }
-  if (action.type === CONFIRMED_GET_POSTS) {
-    return {
-      ...state,
-      posts: action.payload,
-    };
-  }
-  if (action.type === CONFIRMED_GET_POST) {
-    return {
-      ...state,
-      post: action.payload,
-    };
-  }
-  return state;
 }
