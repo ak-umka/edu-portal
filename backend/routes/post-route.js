@@ -23,6 +23,7 @@ router.get('/getPost/:id', PostController.getPost);
 router.post('/getPost/:id/comment', authMiddleware,  PostController.commentPost);
 router.delete('/deletePost/:id', authMiddleware, PostController.deletePost);
 router.get('/getPosts', PostController.getPosts);
+router.put('/editPost/:id', authMiddleware, PostController.editPost);
 
 
 module.exports = router;
