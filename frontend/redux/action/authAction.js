@@ -1,4 +1,9 @@
 import axios from "axios";
+import axiosInstance from "@/services/service";
+import {
+  saveTokenInLocalStorage,
+  runLogoutTimer,
+} from "../selector/authSelector";
 
 //signup
 export const SIGNUP_CONFIRMED = "SIGNUP_CONFIRMED";
@@ -25,11 +30,7 @@ export function signup(email, password) {
       .post(`http://localhost:3001/api/v0/signup`, email, password)
       .then((response) => {
         dispatch(SignupConfirmed(response.data));
-        localStorage.setItem(
-          "token",
-          JSON.stringify(response.data.accessToken)
-        );
-        localStorage.setItem("user", JSON.stringify(response.data));
+        saveTokenInLocalStorage(response.data);
       })
       .catch((error) => {
         console.log(error.response.data.message);
@@ -50,26 +51,11 @@ export function signup(email, password) {
 
 export function login(email, password, token) {
   return (dispatch) => {
-    token = localStorage.getItem("token");
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
-    return axios
-      .post(`http://localhost:3001/api/v0/signin`, email, password, config)
+    return axiosInstance
+      .post(`http://localhost:3001/api/v0/signin`, email, password)
       .then((response) => {
         dispatch(LoginConfirmed(response.data));
-        const accessToken = response.data.accessToken;
-        accessToken.expireDate = new Date(
-          new Date().getTime() + accessToken.expiresIn * 1000
-        );
-        localStorage.setItem("token", JSON.stringify(accessToken));
-        localStorage.setItem("user", JSON.stringify(response.data));
-        let expireDate = new Date(accessToken.expireDate);
-        let todaysDate = new Date();
-        if (todaysDate > expireDate) {
-          dispatch(refresh());
-          return;
-        }
+        saveTokenInLocalStorage(response.data);
       })
       .catch((error) => {
         dispatch(LoginFailed(error.response));
@@ -86,6 +72,7 @@ export function refresh() {
       .get(`http://localhost:3001/api/v0/refresh`, user?.accessToken)
       .then((response) => {
         dispatch(refreshToken(response.data));
+        saveTokenInLocalStorage(response.data);
       })
       .catch((error) => {
         console.log(error);

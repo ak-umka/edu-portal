@@ -1,12 +1,10 @@
 import axios from "axios";
-import { getPosts, formatPosts } from "@/services/postService";
+import { formatPosts } from "@/services/postService";
+import axiosInstance from "@/services/service";
 
 //posts types
-export const CREATE_POST = "CREATE_POST";
 export const CONFIRMED_CREATE_POST = "CONFIRMED_CREATE_POST";
-export const GET_POSTS = "GET_POSTS";
 export const CONFIRMED_GET_POSTS = "CONFIRMED_GET_POSTS";
-export const EDIT_POST = "EDIT_POST";
 export const CONFIRMED_EDIT_POST = "CONFIRMED_EDIT_POST";
 export const CONFIRMED_DELETE_POST = "CONFIRMED_DELETE_POST";
 export const CONFIRMED_GET_POST = "CONFIRMED_GET_POST";
@@ -19,8 +17,11 @@ export function getPostsAction() {
     axios
       .get("http://localhost:3001/api/v0/getPosts")
       .then((response) => {
-        // let posts = formatPosts(response.data);
-        dispatch(confirmGetPosts(response.data));
+        let posts = formatPosts(response.data);
+        dispatch({
+          type: CONFIRMED_GET_POSTS,
+          payload: posts,
+        });
       })
       .catch((e) => {
         console.log(e);
@@ -35,7 +36,10 @@ export function getPost(id) {
     axios
       .get(`http://localhost:3001/api/v0/getPost/${id}`)
       .then((response) => {
-        dispatch(confirmedGetPost(response.data));
+        dispatch({
+          type: CONFIRMED_GET_POST,
+          payload: response.data,
+        });
       })
       .catch((e) => {
         console.log(e);
@@ -47,10 +51,13 @@ export function getPost(id) {
 
 export function postComment(comment, id) {
   return (dispatch) => {
-    axios
+    axiosInstance
       .post(`http://localhost:3001/api/v0/getPost/${id}/comment`, comment)
       .then((response) => {
-        dispatch(comment(response.data));
+        dispatch({
+          type: COMMENTS,
+          payload: response.data,
+        });
       })
       .catch((e) => {
         console.log(e);
@@ -58,29 +65,56 @@ export function postComment(comment, id) {
   };
 }
 
-//get posts
+//post create
 
-export function confirmGetPosts(posts) {
-  return {
-    type: CONFIRMED_GET_POSTS,
-    payload: posts,
+export function postCreate(title, content, photo) {
+  return (dispatch) => {
+    axiosInstance
+      .post("http://localhost:3001/api/v0/createPost", title, content, photo)
+      .then((response) => {
+        dispatch({
+          type: CONFIRMED_CREATE_POST,
+          payload: response.data,
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 }
 
-//get post
+//delete post
 
-export function confirmedGetPost(post) {
-  return {
-    type: CONFIRMED_GET_POST,
-    payload: post,
+export function deletePost(id) {
+  return (dispatch) => {
+    axiosInstance
+      .delete(`http://localhost:3001/api/v0/deletePost/${id}`)
+      .then((response) => {
+        dispatch({
+          type: CONFIRMED_DELETE_POST,
+          payload: response.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 }
 
-//comments
+//edit post
 
-export function comment(data) {
-  return {
-    type: COMMENTS,
-    payload: data,
+export function edit(id) {
+  return (dispatch) => {
+    axiosInstance
+      .put(`http://localhost:3001/api/v0/deletePost/${id}`)
+      .then((response) => {
+        dispatch({
+          type: CONFIRMED_EDIT_POST,
+          payload: response.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 }

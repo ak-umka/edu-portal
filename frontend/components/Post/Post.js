@@ -28,6 +28,14 @@ function Post(props) {
   return (
     <div className="post">
       <div className="container mx-auto">
+        {post?.creator === props.auth?.id ? (
+          <div className="col d-flex justify-content-end">
+            <a className="btn btn-text text-primary">DELETE</a>
+            <a className="btn btn-text text-primary">EDIT</a>
+          </div>
+        ) : (
+          <></>
+        )}
         <div className="row align-items-center justify-content-center">
           <div className="col text-center">
             <img src={post?.photo} alt="..." className="post-image" />
@@ -92,6 +100,7 @@ function Post(props) {
 const mapStateToProps = (state) => ({
   post: state.posts.post,
   users: state.auth.users,
+  auth: state.auth.auth,
   isAuthenticated: isAuthenticated(state),
 });
 
