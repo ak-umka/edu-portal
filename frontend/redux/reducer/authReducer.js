@@ -5,7 +5,7 @@ import {
   LOGIN_FAILED,
   LOGOUT,
   REFRESH_TOKEN,
-  GET_USERS
+  GET_USERS,
 } from "../action/authAction";
 
 const initialState = {
@@ -16,58 +16,55 @@ const initialState = {
     refreshToken: "",
   },
   errorMessage: "",
-  users:[],
+  users: [],
 };
 
 export function authReducer(state = initialState, action) {
-  if (action.type === SIGNUP_CONFIRMED) {
-    return {
-      ...state,
-      auth: action.payload,
-    };
-  }
-  if (action.type === LOGIN_CONFIRMED) {
-    return {
-      ...state,
-      auth: action.payload,
-      errorMessage: "Login Successfully Completed",
-    };
-  }
-  if (action.type === LOGIN_FAILED) {
-    return {
-      ...state,
-      errorMessage: "Login Failed",
-    };
-  }
-  if (action.type === LOGOUT) {
-    return {
-      ...state,
-      auth: {
-        email: "",
-        id: "",
-        accessToken: "",
-        refreshToken: "",
-      },
-    };
-  }
-  if (action.type === SIGNUP_FAILED) {
-    return {
-      ...state,
-      errorMessage: action.payload,
-    };
-  }
-  if (action.type === REFRESH_TOKEN) {
-    return{
-      ...state,
-      auth: action.payload,
-      errorMessage: "Token is refreshed",
+  switch (action.type) {
+    case SIGNUP_CONFIRMED:
+      return {
+        ...state,
+        auth: action.payload,
+      };
+    case LOGIN_CONFIRMED:
+      return {
+        ...state,
+        auth: action.payload,
+        errorMessage: "Login Successfully Completed",
+      };
+    case LOGIN_FAILED:
+      return {
+        ...state,
+        errorMessage: "Login Failed",
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        auth: {
+          email: "",
+          id: "",
+          accessToken: "",
+          refreshToken: "",
+        },
+      };
+    case SIGNUP_FAILED:
+      return {
+        ...state,
+        errorMessage: action.payload,
+      };
+    case REFRESH_TOKEN:
+      return {
+        ...state,
+        auth: action.payload,
+        errorMessage: "Token is refreshed",
+      };
+    case GET_USERS:
+      return {
+        ...state,
+        users: action.payload,
+      };
+    default: {
+      return state;
     }
   }
-  if (action.type === SIGNUP_FAILED) {
-    return{
-      ...state,
-      users: action.payload,
-    }
-  }
-  return state;
 }

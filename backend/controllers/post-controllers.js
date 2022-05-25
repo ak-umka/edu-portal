@@ -56,16 +56,13 @@ class PostController {
     }
 
     async editPost(req, res, next) {
-        const {id} = req.params.id;
-        const { title, content } = req.body;
-        const { photo} = req.file.path;
         try {
-            const update = {
-                title: title,
-                content: content,
-            };
-            const updateBlog = await postModel.findByIdAndUpdate(blogId, update, { new: true });
-            res.status(200).json(updateBlog);
+            const updateBlog = await postModel.findById(req.params.id);
+            updateBlog.title = req.body.title;
+            updateBlog.content = req.body.content;
+            // updateBlog.photo = req.protocol + '://' + req.host + ':3001/' + req.file.path;
+            const result = await updateBlog.save();
+            res.status(200).json(result);
         } catch (error) {
             next(error);
         }

@@ -1,15 +1,19 @@
 /** @type {import('next').NextConfig} */
+const path = require("path");
+
 const nextConfig = {
-  // reactStrictMode: true,
-  webpack(config){
+  sassOptions: {
+    includePaths: [path.join(__dirname, "styles")],
+  },
+  webpack(config) {
     config.module.rules.push({
-      test:/\.svg$/,
+      test: /\.svg$/,
       issuer: /\.[jt]sx?$/,
-      use:["@svgr/webpack"]
+      use: ["@svgr/webpack"],
     });
 
     return config;
-  }
-}
+  },
+};
 
 module.exports = nextConfig;

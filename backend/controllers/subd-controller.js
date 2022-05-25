@@ -52,15 +52,12 @@ class SubdController {
     }
 
     async editSubd(req, res, next) {
-        const { id } = req.params;
-        const { title, subd } = req.body;
         try {
-            const update = {
-                title: title,
-                subd: subd
-            };
-            const updateSubd = await subdModel.findByIdAndUpdate(id, update, { new: true });
-            res.status(200).json(updateSubd);
+            const updateSubd = await subdModel.findById(req.params.id);
+            updateSubd.title = req.body.title;
+            // updateSubd.subd = req.body.subd;
+            const result = await updateSubd.save();
+            res.status(200).json(result);
         } catch (error) {
             next(error);
         }
