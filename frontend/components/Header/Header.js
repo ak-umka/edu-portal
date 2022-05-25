@@ -1,10 +1,15 @@
 import data from "@/public/data.json";
 import { connect, useDispatch } from "react-redux";
 import { logout } from "@/redux/action/authAction";
-import { isAuthenticated, isAuth } from "@/redux/selector/authSelector";
+import { isAuthenticated } from "@/redux/selector/authSelector";
+import { useEffect } from "react";
 
 function Header(props) {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log(props.isAuthenticated);
+  }, [props.isAuthenticated]);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light">

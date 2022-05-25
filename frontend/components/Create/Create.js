@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, connect } from "react-redux";
+import { createPost } from "@/redux/action/postsAction";
 
 function Create() {
   const [title, setTitle] = useState();
@@ -14,8 +15,10 @@ function Create() {
 
   const dispatch = useDispatch();
 
-  function onSubmit(data) {
-    console.log(data);
+  function onSubmit(title, content, image) {
+    var bodyFormData = new FormData();
+    bodyFormData.append(title, content, image);
+    dispatch(createPost(bodyFormData));
   }
   return (
     <div className="create">

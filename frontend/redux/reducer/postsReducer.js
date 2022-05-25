@@ -2,6 +2,7 @@ import {
   CONFIRMED_GET_POSTS,
   CONFIRMED_GET_POST,
   COMMENTS,
+  CONFIRMED_CREATE_POST,
 } from "@/redux/action/postsAction";
 
 const initialState = {
@@ -31,6 +32,11 @@ export function postsReducer(state = initialState, action) {
         posts: action.payload,
       };
     case CONFIRMED_GET_POST:
+      return {
+        ...state,
+        post: action.payload,
+      };
+    case CONFIRMED_CREATE_POST:
       return {
         ...state,
         post: action.payload,

@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { saveTokeninLocalStorage } from "../selector/authSelector";
 //signup
 export const SIGNUP_CONFIRMED = "SIGNUP_CONFIRMED";
 export const SIGNUP_FAILED = "SIGNUP_FAILED";
@@ -25,14 +25,11 @@ export function signup(email, password) {
       .post(`http://localhost:3001/api/v0/signup`, email, password)
       .then((response) => {
         dispatch(SignupConfirmed(response.data));
-        localStorage.setItem(
-          "token",
-          JSON.stringify(response.data.accessToken)
-        );
-        localStorage.setItem("user", JSON.stringify(response.data));
+        localStorage.setItem("token", response.data.accessToken);
+        runLogoutTimer(dispatch, response.data.expiresIn * 1000);
       })
       .catch((error) => {
-        console.log(error.response.data.message);
+        console.log(error);
         const errorMessage = function () {
           switch (error.response.data.error.message) {
             case "User already exists":
@@ -48,9 +45,9 @@ export function signup(email, password) {
 
 //login function
 
-export function login(email, password, token) {
+export function login(email, password) {
   return (dispatch) => {
-    token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
@@ -58,18 +55,8 @@ export function login(email, password, token) {
       .post(`http://localhost:3001/api/v0/signin`, email, password, config)
       .then((response) => {
         dispatch(LoginConfirmed(response.data));
-        const accessToken = response.data.accessToken;
-        accessToken.expireDate = new Date(
-          new Date().getTime() + accessToken.expiresIn * 1000
-        );
-        localStorage.setItem("token", JSON.stringify(accessToken));
-        localStorage.setItem("user", JSON.stringify(response.data));
-        let expireDate = new Date(accessToken.expireDate);
-        let todaysDate = new Date();
-        if (todaysDate > expireDate) {
-          dispatch(refresh());
-          return;
-        }
+        saveTokeninLocalStorage(response.data);
+        // runLogoutTimer(dispatch, 30 * 24 * 60 * 60 * 1000);
       })
       .catch((error) => {
         dispatch(LoginFailed(error.response));
@@ -95,7 +82,7 @@ export function refresh() {
 
 //get users
 
-export function users() {
+export function getUsersData() {
   return (dispatch) => {
     return axios
       .get(`http://localhost:3001/api/v0/users`)
@@ -143,7 +130,6 @@ export function LoginFailed(data) {
 //logout
 
 export function logout() {
-  localStorage.removeItem("user");
   return {
     type: LOGOUT,
   };
