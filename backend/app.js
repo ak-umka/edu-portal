@@ -17,6 +17,7 @@ const port = process.env.PORT || 3001;
 app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public')); 
 app.use('/images', express.static('images'));
 app.use('/api/v0/', router, postRouter, subdRouter);

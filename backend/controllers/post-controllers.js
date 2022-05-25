@@ -10,7 +10,7 @@ class PostController {
         try {
             const newPost = new postModel({
                 title: req.body.title,
-                photo: req.protocol + '://' + req.host + ':3001/' + req.file.path,
+                photo: req.protocol + '://' + req.host + ':3001/' + req.file?.path,
                 content: req.body.content,
                 creator: req.user,
                 createdAt: new Date().toISOString()
