@@ -8,7 +8,7 @@ class SubdController {
         try {
             const newSubd = new subdModel({
                 title: req.body.title,
-                subd: req.protocol + '://' + req.host + ':3001/' + req.file.path,
+                subd: req.protocol + '://' + req.host + ':3001/' + req.file?.path,
                 creator: req.user,
                 createdAt: new Date().toISOString()
             })
