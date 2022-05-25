@@ -2,9 +2,7 @@ import axios from "axios";
 import { getPosts, formatPosts } from "@/services/postService";
 
 //posts types
-export const CREATE_POST = "CREATE_POST";
 export const CONFIRMED_CREATE_POST = "CONFIRMED_CREATE_POST";
-export const GET_POSTS = "GET_POSTS";
 export const CONFIRMED_GET_POSTS = "CONFIRMED_GET_POSTS";
 export const EDIT_POST = "EDIT_POST";
 export const CONFIRMED_EDIT_POST = "CONFIRMED_EDIT_POST";
@@ -58,6 +56,25 @@ export function postComment(comment, id) {
   };
 }
 
+//create post
+
+export function createPost(post) {
+  return (dispatch) => {
+    axios({
+      method: "post",
+      url: "http://localhost:3001/api/v0/createPost",
+      data: post,
+      headers: { "Content-Type": "multipart/form-data" },
+    })
+      .then((response) => {
+        dispatch(confirmedCreatePost(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+}
+
 //get posts
 
 export function confirmGetPosts(posts) {
@@ -82,5 +99,13 @@ export function comment(data) {
   return {
     type: COMMENTS,
     payload: data,
+  };
+}
+
+//create post
+export function confirmedCreatePost(post) {
+  return {
+    type: CONFIRMED_CREATE_POST,
+    payload: post,
   };
 }
