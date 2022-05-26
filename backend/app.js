@@ -4,14 +4,10 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 
-
-
 const errorMiddleware = require('./middlewares/error-middleware');
 const router = require('./routes/auth-route');
 const postRouter = require('./routes/post-route');
 const subdRouter = require('./routes/subd-route');
-
-
 
 dotenv.config();
 
@@ -20,8 +16,8 @@ const port = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(cookieParser());
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+
+
 app.use(express.static('public'));
 app.use('/images', express.static('images'));
 app.use('/api/v0/', router, postRouter, subdRouter);

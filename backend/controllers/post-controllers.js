@@ -15,6 +15,7 @@ class PostController {
                 creator: req.user,
                 createdAt: new Date().toISOString()
             })
+            console.log(req.raw)
             await newPost.save();
             res.status(201).json(newPost);
 
@@ -25,7 +26,15 @@ class PostController {
 
     async getPosts(req, res, next) {
         try {
-            const post = await postModel.find().populate('comment');
+            
+            req.query.page = req.query.page || 1;
+            // check if page is a number
+            if (isNaN(req.query.page)) {
+                return next(ApiError.BadRequestError('Page must be a number'));
+            }
+            // convert page to number
+            req.query.page = Number(req.query.page);
+            const post = await postModel.find().limit(5).skip(5*req.query.page).populate('comment');
             if (!post.length) {
                 return next(ApiError.NotFoundError('No posts found'));
             }
@@ -38,8 +47,9 @@ class PostController {
     async getPost(req, res, next) {
         const { id } = req.params;
         try {
-            const post = await postModel.findById(id);
+            const post = await postModel.findById(id).populate('comment');
             res.status(200).json(post);
+            
         } catch (error) {
             next(error);
         }
@@ -60,7 +70,7 @@ class PostController {
             const updateBlog = await postModel.findById(req.params.id);
             updateBlog.title = req.body.title;
             updateBlog.content = req.body.content;
-            // updateBlog.photo = req.protocol + '://' + req.host + ':3001/' + req.file.path;
+            updateBlog.photo = req.protocol + '://' + req.host + ':3001/' + req.file.path;
             const result = await updateBlog.save();
             res.status(200).json(result);
         } catch (error) {
