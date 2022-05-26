@@ -6,8 +6,9 @@ const auth = async (req, res, next) => {
         const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
         req.user = decoded?.id;
         req.role = decoded?.role;
+        req.email = decoded?.email;
         // req.user.role = decoded?.role;
-        // console.log (req.role)
+        // console.log (decoded)
         
         
         next();

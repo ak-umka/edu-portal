@@ -25,7 +25,7 @@ class PostController {
 
     async getPosts(req, res, next) {
         try {
-            const post = await postModel.find();
+            const post = await postModel.find().populate('comment');
             if (!post.length) {
                 return next(ApiError.NotFoundError('No posts found'));
             }
@@ -73,18 +73,17 @@ class PostController {
         try {
             const newComment = new commentPost({
                 comment: req.body.comment,
-                author: req.user,
-                createdAt: new Date().toISOString()
+                author: req.email
             });
-            const saveComment = await newComment.save();
-            // res.status(201).json(newComment);
-            const post = await postModel.findById(req.params.id);
+            await newComment.save();
+            
+            const post = await postModel.findById(req.params.id); //.lean().populate('comments')
             if (!post) {
                 return next(ApiError.NotFoundError('No post found'));
             }
-            post.comment.push(saveComment);
+            post.comment.push(newComment);
             await post.save();
-            res.status(201).json(saveComment);
+            res.status(201).json(newComment);
         } catch (error) {
             next(error);
         }
