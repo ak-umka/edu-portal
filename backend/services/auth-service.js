@@ -1,5 +1,5 @@
 const userModel = require('../models/user-model');
-const Role = require('../models/role');
+
 const TokenService = require('../services/token-service');
 const UserDto = require('../dtos/user-dto');
 const ApiError = require('../exceptions/api-error');
@@ -7,15 +7,14 @@ const ApiError = require('../exceptions/api-error');
 const bcrypt = require('bcrypt');
 
 class AuthService {
-    async signup (email, password) {
+    async signup (email, password, role) {
         const checkUser = await userModel.findOne({email: email});
         if (checkUser) {
             throw ApiError.BadRequestError('User already exists');
         }
 
         const hashedPassword = await bcrypt.hash(password, 3);
-        const userRole = await Role.findOne({value: 'USER'});
-        const user = await userModel.create({email, password: hashedPassword, roles: [userRole.value]});
+        const user = await userModel.create({email, password: hashedPassword, role: role || 'basic'});
         
         const userDto = new UserDto(user);
         const tokens = TokenService.generateToken({...userDto});
@@ -36,7 +35,7 @@ class AuthService {
         const userDto = new UserDto(user);
         const tokens = TokenService.generateToken({...userDto});
         await TokenService.saveToken(userDto.id, tokens.refreshToken);
-        return {...tokens, user: userDto };
+        return {...tokens, user: userDto}; 
     }
 
     async logout (refreshToken) {
@@ -60,7 +59,10 @@ class AuthService {
         return {...tokens, user: userDto };
     }
 
-
+    async getUsers () {
+        const users = await userModel.find();
+        return users;
+    }
 }
 
 module.exports = new AuthService();

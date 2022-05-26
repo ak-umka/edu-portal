@@ -3,9 +3,11 @@ const { validationResult } = require('express-validator');
 const ApiError = require('../exceptions/api-error');
 const subdModel = require('../models/subd-model');
 
+
 class SubdController {
     async createSubd(req, res, next) {
         try {
+
             const newSubd = new subdModel({
                 title: req.body.title,
                 subd: req.protocol + '://' + req.host + ':3001/' + req.file?.path,
@@ -45,22 +47,20 @@ class SubdController {
         const { id } = req.params;
         try {
             await subdModel.findByIdAndDelete(id);
-            res.status(200).json({ message: 'Post deleted' });
+            const subd = await subdModel.findById(id);
+            res.status(200).json({ message: 'Post deleted', subd });
         } catch (error) {
             next(error);
         }
     }
 
     async editSubd(req, res, next) {
-        const { id } = req.params;
-        const { title, subd } = req.body;
         try {
-            const update = {
-                title: title,
-                subd: subd
-            };
-            const updateSubd = await subdModel.findByIdAndUpdate(id, update, { new: true });
-            res.status(200).json(updateSubd);
+            const updateSubd = await subdModel.findById(req.params.id);
+            updateSubd.title = req.body.title;
+            // updateSubd.subd = req.body.subd;
+            const result = await updateSubd.save();
+            res.status(200).json(result);
         } catch (error) {
             next(error);
         }
