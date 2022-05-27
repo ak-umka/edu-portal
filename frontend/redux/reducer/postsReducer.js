@@ -68,6 +68,11 @@ export function postsReducer(state = initialState, action) {
         ...state,
         post: action.payload,
       };
+    case CONFIRMED_CREATE_POST:
+      return {
+        ...state,
+        post: action.payload,
+      };
     default:
       return state;
   }

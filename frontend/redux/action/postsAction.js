@@ -67,7 +67,26 @@ export function postComment(id, comment) {
   };
 }
 
-//post create
+//create post
+
+export function createPost(post) {
+  return (dispatch) => {
+    axios({
+      method: "post",
+      url: "http://localhost:3001/api/v0/createPost",
+      data: post,
+      headers: { "Content-Type": "multipart/form-data" },
+    })
+      .then((response) => {
+        dispatch(confirmedCreatePost(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+}
+
+//get posts
 
 export function postCreate(formData) {
   return (dispatch) => {
@@ -148,5 +167,13 @@ export function edit(id) {
       .catch((error) => {
         console.log(error);
       });
+  };
+}
+
+//create post
+export function confirmedCreatePost(post) {
+  return {
+    type: CONFIRMED_CREATE_POST,
+    payload: post,
   };
 }

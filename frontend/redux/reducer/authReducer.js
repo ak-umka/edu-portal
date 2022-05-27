@@ -5,6 +5,7 @@ import {
   LOGIN_FAILED,
   LOGOUT,
   REFRESH_TOKEN,
+  GET_USERS,
 } from "../action/authAction";
 
 const initialState = {
@@ -58,6 +59,11 @@ export function authReducer(state = initialState, action) {
         ...state,
         auth: action.payload,
         errorMessage: "Token is refreshed",
+      };
+    case GET_USERS:
+      return {
+        ...state,
+        users: action.payload,
       };
     default: {
       return state;

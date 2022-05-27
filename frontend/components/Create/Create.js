@@ -4,6 +4,7 @@ import { useDispatch, connect } from "react-redux";
 import { postCreate } from "@/redux/action/postsAction";
 import FormData from "form-data";
 
+
 function Create(props) {
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
@@ -23,7 +24,7 @@ function Create(props) {
     formData.append("photo", data.photo);
     dispatch(postCreate(formData));
   };
-
+  
   return (
     <div className="create">
       <div className="row justify-content-center">

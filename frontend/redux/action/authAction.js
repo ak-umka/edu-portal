@@ -34,7 +34,7 @@ export function signup(email, password, role) {
         localStorage.setItem("token", response.data.accessToken);
       })
       .catch((error) => {
-        console.log(error.response.data.message);
+        console.log(error);
         const errorMessage = function () {
           switch (error.response.data.error.message) {
             case "User already exists":
@@ -85,7 +85,7 @@ export function refresh() {
 
 //get users
 
-export function users() {
+export function getUsersData() {
   return (dispatch) => {
     return axios
       .get(`http://localhost:3001/api/v0/users`)
@@ -133,7 +133,6 @@ export function LoginFailed(data) {
 //logout
 
 export function logout() {
-  localStorage.removeItem("user");
   return {
     type: LOGOUT,
   };

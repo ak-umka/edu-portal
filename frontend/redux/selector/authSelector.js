@@ -1,11 +1,5 @@
 import { logout, refresh, LoginConfirmed } from "../action/authAction";
 
-// //isAuthenticated
-// export const isAuthenticated = (state) => {
-//   if (state.auth.auth.accessToken) return true;
-//   return false;
-// };
-
 //save token
 export function saveTokenInLocalStorage(tokenDetails) {
   tokenDetails.expireDate = new Date(
@@ -42,5 +36,6 @@ export function checkAutoLogin(dispatch) {
   dispatch(LoginConfirmed(tokenDetails));
 
   const timer = expireDate.getTime() - todaysDate.getTime();
+
   runLogoutTimer(dispatch, timer);
 }
