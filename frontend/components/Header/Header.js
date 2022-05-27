@@ -1,18 +1,12 @@
 import data from "@/public/data.json";
 import { connect, useDispatch } from "react-redux";
 import { logout } from "@/redux/action/authAction";
-import { isAuthenticated } from "@/redux/selector/authSelector";
-import {useEffect} from "react";
 
 function Header(props) {
   const dispatch = useDispatch();
 
-  useEffect(()=>{
-    console.log(props.isAuthenticated);
-  },[props.isAuthenticated])
-
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white">
+    <nav className="navbar navbar-expand-lg navbar-light">
       <div className="container mx-auto ">
         <a className="navbar-brand m-4 text-primary" href="/">
           <strong>E-Portal</strong>
@@ -35,9 +29,13 @@ function Header(props) {
                 Home
               </a>
             </li>
-            {props.isAuthenticated ? (
+            {props.loggedIn ? (
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="/create">
+                <a
+                  className="nav-link active"
+                  aria-current="page"
+                  href="/create"
+                >
                   Create
                 </a>
               </li>
@@ -45,7 +43,7 @@ function Header(props) {
               <></>
             )}
           </ul>
-          {props.isAuthenticated ? (
+          {props.loggedIn ? (
             <a
               className="btn btn-outline-primary m-1"
               onClick={() => dispatch(logout())}
@@ -54,15 +52,12 @@ function Header(props) {
             </a>
           ) : (
             <div className="auth-buttons">
-              {data.navbar.buttons.map((button, idx) => (
-                <a
-                  className="btn btn-outline-primary m-1"
-                  key={`${idx}`}
-                  href={`${button.link}`}
-                >
-                  {button.name}
-                </a>
-              ))}
+              <a className="btn btn-outline-primary m-1" href="/signup">
+                Sign Up
+              </a>
+              <a className="btn btn-primary m-1" href="/signin">
+                Sign In
+              </a>
             </div>
           )}
         </div>
@@ -71,10 +66,8 @@ function Header(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    isAuthenticated: isAuthenticated(state),
-  };
-};
+const mapStateToProps = (state) => ({
+  loggedIn: state.auth.loggedIn,
+});
 
 export default connect(mapStateToProps)(Header);

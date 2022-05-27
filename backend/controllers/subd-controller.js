@@ -1,7 +1,7 @@
-const { validationResult } = require('express-validator');
+const { validationResult } = require("express-validator");
 
-const ApiError = require('../exceptions/api-error');
-const subdModel = require('../models/subd-model');
+const ApiError = require("../exceptions/api-error");
+const subdModel = require("../models/subd-model");
 
 
 class SubdController {
@@ -20,6 +20,7 @@ class SubdController {
             next(error);
         }
     }
+  }
 
     async getSubds(req, res, next) {
         try {
@@ -40,16 +41,17 @@ class SubdController {
             next(error);
         }
     }
+  }
 
-    async getSubd(req, res, next) {
-        const { id } = req.params;
-        try {
-            const subd = await subdModel.findById(id);
-            res.status(200).json(subd);
-        } catch (error) {
-            next(error);
-        }
+  async getSubd(req, res, next) {
+    const { id } = req.params;
+    try {
+      const subd = await subdModel.findById(id);
+      res.status(200).json(subd);
+    } catch (error) {
+      next(error);
     }
+  }
 
     async deleteSubd(req, res, next) {
         const { id } = req.params;
@@ -61,6 +63,7 @@ class SubdController {
             next(error);
         }
     }
+  }
 
     async editSubd(req, res, next) {
         try {
@@ -73,6 +76,7 @@ class SubdController {
             next(error);
         }
     }
+  }
 }
 
 module.exports = new SubdController();

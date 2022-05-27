@@ -1,4 +1,4 @@
-const { validationResult } = require('express-validator');
+const { validationResult } = require("express-validator");
 
 const ApiError = require('../exceptions/api-error');
 const postModel = require('../models/post-model');
@@ -23,6 +23,7 @@ class PostController {
             next(error);
         }
     }
+  }
 
     async getPosts(req, res, next) {
         try {
@@ -43,6 +44,7 @@ class PostController {
             next(error);
         }
     }
+  }
 
     async getPost(req, res, next) {
         const { id } = req.params;
@@ -54,16 +56,17 @@ class PostController {
             next(error);
         }
     }
+  }
 
-    async deletePost(req, res, next) {
-        const { id } = req.params;
-        try {
-            await postModel.findByIdAndDelete(id);
-            res.status(200).json({ message: 'Post deleted' });
-        } catch (error) {
-            next(error);
-        }
+  async deletePost(req, res, next) {
+    const { id } = req.params;
+    try {
+      await postModel.findByIdAndDelete(id);
+      res.status(200).json({ message: "Post deleted" });
+    } catch (error) {
+      next(error);
     }
+  }
 
     async editPost(req, res, next) {
         try {
@@ -77,6 +80,7 @@ class PostController {
             next(error);
         }
     }
+  }
 
     async commentPost(req, res, next) {
         // const { id } = req.params;
@@ -98,6 +102,7 @@ class PostController {
             next(error);
         }
     }
+  }
 }
 
 module.exports = new PostController();

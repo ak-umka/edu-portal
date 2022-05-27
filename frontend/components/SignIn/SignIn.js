@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch,connect } from "react-redux";
+import { useDispatch, connect } from "react-redux";
 import { login } from "@/redux/action/authAction";
 import { useRouter } from "next/router";
-import { isAuthenticated } from "@/redux/selector/authSelector";
 
 function SignIn(props) {
   const [email, setEmail] = useState();
@@ -22,18 +21,15 @@ function SignIn(props) {
     dispatch(login(email, password));
   }
 
-useEffect(()=>{
-  if(props.isAuthenticated){
-    router.push("/")
-  }
-},[props.isAuthenticated])
-
+  useEffect(() => {
+    if (props.loggedIn) {
+      router.push("/");
+    }
+  }, [props.loggedIn]);
 
   return (
     <section className="sign-in">
-      <div
-        className="px-4 py-5 px-md-5 text-center text-lg-start"
-      >
+      <div className="px-4 py-5 px-md-5 text-center text-lg-start">
         <div className="container">
           <div className="row gx-lg-5 align-items-center">
             <div className="col-lg-6 mb-5 mb-lg-0">
@@ -109,7 +105,10 @@ useEffect(()=>{
                     </button>
                   </form>
                   <p>
-                    If you haven't registered yet, <a href="/signup">Sign Up</a>
+                    If you haven't registered yet,{" "}
+                    <a className="link-primary" href="/signup">
+                      Sign Up
+                    </a>
                   </p>
                 </div>
               </div>
@@ -121,10 +120,8 @@ useEffect(()=>{
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    isAuthenticated: isAuthenticated(state)
-  };
-};
+const mapStateToProps = (state) => ({
+  loggedIn: state.auth.loggedIn,
+});
 
-export default connect(mapStateToProps) (SignIn);
+export default connect(mapStateToProps)(SignIn);
