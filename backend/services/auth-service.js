@@ -15,7 +15,7 @@ class AuthService {
 
         const hashedPassword = await bcrypt.hash(password, 3);
         const userRole = await Role.findOne({value: 'USER'});
-        const user = await userModel.create({email, password: hashedPassword, roles: [userRole.value]});
+        const user = await userModel.create({email, password: hashedPassword, roles: [userRole?.value]});
         
         const userDto = new UserDto(user);
         const tokens = TokenService.generateToken({...userDto});

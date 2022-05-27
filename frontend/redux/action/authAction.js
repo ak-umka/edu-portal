@@ -1,5 +1,10 @@
 import axios from "axios";
-import { saveTokeninLocalStorage } from "../selector/authSelector";
+import axiosInstance from "@/services/service";
+import {
+  saveTokenInLocalStorage,
+  runLogoutTimer,
+} from "../selector/authSelector";
+
 //signup
 export const SIGNUP_CONFIRMED = "SIGNUP_CONFIRMED";
 export const SIGNUP_FAILED = "SIGNUP_FAILED";
@@ -19,14 +24,14 @@ export const GET_USERS = "GET_USERS";
 
 //signup finction
 
-export function signup(email, password) {
+export function signup(email, password, role) {
   return (dispatch) => {
     return axios
-      .post(`http://localhost:3001/api/v0/signup`, email, password)
+      .post(`http://localhost:3001/api/v0/signup`, email, password, role)
       .then((response) => {
         dispatch(SignupConfirmed(response.data));
+        saveTokenInLocalStorage(response.data);
         localStorage.setItem("token", response.data.accessToken);
-        runLogoutTimer(dispatch, response.data.expiresIn * 1000);
       })
       .catch((error) => {
         console.log(error);
@@ -47,16 +52,13 @@ export function signup(email, password) {
 
 export function login(email, password) {
   return (dispatch) => {
-    const token = localStorage.getItem("token");
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
-    return axios
-      .post(`http://localhost:3001/api/v0/signin`, email, password, config)
+    return axiosInstance
+      .post(`http://localhost:3001/api/v0/signin`, email, password)
       .then((response) => {
         dispatch(LoginConfirmed(response.data));
-        saveTokeninLocalStorage(response.data);
-        // runLogoutTimer(dispatch, 30 * 24 * 60 * 60 * 1000);
+        saveTokenInLocalStorage(response.data);
+        localStorage.setItem("token", response.data.accessToken);
+        if (!user.accessToken) return dispatch(refresh());
       })
       .catch((error) => {
         dispatch(LoginFailed(error.response));
@@ -69,10 +71,11 @@ export function login(email, password) {
 export function refresh() {
   return (dispatch) => {
     const user = JSON.parse(localStorage.getItem("user"));
-    return axios
+    return axiosInstance
       .get(`http://localhost:3001/api/v0/refresh`, user?.accessToken)
       .then((response) => {
         dispatch(refreshToken(response.data));
+        saveTokenInLocalStorage(response.data);
       })
       .catch((error) => {
         console.log(error);

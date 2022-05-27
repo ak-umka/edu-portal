@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, connect } from "react-redux";
 import { signup } from "@/redux/action/authAction";
+import { useRouter } from "next/router";
 
 function SignUp(props) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const router = useRouter();
 
   const {
     register,
@@ -19,14 +21,17 @@ function SignUp(props) {
     dispatch(signup(email, password));
   }
 
-  useEffect(()=>{
+  useEffect(() => {
+    if (!props.loggedIn) return router.push("signin");
+  }, [props.loggedIn]);
+
+  useEffect(() => {
     console.log(props.errorMessage);
-  },[props.errorMessage])
+  }, [props.errorMessage]);
 
   return (
     <section className="sign-up">
-      <div
-        className="px-4 py-5 px-md-5 text-center text-lg-start">
+      <div className="px-4 py-5 px-md-5 text-center text-lg-start">
         <div className="container">
           <div className="row gx-lg-5 align-items-center">
             <div className="col-lg-6 mb-5 mb-lg-0">
@@ -103,7 +108,10 @@ function SignUp(props) {
                     </button>
                   </form>
                   <p>
-                    If you've registered already, <a className="link-primary"  href="/signin">Sign In</a>
+                    If you've registered already,{" "}
+                    <a className="link-primary" href="/signin">
+                      Sign In
+                    </a>
                   </p>
                 </div>
               </div>
@@ -118,6 +126,7 @@ function SignUp(props) {
 const mapStateToProps = (state) => {
   return {
     errorMessage: state.auth.errorMessage,
+    loggedIn: state.auth.loggedIn,
   };
 };
 

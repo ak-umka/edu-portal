@@ -1,50 +1,41 @@
-import { logout, refresh } from "../action/authAction";
-import { LoginConfirmed } from "../action/authAction";
+import { logout, refresh, LoginConfirmed } from "../action/authAction";
 
-//isAuthenticated
-export const isAuthenticated = (state) => {
-  if (state.auth.auth.accessToken) return true;
-  return false;
-};
-
-//save token in local storage
-
-export function saveTokeninLocalStorage(token) {
-  token.expireDate = new Date().getTime() + 30 * 24 * 60 * 60 * 1000;
-  localStorage.setItem("user", JSON.stringify(token));
+//save token
+export function saveTokenInLocalStorage(tokenDetails) {
+  tokenDetails.expireDate = new Date(
+    new Date().getTime() + 30 * 24 * 60 * 1000
+  );
+  localStorage.setItem("user", JSON.stringify(tokenDetails));
 }
 
 //log out timer
-
 export function runLogoutTimer(dispatch, timer) {
   setTimeout(() => {
     dispatch(logout());
-    // localStorage.removeItem("user");
   }, timer);
 }
 
-//check auto login when browser refreshed
-
+//check login
 export function checkAutoLogin(dispatch) {
-  const tokenString = localStorage.getItem("user");
-  const accessToken = localStorage.getItem("token");
-  let token = "";
-  if (!tokenString) {
-    dispatch(logout());
-    localStorage.removeItem("user");
+  const tokenDetailsString = localStorage.getItem("user");
+  let tokenDetails = "";
+  if (!tokenDetailsString) {
+    // dispatch(logout());
     return;
   }
-  token = JSON.parse(tokenString);
 
-  let expireDate = new Date(expireDate);
-  let today = new Date();
+  tokenDetails = JSON.parse(tokenDetailsString);
+  let expireDate = new Date(tokenDetails.expireDate);
+  let todaysDate = new Date();
 
-  if (today > expireDate) {
+  if (todaysDate > expireDate) {
     dispatch(refresh());
+    dispatch(logout());
     return;
   }
-  dispatch(LoginConfirmed(tokenString));
+  dispatch(LoginConfirmed(tokenDetails));
 
-  const timer = expireDate.getTime() - today.getTime();
+  const timer = expireDate.getTime() - todaysDate.getTime();
+
   runLogoutTimer(dispatch, timer);
 }

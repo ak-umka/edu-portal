@@ -9,6 +9,7 @@ import {
 } from "../action/authAction";
 
 const initialState = {
+  loggedIn: false,
   auth: {
     email: "",
     id: "",
@@ -30,6 +31,7 @@ export function authReducer(state = initialState, action) {
       return {
         ...state,
         auth: action.payload,
+        loggedIn: true,
         errorMessage: "Login Successfully Completed",
       };
     case LOGIN_FAILED:

@@ -1,10 +1,8 @@
 import { connect, useDispatch } from "react-redux";
-import { getPost } from "@/redux/action/postsAction";
-import { getUsersData } from "@/redux/action/authAction";
+import { getPost, deletePost } from "@/redux/action/postsAction";
 import { bindActionCreators } from "redux";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { isAuthenticated } from "@/redux/selector/authSelector";
 import { postComment } from "@/redux/action/postsAction";
 import moment from "moment";
 import Spinner from "../Loading/Loading";
@@ -19,25 +17,35 @@ function Post(props) {
   const formattedTime = moment(post?.createdAt).format("DD/MM/YYYY HH:mm");
 
   useEffect(() => {
+    if (!router.isReady) return;
     props.getPost(id);
-    setLoading(false);
-  }, [id]);
+  }, [id, router.isReady]);
 
-  useEffect(() => {
-    props.getUsersData();
-    console.log(props.users);
-  }, [props.users]);
+  function onSubmit(comment) {
+    dispatch(postComment(id, comment));
+  }
 
-  const onSubmit = (data) => {
-    dispatch(postComment(data, id));
+  const deletePost = () => {
+    if (window.confirm("Are you sure you want to delete post?"))
+      return props.deletePost(id);
   };
 
   return (
     <div className="post">
       <div className="container mx-auto">
-        {loading ? (
-          <div className="spinner d-flex align-items-center justify-content-center">
-            <Spinner />{" "}
+        {post?.creator === props.auth?.user?.id ? (
+          <div className="col d-flex justify-content-end">
+            <a className="btn btn-text text-primary" onClick={deletePost}>
+              DELETE
+            </a>
+            <a className="btn btn-text text-primary">EDIT</a>
+          </div>
+        ) : (
+          <></>
+        )}
+        <div className="row align-items-center justify-content-center">
+          <div className="col text-center">
+            <img src={post?.photo} alt="..." className="post-image" />
           </div>
         ) : (
           <div>
@@ -45,11 +53,41 @@ function Post(props) {
               <div className="col text-center">
                 <img src={post?.photo} alt="..." className="post-image" />
               </div>
-              <div className="col-6 text-center">
-                <p>Published: {formattedTime}</p>
-                <div className="d-flex justify-content-center">
-                  <div className="col-lg-6 col-12">
-                    <h3 className="py-2">{post?.title}</h3>
+            </div>
+            {/* <p className="author mt-4">Author: {post?.creator}</p> */}
+          </div>
+        </div>
+        <p className="content">{post?.content}</p>
+        <div className="row justify-content-center">
+          <div className="col-8">
+            <div className="comment">
+              <h6>Comments</h6>
+              {/* Content */}
+              <form onSubmit={onSubmit}>
+                <div className="form-outline mb-4">
+                  <textarea
+                    type="text"
+                    id="comment-form"
+                    className="form-control"
+                    rows="5"
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                  />
+                </div>
+                <div className="row justify-content-end">
+                  <div className="col-2">
+                    {props.loggedIn ? (
+                      <button
+                        type="submit"
+                        className="btn btn-primary btn-block"
+                      >
+                        Publish
+                      </button>
+                    ) : (
+                      <button className="btn btn-primary btn-block" disabled>
+                        Publish
+                      </button>
+                    )}
                   </div>
                 </div>
                 {/* <p className="author mt-4">Author: {post?.creator}</p> */}
@@ -110,11 +148,12 @@ function Post(props) {
 const mapStateToProps = (state) => ({
   post: state.posts.post,
   users: state.auth.users,
-  isAuthenticated: isAuthenticated(state),
+  auth: state.auth.auth,
+  loggedIn: state.auth.loggedIn,
 });
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ getPost, getUsersData }, dispatch);
+  return bindActionCreators({ getPost, deletePost }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Post);
