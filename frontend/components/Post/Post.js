@@ -91,6 +91,7 @@ function Post(props) {
                   </div>
                 </div>
                 {/* <p className="author mt-4">Author: {post?.creator}</p> */}
+                </form>
               </div>
             </div>
             <p className="content">{post?.content}</p>
@@ -139,7 +140,6 @@ function Post(props) {
               </div>
             </div>
           </div>
-        )}
       </div>
     </div>
   );
