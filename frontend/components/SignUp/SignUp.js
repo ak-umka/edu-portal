@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 function SignUp(props) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const router = useRouter();
 
   const {
     register,
@@ -19,6 +20,10 @@ function SignUp(props) {
   function onSubmit(email, password) {
     dispatch(signup(email, password));
   }
+
+  useEffect(() => {
+    if (!props.loggedIn) return router.push("signin");
+  }, [props.loggedIn]);
 
   useEffect(() => {
     console.log(props.errorMessage);
@@ -121,6 +126,7 @@ function SignUp(props) {
 const mapStateToProps = (state) => {
   return {
     errorMessage: state.auth.errorMessage,
+    loggedIn: state.auth.loggedIn,
   };
 };
 

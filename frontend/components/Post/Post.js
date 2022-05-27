@@ -1,10 +1,8 @@
 import { connect, useDispatch } from "react-redux";
-import { getPost } from "@/redux/action/postsAction";
-import { users } from "@/redux/action/authAction";
+import { getPost, deletePost } from "@/redux/action/postsAction";
 import { bindActionCreators } from "redux";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { isAuthenticated } from "@/redux/selector/authSelector";
 import { postComment } from "@/redux/action/postsAction";
 import moment from "moment";
 
@@ -17,20 +15,27 @@ function Post(props) {
   const formattedTime = moment(post?.createdAt).format("DD/MM/YYYY HH:mm");
 
   useEffect(() => {
+    if (!router.isReady) return;
     props.getPost(id);
-    props.users();
-  }, [id]);
+  }, [id, router.isReady]);
 
-  const onSubmit = (data) => {
-    dispatch(postComment(data, id));
+  function onSubmit(comment) {
+    dispatch(postComment(id, comment));
+  }
+
+  const deletePost = () => {
+    if (window.confirm("Are you sure you want to delete post?"))
+      return props.deletePost(id);
   };
 
   return (
     <div className="post">
       <div className="container mx-auto">
-        {post?.creator === props.auth?.id ? (
+        {post?.creator === props.auth?.user?.id ? (
           <div className="col d-flex justify-content-end">
-            <a className="btn btn-text text-primary">DELETE</a>
+            <a className="btn btn-text text-primary" onClick={deletePost}>
+              DELETE
+            </a>
             <a className="btn btn-text text-primary">EDIT</a>
           </div>
         ) : (
@@ -69,7 +74,7 @@ function Post(props) {
                 </div>
                 <div className="row justify-content-end">
                   <div className="col-2">
-                    {props.isAuthenticated ? (
+                    {props.loggedIn ? (
                       <button
                         type="submit"
                         className="btn btn-primary btn-block"
@@ -101,11 +106,11 @@ const mapStateToProps = (state) => ({
   post: state.posts.post,
   users: state.auth.users,
   auth: state.auth.auth,
-  isAuthenticated: isAuthenticated(state),
+  loggedIn: state.auth.loggedIn,
 });
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ getPost, users }, dispatch);
+  return bindActionCreators({ getPost, deletePost }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Post);

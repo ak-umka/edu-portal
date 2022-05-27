@@ -1,7 +1,6 @@
 import data from "@/public/data.json";
 import { connect, useDispatch } from "react-redux";
 import { logout } from "@/redux/action/authAction";
-import { isAuthenticated, isAuth } from "@/redux/selector/authSelector";
 
 function Header(props) {
   const dispatch = useDispatch();
@@ -30,7 +29,7 @@ function Header(props) {
                 Home
               </a>
             </li>
-            {props.isAuthenticated ? (
+            {props.loggedIn ? (
               <li className="nav-item">
                 <a
                   className="nav-link active"
@@ -44,7 +43,7 @@ function Header(props) {
               <></>
             )}
           </ul>
-          {props.isAuthenticated ? (
+          {props.loggedIn ? (
             <a
               className="btn btn-outline-primary m-1"
               onClick={() => dispatch(logout())}
@@ -67,10 +66,8 @@ function Header(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    isAuthenticated: isAuthenticated(state),
-  };
-};
+const mapStateToProps = (state) => ({
+  loggedIn: state.auth.loggedIn,
+});
 
 export default connect(mapStateToProps)(Header);

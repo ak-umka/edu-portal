@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, connect } from "react-redux";
+import { postCreate } from "@/redux/action/postsAction";
+import FormData from "form-data";
 
-function Create() {
+function Create(props) {
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
-  const [image, setImage] = useState();
+  const [photo, setPhoto] = useState();
   const {
     register,
     handleSubmit,
@@ -14,9 +16,14 @@ function Create() {
 
   const dispatch = useDispatch();
 
-  function onSubmit(data) {
-    console.log(data);
-  }
+  const onSubmit = (data) => {
+    var formData = new FormData();
+    formData.set("title", data.title);
+    formData.set("content", data.content);
+    formData.append("photo", data.photo);
+    dispatch(postCreate(formData));
+  };
+
   return (
     <div className="create">
       <div className="row justify-content-center">
@@ -34,7 +41,7 @@ function Create() {
                     id="title-form"
                     className="form-control"
                     value={title}
-                    onChange={(e) => setContent(e.target.value)}
+                    onChange={(e) => setTitle(e.target.value)}
                     {...register("title", {
                       required: true,
                     })}
@@ -75,14 +82,15 @@ function Create() {
                     <input
                       className="file-input"
                       type="file"
-                      value={image}
-                      onChange={(e) => setImage(e.target.files[0])}
-                      {...register("image", {
+                      encType="multipart/form-data"
+                      value={photo}
+                      onChange={(e) => setPhoto(e.target.files[0])}
+                      {...register("photo", {
                         required: true,
                       })}
                     />
                   </div>
-                  {errors.image && (
+                  {errors.photo && (
                     <span className="text-danger">Image is required</span>
                   )}
                 </div>

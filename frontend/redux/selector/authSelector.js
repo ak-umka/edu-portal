@@ -1,10 +1,10 @@
 import { logout, refresh, LoginConfirmed } from "../action/authAction";
 
-//isAuthenticated
-export const isAuthenticated = (state) => {
-  if (state.auth.auth.accessToken) return true;
-  return false;
-};
+// //isAuthenticated
+// export const isAuthenticated = (state) => {
+//   if (state.auth.auth.accessToken) return true;
+//   return false;
+// };
 
 //save token
 export function saveTokenInLocalStorage(tokenDetails) {
@@ -26,7 +26,7 @@ export function checkAutoLogin(dispatch) {
   const tokenDetailsString = localStorage.getItem("user");
   let tokenDetails = "";
   if (!tokenDetailsString) {
-    dispatch(logout());
+    // dispatch(logout());
     return;
   }
 
