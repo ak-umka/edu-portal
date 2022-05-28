@@ -11,6 +11,7 @@ export const CONFIRMED_DELETE_POST = "CONFIRMED_DELETE_POST";
 export const FAILED_DELETE_POST = "FAILED_DELETE_POST";
 export const CONFIRMED_GET_POST = "CONFIRMED_GET_POST";
 export const COMMENTS = "COMMENTS";
+export const COMMENTS_ERROR = "COMMENTS_ERROR";
 
 //get posts
 
@@ -54,7 +55,7 @@ export function getPost(id) {
 export function postComment(id, comment) {
   return (dispatch) => {
     axiosInstance
-      .post(`http://localhost:3001/api/v0/getPost/${id}/comment`, comment)
+      .post(`getPost/${id}/comment`, comment)
       .then((response) => {
         dispatch({
           type: COMMENTS,
@@ -62,7 +63,10 @@ export function postComment(id, comment) {
         });
       })
       .catch((e) => {
-        console.log(e);
+        dispatch({
+          type: COMMENTS_ERROR,
+          payload: e.response,
+        });
       });
   };
 }
@@ -92,27 +96,6 @@ export function postCreate(formData) {
   };
 }
 
-//delete post
-
-// export function deletePost(id) {
-//   return (dispatch) => {
-//     axiosInstance
-//       .delete(`deletePost/${id}`)
-//       .then((response) => {
-//         dispatch({
-//           type: CONFIRMED_DELETE_POST,
-//           payload: response.data,
-//         });
-//       })
-//       .catch((error) => {
-//         dispatch({
-//           type: FAILED_DELETE_POST,
-//           payload: error.response,
-//         });
-//       });
-//   };
-// }
-
 export function deletePost(postId) {
   return (dispatch) => {
     axiosInstance
@@ -137,7 +120,7 @@ export function deletePost(postId) {
 export function edit(id) {
   return (dispatch) => {
     axiosInstance
-      .put(`http://localhost:3001/api/v0/deletePost/${id}`)
+      .put(`editPost/${id}`)
       .then((response) => {
         dispatch({
           type: CONFIRMED_EDIT_POST,

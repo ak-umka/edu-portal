@@ -6,6 +6,7 @@ import {
   FAILED_CREATE_POST,
   CONFIRMED_DELETE_POST,
   FAILED_DELETE_POST,
+  COMMENTS_ERROR,
 } from "@/redux/action/postsAction";
 
 const initialState = {
@@ -59,6 +60,11 @@ export function postsReducer(state = initialState, action) {
       return {
         ...state,
         comment: action.payload,
+      };
+    case COMMENTS_ERROR:
+      return {
+        ...state,
+        comment: "",
       };
     case CONFIRMED_GET_POSTS:
       return {
