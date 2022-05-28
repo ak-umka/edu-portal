@@ -6,10 +6,14 @@ import {
   FAILED_CREATE_POST,
   CONFIRMED_DELETE_POST,
   FAILED_DELETE_POST,
+  COMMENTS_ERROR,
+  CONFIRMED_EDIT_POST,
+  FAILED_EDIT_POST,
 } from "@/redux/action/postsAction";
 
 const initialState = {
   posts: [],
+  postIsChanged: false,
   post: {
     id: "",
     title: "",
@@ -29,6 +33,7 @@ export function postsReducer(state = initialState, action) {
       return {
         ...state,
         post: action.payload,
+        postIsChanged: true,
       };
     case FAILED_CREATE_POST:
       return {
@@ -58,6 +63,11 @@ export function postsReducer(state = initialState, action) {
         ...state,
         comment: action.payload,
       };
+    case COMMENTS_ERROR:
+      return {
+        ...state,
+        comment: action.payload,
+      };
     case CONFIRMED_GET_POSTS:
       return {
         ...state,
@@ -68,7 +78,12 @@ export function postsReducer(state = initialState, action) {
         ...state,
         post: action.payload,
       };
-    case CONFIRMED_CREATE_POST:
+    case CONFIRMED_EDIT_POST:
+      return {
+        ...state,
+        post: action.payload,
+      };
+    case FAILED_EDIT_POST:
       return {
         ...state,
         post: action.payload,

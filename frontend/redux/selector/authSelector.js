@@ -3,7 +3,7 @@ import { logout, refresh, LoginConfirmed } from "../action/authAction";
 //save token
 export function saveTokenInLocalStorage(tokenDetails) {
   tokenDetails.expireDate = new Date(
-    new Date().getTime() + 30 * 24 * 60 * 1000
+    new Date().getTime() + 30 * 60 * 1000
   );
   localStorage.setItem("user", JSON.stringify(tokenDetails));
 }
@@ -20,7 +20,7 @@ export function checkAutoLogin(dispatch) {
   const tokenDetailsString = localStorage.getItem("user");
   let tokenDetails = "";
   if (!tokenDetailsString) {
-    // dispatch(logout());
+    dispatch(logout());
     return;
   }
 

@@ -1,5 +1,3 @@
-import axiosInstance from "./service";
-
 export function formatPosts(postsData) {
     let posts = [];
     for (let key in postsData) {

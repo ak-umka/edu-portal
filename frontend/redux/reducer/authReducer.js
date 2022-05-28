@@ -17,7 +17,14 @@ const initialState = {
     refreshToken: "",
   },
   errorMessage: "",
-  users: [],
+  users: [
+    {
+      role: "",
+      id: "",
+      email: "",
+      password: "",
+    },
+  ],
 };
 
 export function authReducer(state = initialState, action) {
@@ -26,6 +33,7 @@ export function authReducer(state = initialState, action) {
       return {
         ...state,
         auth: action.payload,
+        errorMessage: "User successfully created",
       };
     case LOGIN_CONFIRMED:
       return {
@@ -48,6 +56,7 @@ export function authReducer(state = initialState, action) {
           accessToken: "",
           refreshToken: "",
         },
+        loggedIn: false,
       };
     case SIGNUP_FAILED:
       return {

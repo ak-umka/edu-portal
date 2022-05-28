@@ -1,6 +1,6 @@
 import data from "@/public/data.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot, faPhone,  } from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot, faPhone } from "@fortawesome/free-solid-svg-icons";
 
 function Footer() {
   return (
@@ -15,13 +15,27 @@ function Footer() {
             <div className="col-lg-4 mb-5 mb-lg-0">
               <h6 className="text-primary mb-2">Useful links</h6>
               <p>
-                <a href="/" className="text-decoration-none text-reset text-white">
+                <a
+                  href="/"
+                  className="text-decoration-none text-reset text-white"
+                >
                   Home
                 </a>
               </p>
               <p>
-                <a href="/signin" className="text-decoration-none text-reset text-white">
+                <a
+                  href="/signin"
+                  className="text-decoration-none text-reset text-white"
+                >
                   SignIn
+                </a>
+              </p>
+              <p>
+                <a
+                  href="/admin/signin"
+                  className="text-decoration-none text-reset text-white"
+                >
+                  Admin
                 </a>
               </p>
             </div>
@@ -30,7 +44,9 @@ function Footer() {
               <h6 className="text-primary">Our location</h6>
               <div className="d-flex align-items-center ">
                 <FontAwesomeIcon icon={faLocationDot} />
-                <p className="m-2 px-2">Nur-Sultan, A. Jangeldın kóshesi, 123А</p>
+                <p className="m-2 px-2">
+                  Nur-Sultan, A. Jangeldın kóshesi, 123А
+                </p>
               </div>
               <div className="d-flex align-items-center">
                 <FontAwesomeIcon icon={faPhone} />

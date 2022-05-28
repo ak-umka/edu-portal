@@ -7,10 +7,12 @@ export const CONFIRMED_CREATE_POST = "CONFIRMED_CREATE_POST";
 export const FAILED_CREATE_POST = "FAILED_CREATE_POST";
 export const CONFIRMED_GET_POSTS = "CONFIRMED_GET_POSTS";
 export const CONFIRMED_EDIT_POST = "CONFIRMED_EDIT_POST";
+export const FAILED_EDIT_POST = "FAILED_EDIT_POST";
 export const CONFIRMED_DELETE_POST = "CONFIRMED_DELETE_POST";
 export const FAILED_DELETE_POST = "FAILED_DELETE_POST";
 export const CONFIRMED_GET_POST = "CONFIRMED_GET_POST";
 export const COMMENTS = "COMMENTS";
+export const COMMENTS_ERROR = "COMMENTS_ERROR";
 
 //get posts
 
@@ -54,7 +56,7 @@ export function getPost(id) {
 export function postComment(id, comment) {
   return (dispatch) => {
     axiosInstance
-      .post(`http://localhost:3001/api/v0/getPost/${id}/comment`, comment)
+      .post(`getPost/${id}/comment`, comment)
       .then((response) => {
         dispatch({
           type: COMMENTS,
@@ -62,26 +64,10 @@ export function postComment(id, comment) {
         });
       })
       .catch((e) => {
-        console.log(e);
-      });
-  };
-}
-
-//create post
-
-export function createPost(post) {
-  return (dispatch) => {
-    axios({
-      method: "post",
-      url: "http://localhost:3001/api/v0/createPost",
-      data: post,
-      headers: { "Content-Type": "multipart/form-data" },
-    })
-      .then((response) => {
-        dispatch(confirmedCreatePost(response.data));
-      })
-      .catch((error) => {
-        console.log(error);
+        dispatch({
+          type: COMMENTS_ERROR,
+          payload: e.response,
+        });
       });
   };
 }
@@ -96,7 +82,6 @@ export function postCreate(formData) {
       data: formData,
       headers: { "Content-Type": "multipart/form-data" },
     })
-      // .post("http://localhost:3001/api/v0/createPost", formData)
       .then((response) => {
         dispatch({
           type: CONFIRMED_CREATE_POST,
@@ -111,27 +96,6 @@ export function postCreate(formData) {
       });
   };
 }
-
-//delete post
-
-// export function deletePost(id) {
-//   return (dispatch) => {
-//     axiosInstance
-//       .delete(`deletePost/${id}`)
-//       .then((response) => {
-//         dispatch({
-//           type: CONFIRMED_DELETE_POST,
-//           payload: response.data,
-//         });
-//       })
-//       .catch((error) => {
-//         dispatch({
-//           type: FAILED_DELETE_POST,
-//           payload: error.response,
-//         });
-//       });
-//   };
-// }
 
 export function deletePost(postId) {
   return (dispatch) => {
@@ -154,10 +118,14 @@ export function deletePost(postId) {
 
 //edit post
 
-export function edit(id) {
+export function edit(id, formData) {
   return (dispatch) => {
-    axiosInstance
-      .put(`http://localhost:3001/api/v0/deletePost/${id}`)
+    axiosInstance({
+      method: "put",
+      url: `editPost/${id}`,
+      data: formData,
+      headers: { "Content-Type": "multipart/form-data" },
+    })
       .then((response) => {
         dispatch({
           type: CONFIRMED_EDIT_POST,
@@ -165,15 +133,10 @@ export function edit(id) {
         });
       })
       .catch((error) => {
-        console.log(error);
+        dispatch({
+          type: FAILED_EDIT_POST,
+          payload: error.response,
+        });
       });
-  };
-}
-
-//create post
-export function confirmedCreatePost(post) {
-  return {
-    type: CONFIRMED_CREATE_POST,
-    payload: post,
   };
 }
