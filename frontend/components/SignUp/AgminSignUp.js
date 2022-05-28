@@ -17,9 +17,14 @@ function AdminSignUp() {
   const dispatch = useDispatch();
 
   function onSubmit(email, password, role) {
-    console.log(email, password, role);
-    // dispatch(signup(email, password, role));
+    dispatch(signup(email, password, role));
   }
+
+  useEffect(() => {
+    if (props.errorMessage === "User successfully created") {
+      router.push("/admin/signin");
+    }
+  }, [props.errorMessage]);
 
   return (
     <div className="admin-sign-up">
@@ -56,7 +61,6 @@ function AdminSignUp() {
                         <span className="text-danger">Email is required</span>
                       )}
                     </div>
-
                     {/* Password */}
                     <div className="form-outline mb-4">
                       <label className="form-label" htmlFor="password-form">
@@ -87,9 +91,14 @@ function AdminSignUp() {
                         value={role}
                         hidden
                         onChange={(e) => setRole(e.target.value)}
+                        {...register("role", {
+                          required: true,
+                        })}
                       />
+                      {errors.role && (
+                        <span className="text-danger">Role is required</span>
+                      )}
                     </div>
-
                     {/* Submit  */}
                     <button
                       type="submit"
@@ -113,5 +122,11 @@ function AdminSignUp() {
     </div>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    errorMessage: state.auth.errorMessage,
+    loggedIn: state.auth.loggedIn,
+  };
+};
 
-export default AdminSignUp;
+export default connect(mapStateToProps)(AdminSignUp);

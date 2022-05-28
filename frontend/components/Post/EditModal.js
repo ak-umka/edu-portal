@@ -4,8 +4,9 @@ import { useDispatch, connect } from "react-redux";
 import { postCreate } from "@/redux/action/postsAction";
 import FormData from "form-data";
 import { useRouter } from "next/router";
+import { Modal } from "react-bootstrap";
 
-function Create(props) {
+function Edit(props) {
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
   const [photo, setPhoto] = useState();
@@ -19,28 +20,17 @@ function Create(props) {
   const postIsChanged = props.postIsChanged;
   const post = props.post;
 
-  const onSubmit = (data) => {
-    const token = localStorage.getItem("token");
-    var formData = new FormData();
-    formData.set("title", data.title);
-    formData.set("content", data.content);
-    formData.append("photo", data.photo[0]);
-    dispatch(postCreate(formData));
-  };
-
-  useEffect(() => {
-    if (props.postIsChanged) {
-      router.push(`/posts/${props.post?._id}`);
-    }
-  }, [props.postIsChanged, props.post]);
-
   return (
-    <div className="create">
-      <div className="row justify-content-center">
-        <div className="col-lg-6 mb-5 mb-lg-0">
+    <>
+      <Modal show={props.show} onHide={props.handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title className="text-primary">Edit</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
           <div className="card border-0 shadow-sm bg-white">
             <div className="card-body py-5 px-md-5">
-              <form onSubmit={handleSubmit(onSubmit)}>
+              <form onSubmit={handleSubmit(props.onSubmit)}>
                 {/* Title */}
                 <div className="form-outline mb-4">
                   <label className="form-label" htmlFor="title-form">
@@ -114,9 +104,9 @@ function Create(props) {
               </form>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+        </Modal.Body>
+      </Modal>
+    </>
   );
 }
 
@@ -127,4 +117,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Create);
+export default connect(mapStateToProps)(Edit);

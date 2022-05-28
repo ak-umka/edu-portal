@@ -4,7 +4,7 @@ import { useDispatch, connect } from "react-redux";
 import { login } from "@/redux/action/authAction";
 import { useRouter } from "next/router";
 
-function AdminLogin() {
+function AdminLogin(props) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const router = useRouter();
@@ -15,20 +15,27 @@ function AdminLogin() {
   } = useForm();
   const dispatch = useDispatch();
 
-  function onSubmit(email, password, role="admin") {
-    dispatch(login(email, password, role));
+  function onSubmit(email, password) {
+    dispatch(login(email, password));
   }
+
+  useEffect(() => {
+    if (props.loggedIn) {
+      router.push("/");
+    }
+  }, [props.loggedIn]);
 
   return (
     <div className="admin-sign-in">
       <div className="px-4 py-5 px-md-5 text-center text-lg-start">
         <div className="container">
           <div className="row gx-lg-5 justify-content-center align-items-center">
-
             <div className="col-lg-6 mb-5 mb-lg-0">
               <div className="card">
                 <div className="card-body py-5 px-md-5">
-                <h2 className="text-primary text-center m-4">Sign In as Admin</h2>
+                  <h2 className="text-primary text-center m-4">
+                    Sign In as Admin
+                  </h2>
                   <form onSubmit={handleSubmit(onSubmit)}>
                     {/* Email */}
                     <div className="form-outline mb-4">
@@ -101,4 +108,8 @@ function AdminLogin() {
   );
 }
 
-export default AdminLogin;
+const mapStateToProps = (state) => ({
+  loggedIn: state.auth.loggedIn,
+});
+
+export default connect(mapStateToProps)(AdminLogin);

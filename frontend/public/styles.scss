@@ -68,6 +68,10 @@ footer {
   min-height: 100vh;
 }
 
+.post-description {
+  background-image: linear-gradient(to right, #008000, rgb(66, 133, 244));
+}
+
 .post,
 .footer p {
   color: #aaaabe;
@@ -137,4 +141,3 @@ span {
 .card {
   min-height: 20rem !important;
 }
-

@@ -6,7 +6,7 @@ function Hero() {
           className="row align-items-center justify-content-center"
           style={{ height: "500px" }}
         >
-          <div className="col-6 text-center">
+          <div className="col-8 text-center">
             <h1>
               The easiest and fastest way to{" "}
               <div className="text-primary">Learn</div> in Agriculture

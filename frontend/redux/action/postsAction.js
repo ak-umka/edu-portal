@@ -7,6 +7,7 @@ export const CONFIRMED_CREATE_POST = "CONFIRMED_CREATE_POST";
 export const FAILED_CREATE_POST = "FAILED_CREATE_POST";
 export const CONFIRMED_GET_POSTS = "CONFIRMED_GET_POSTS";
 export const CONFIRMED_EDIT_POST = "CONFIRMED_EDIT_POST";
+export const FAILED_EDIT_POST = "FAILED_EDIT_POST";
 export const CONFIRMED_DELETE_POST = "CONFIRMED_DELETE_POST";
 export const FAILED_DELETE_POST = "FAILED_DELETE_POST";
 export const CONFIRMED_GET_POST = "CONFIRMED_GET_POST";
@@ -117,10 +118,14 @@ export function deletePost(postId) {
 
 //edit post
 
-export function edit(id) {
+export function edit(id, formData) {
   return (dispatch) => {
-    axiosInstance
-      .put(`editPost/${id}`)
+    axiosInstance({
+      method: "put",
+      url: `editPost/${id}`,
+      data: formData,
+      headers: { "Content-Type": "multipart/form-data" },
+    })
       .then((response) => {
         dispatch({
           type: CONFIRMED_EDIT_POST,
@@ -128,7 +133,10 @@ export function edit(id) {
         });
       })
       .catch((error) => {
-        console.log(error);
+        dispatch({
+          type: FAILED_EDIT_POST,
+          payload: error.response,
+        });
       });
   };
 }

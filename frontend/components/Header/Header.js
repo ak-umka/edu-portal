@@ -29,7 +29,7 @@ function Header(props) {
                 Home
               </a>
             </li>
-            {props.loggedIn ? (
+            {props.auth?.user?.role === "admin" ? (
               <li className="nav-item">
                 <a
                   className="nav-link active"
@@ -68,6 +68,7 @@ function Header(props) {
 
 const mapStateToProps = (state) => ({
   loggedIn: state.auth.loggedIn,
+  auth: state.auth.auth,
 });
 
 export default connect(mapStateToProps)(Header);
