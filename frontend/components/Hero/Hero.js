@@ -4,7 +4,7 @@ function Hero() {
       <div className="container mx-auto">
         <div
           className="row align-items-center justify-content-center"
-          style={{ height: "400px" }}
+          // style={{ height: "400px" }}
         >
           <div className="col-6 text-center">
             <h1>

@@ -29,9 +29,9 @@ export function signup(email, password, role) {
     return axios
       .post(`http://localhost:3001/api/v0/signup`, email, password, role)
       .then((response) => {
-        dispatch(SignupConfirmed(response.data));
         saveTokenInLocalStorage(response.data);
         localStorage.setItem("token", response.data.accessToken);
+        dispatch(SignupConfirmed(response.data));
       })
       .catch((error) => {
         console.log(error);
@@ -50,14 +50,14 @@ export function signup(email, password, role) {
 
 //login function
 
-export function login(email, password) {
+export function login(email, password, role) {
   return (dispatch) => {
     return axiosInstance
-      .post(`http://localhost:3001/api/v0/signin`, email, password)
+      .post(`http://localhost:3001/api/v0/signin`, email, password, role)
       .then((response) => {
-        dispatch(LoginConfirmed(response.data));
         saveTokenInLocalStorage(response.data);
         localStorage.setItem("token", response.data.accessToken);
+        dispatch(LoginConfirmed(response.data));
         if (!user.accessToken) return dispatch(refresh());
       })
       .catch((error) => {
@@ -70,9 +70,8 @@ export function login(email, password) {
 
 export function refresh() {
   return (dispatch) => {
-    const user = JSON.parse(localStorage.getItem("user"));
     return axiosInstance
-      .get(`http://localhost:3001/api/v0/refresh`, user?.accessToken)
+      .get(`http://localhost:3001/api/v0/refresh`)
       .then((response) => {
         dispatch(refreshToken(response.data));
         saveTokenInLocalStorage(response.data);
@@ -133,6 +132,8 @@ export function LoginFailed(data) {
 //logout
 
 export function logout() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
   return {
     type: LOGOUT,
   };

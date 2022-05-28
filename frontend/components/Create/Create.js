@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, connect } from "react-redux";
 import { postCreate } from "@/redux/action/postsAction";
 import FormData from "form-data";
-
+import { useRouter } from "next/router";
 
 function Create(props) {
   const [title, setTitle] = useState();
@@ -14,17 +14,26 @@ function Create(props) {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+  const router = useRouter();
   const dispatch = useDispatch();
+  const postIsCreated = props.postIsCreated;
+  const post = props.post;
 
   const onSubmit = (data) => {
+    const token = localStorage.getItem("token");
     var formData = new FormData();
     formData.set("title", data.title);
     formData.set("content", data.content);
-    formData.append("photo", data.photo);
+    formData.append("photo", data.photo[0]);
     dispatch(postCreate(formData));
   };
-  
+
+  useEffect(() => {
+    if (props.postIsCreated) {
+      router.push(`/posts/${props.post?._id}`);
+    }
+  }, [props.postIsCreated, props.post]);
+
   return (
     <div className="create">
       <div className="row justify-content-center">
@@ -51,7 +60,6 @@ function Create(props) {
                     <span className="text-danger">Title is required</span>
                   )}
                 </div>
-
                 {/* Content */}
                 <div className="form-outline mb-4">
                   <label className="form-label" htmlFor="content-form">
@@ -71,8 +79,7 @@ function Create(props) {
                   {errors.content && (
                     <span className="text-danger">Content is required</span>
                   )}
-                </div>
-
+                </div>{" "}
                 {/* Image */}
                 <div className="form-outline mb-4">
                   <div className="file-drop-area">
@@ -95,7 +102,6 @@ function Create(props) {
                     <span className="text-danger">Image is required</span>
                   )}
                 </div>
-
                 {/* Submit  */}
                 <div className="row justify-content-center">
                   <button
@@ -114,4 +120,11 @@ function Create(props) {
   );
 }
 
-export default Create;
+const mapStateToProps = (state) => {
+  return {
+    postIsCreated: state.posts.postIsCreated,
+    post: state.posts.post,
+  };
+};
+
+export default connect(mapStateToProps)(Create);

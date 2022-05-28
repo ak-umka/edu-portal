@@ -10,6 +10,7 @@ import {
 
 const initialState = {
   posts: [],
+  postIsCreated: false,
   post: {
     id: "",
     title: "",
@@ -29,6 +30,7 @@ export function postsReducer(state = initialState, action) {
       return {
         ...state,
         post: action.payload,
+        postIsCreated: true,
       };
     case FAILED_CREATE_POST:
       return {
