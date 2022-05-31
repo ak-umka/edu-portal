@@ -1,6 +1,6 @@
 import Card from "../Card/Card";
 import { useDispatch, connect } from "react-redux";
-import { getPostsAction } from "@/redux/action/postsAction";
+import { getPostsAction, editSubd, deleteSubd } from "@/redux/action/postsAction";
 import { bindActionCreators } from "redux";
 import { useEffect, useState } from "react";
 import Spinner from "../Loading/Loading";
@@ -60,12 +60,12 @@ function Explore(props) {
         )}
         {!props.main ? (
           <div className="article-pagination d-flex justify-content-center">
-            <Pagination
+            {/* <Pagination
               postsPerPage={postPerPage}
               totalPosts={posts.length}
               paginate={paginate}
               currentPage={currentPage}
-            />
+            /> */}
           </div>
         ) : (
           <></>

@@ -90,6 +90,7 @@ function Create(props) {
                     <input
                       className="file-input"
                       type="file"
+                      accept="image/*"
                       encType="multipart/form-data"
                       value={photo}
                       onChange={(e) => setPhoto(e.target.files[0])}

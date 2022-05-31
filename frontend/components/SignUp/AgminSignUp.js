@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, connect } from "react-redux";
+import { useDispatch, connect, useStore } from "react-redux";
 import { signup } from "@/redux/action/authAction";
 import { useRouter } from "next/router";
 
@@ -109,7 +109,7 @@ function AdminSignUp(props) {
                   </form>
                   <p>
                     If you haven't registered yet,{" "}
-                    <a className="link-primary" href="/admin/signin">
+                    <a className="link-primary" href="/signin">
                       Sign In
                     </a>
                   </p>
