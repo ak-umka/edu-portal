@@ -4,7 +4,7 @@ import { useDispatch, connect } from "react-redux";
 import { signup } from "@/redux/action/authAction";
 import { useRouter } from "next/router";
 
-function AdminSignUp() {
+function AdminSignUp(props) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [role, setRole] = useState("admin");

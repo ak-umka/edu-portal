@@ -29,14 +29,27 @@ function Header(props) {
                 Home
               </a>
             </li>
+            {props.loggedIn ? (
+              <li className="nav-item">
+                <a
+                  className="nav-link active"
+                  aria-current="page"
+                  href="/create/post"
+                >
+                  Create
+                </a>
+              </li>
+            ) : (
+              <></>
+            )}
             {props.auth?.user?.role === "admin" ? (
               <li className="nav-item">
                 <a
                   className="nav-link active"
                   aria-current="page"
-                  href="/create"
+                  href="/create/subd"
                 >
-                  Create
+                  Create Subd
                 </a>
               </li>
             ) : (

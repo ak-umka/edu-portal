@@ -6,6 +6,7 @@ import "@/public/styles.scss";
 import { useDispatch } from "react-redux";
 import { checkAutoLogin } from "@/redux/selector/authSelector";
 import { useEffect } from "react";
+import { BrowserRoute, Routes, Route } from "react-router-dom";
 
 function MyApp({ Component, pageProps }) {
   const dispatch = useDispatch();

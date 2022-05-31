@@ -33,8 +33,8 @@ class PostController {
       req.query.page = Number(req.query.page);
       const post = await postModel
         .find()
-        .limit(5)
-        .skip(5 * req.query.page)
+        // .limit(12)
+        // .skip(12 * req.query.page)
         .populate("comment");
       if (!post.length) {
         return next(ApiError.NotFoundError("No posts found"));

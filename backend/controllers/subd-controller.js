@@ -31,8 +31,8 @@ class SubdController {
 
       const subd = await subdModel
         .find()
-        .limit(5)
-        .skip(5 * req.query.page);
+        .limit(12)
+        .skip(12 * req.query.page);
       if (!subd.length) {
         return next(ApiError.NotFoundError("No posts found"));
       }
