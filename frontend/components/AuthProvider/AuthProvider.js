@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
 import { useEffect } from "react";
+import Router from "next/router";
 
 function AuthProvider(props) {
   const router = useRouter();
@@ -8,14 +9,12 @@ function AuthProvider(props) {
   const isProtected = (route) => protectedRoutes.includes(route);
 
   const Unauthorized = () => {
-    router.replace("/signin");
+    Router.replace("/signin");
   };
 
   useEffect(() => {
     const route = router.route;
-    console.log(isProtected(route));
-    if (!props.loggedIn && isProtected(route)) Unauthorized();
-    return;
+    // if (!props.loggedIn && isProtected(route)) return Unauthorized();
   }, [props.loggedIn]);
 
   return <>{props.children}</>;

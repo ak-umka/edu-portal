@@ -1,11 +1,8 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, connect } from "react-redux";
-import { subdCreate } from "@/redux/action/subdAction";
-import FormData from "form-data";
-import { useRouter } from "next/router";
+import { Modal } from "react-bootstrap";
 
-function CreateSubd(props) {
+function EditSubd(props) {
   const [title, setTitle] = useState();
   const [path, setPath] = useState();
   const {
@@ -13,36 +10,18 @@ function CreateSubd(props) {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const router = useRouter();
-  const dispatch = useDispatch();
-  const subd = props.subd;
-
-  const onSubmit = (data) => {
-    var formData = new FormData();
-    formData.set("title", data.title);
-    formData.append("subd", data.document[0]);
-    dispatch(subdCreate(formData));
-  };
 
   return (
-    <div className="create-subd">
-      <div className="row justify-content-center my-4">
-        <div className="col-lg-6 mb-5 mb-lg-0">
-          {subd?.title && subd?.subd ? (
-            <div className="alert alert-success" role="alert">
-              Your post is created
-            </div>
-          ) : (
-            <></>
-            
-          )}
-        </div>
-      </div>
-      <div className="row justify-content-center">
-        <div className="col-lg-6 mb-5 mb-lg-0">
+    <>
+      <Modal show={props.show} onHide={props.handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title className="text-primary">Edit</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
           <div className="card border-0 shadow-sm bg-white">
             <div className="card-body py-5 px-md-5">
-              <form onSubmit={handleSubmit(onSubmit)}>
+              <form onSubmit={handleSubmit(props.onSubmit)}>
                 {/* Title */}
                 <div className="form-outline mb-4">
                   <label className="form-label" htmlFor="title-form">
@@ -62,7 +41,6 @@ function CreateSubd(props) {
                     <span className="text-danger">Title is required</span>
                   )}
                 </div>
-
                 {/* Image */}
                 <div className="form-outline mb-4">
                   <div className="file-drop-area">
@@ -99,16 +77,10 @@ text/plain, application/pdf"
               </form>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+        </Modal.Body>
+      </Modal>
+    </>
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    subd: state.subds.subd,
-  };
-};
-
-export default connect(mapStateToProps)(CreateSubd);
+export default EditSubd;

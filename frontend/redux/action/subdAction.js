@@ -58,46 +58,48 @@ export function subdCreate(formData) {
   };
 }
 
-// export function deletePost(postId) {
-//   return (dispatch) => {
-//     axiosInstance
-//       .delete(`deletePost/${postId}`)
-//       .then((response) => {
-//         dispatch({
-//           type: CONFIRMED_DELETE_POST,
-//           payload: response.data,
-//         });
-//       })
-//       .catch((error) => {
-//         dispatch({
-//           type: FAILED_DELETE_POST,
-//           payload: error.response,
-//         });
-//       });
-//   };
-// }
+//delete subd
 
-// //edit post
+export function deleteSubd(id) {
+  return (dispatch) => {
+    axiosInstance
+      .delete(`deleteSubd/${id}`)
+      .then((response) => {
+        dispatch({
+          type: CONFIRMED_DELETE_SUBD,
+          payload: response.data,
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: FAILED_DELETE_SUBD,
+          payload: error.response,
+        });
+      });
+  };
+}
 
-// export function edit(id, formData) {
-//   return (dispatch) => {
-//     axiosInstance({
-//       method: "put",
-//       url: `editPost/${id}`,
-//       data: formData,
-//       headers: { "Content-Type": "multipart/form-data" },
-//     })
-//       .then((response) => {
-//         dispatch({
-//           type: CONFIRMED_EDIT_POST,
-//           payload: response.data,
-//         });
-//       })
-//       .catch((error) => {
-//         dispatch({
-//           type: FAILED_EDIT_POST,
-//           payload: error.response,
-//         });
-//       });
-//   };
-// }
+//edit subd
+
+export function editSubd(id, formData) {
+  return (dispatch) => {
+    axiosInstance({
+      method: "put",
+      url: `editSubd/${id}`,
+      data: formData,
+      headers: { "Content-Type": "multipart/form-data" },
+    })
+      .then((response) => {
+        dispatch({
+          type: CONFIRMED_EDIT_SUBD,
+          payload: response.data,
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: FAILED_EDIT_SUBD,
+          payload: error.response,
+        });
+      });
+  };
+}

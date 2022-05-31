@@ -1,19 +1,24 @@
 import { useDispatch, connect } from "react-redux";
-import { getSubdsAction } from "@/redux/action/subdAction";
+import {
+  getSubdsAction,
+  deleteSubd,
+  editSubd,
+} from "@/redux/action/subdAction";
 import { bindActionCreators } from "redux";
 import { useEffect, useState } from "react";
 import Spinner from "../Loading/Loading";
 import { faFile } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
+import EditSubd from "../Post/EditModalSubd";
 
 function Subds(props) {
   const subds = props.subds;
-  //   const [currentPage, setCurrentPage] = useState(1);
-  //   const [postPerPage, setPostPerPage] = useState(props.main ? 12 : 24);
-  //   const indexOfLastPost = currentPage * postPerPage;
-  //   const indexOfFirstPost = indexOfLastPost - postPerPage;
-  //   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  const dispatch = useDispatch();
+
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -25,10 +30,30 @@ function Subds(props) {
     }
   }, [props.getSubdsAction]);
 
+  const onSubmit = (id, data) => {
+    var formData = new FormData();
+    console.log(data);
+    formData.set("title", data.title);
+    formData.append("subd", data.document[0]);
+    dispatch(edit(id, formData));
+    setShow(false);
+  };
+
   const displaySubds =
     subds &&
     subds.map((subd, idx) => (
-      <tbody>
+      <tbody key={idx}>
+        <EditSubd
+          show={show}
+          handleClose={handleClose}
+          onSubmit={(data) => {
+            var formData = new FormData();
+            formData.set("title", data.title);
+            formData.append("subd", data.document[0]);
+            dispatch(editSubd(subd?._id, formData));
+            setShow(false);
+          }}
+        />
         <tr className="text-center">
           <th scope="row">{idx + 1}</th>
           <td className="text-start">{subd?.title}</td>
@@ -37,6 +62,21 @@ function Subds(props) {
               <FontAwesomeIcon icon={faFile} className="text-primary" />
             </Link>
           </td>
+          {props.auth?.user?.role === "admin" ? (
+            <td>
+              <a className="btn btn-link text-primary" onClick={handleShow}>
+                Edit
+              </a>
+              <a
+                className="btn btn-link text-primary"
+                onClick={() => props.deleteSubd(subd?._id)}
+              >
+                Delete
+              </a>
+            </td>
+          ) : (
+            <></>
+          )}
         </tr>
       </tbody>
     ));
@@ -44,20 +84,29 @@ function Subds(props) {
   return (
     <div className="subds">
       <div className="container mx-auto px-4">
+        {/* <EditSubd show={show} handleClose={handleClose} onSubmit={onSubmit} /> */}
         {subds.length === 0 ? (
           <div className="spinner d-flex align-items-center justify-content-center">
             <Spinner />{" "}
           </div>
         ) : (
           <div className="subds-items">
-          <p>There are attached document for learning information, please download it.</p>
+            <p>
+              There are attached document for learning information, please
+              download it.
+            </p>
             <div className="row justify-content-center">
-              <table class="table w-100">
-                <thead class="thead-light text-center">
+              <table className="table w-100">
+                <thead className="thead-light text-center">
                   <tr>
                     <th scope="col">Number</th>
                     <th scope="col">Title</th>
                     <th scope="col">Document</th>
+                    {props.auth?.user?.role === "admin" ? (
+                      <th scope="col">Action</th>
+                    ) : (
+                      <></>
+                    )}
                   </tr>
                 </thead>
                 {displaySubds}
@@ -131,11 +180,12 @@ function Pagination({ postsPerPage, totalPosts, paginate, currentPage }) {
 const mapStateToProps = (state) => {
   return {
     subds: state.subds.subds,
+    auth: state.auth.auth,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ getSubdsAction }, dispatch);
+  return bindActionCreators({ getSubdsAction, deleteSubd }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Subds);
