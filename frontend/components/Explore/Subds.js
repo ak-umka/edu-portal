@@ -10,7 +10,7 @@ import Spinner from "../Loading/Loading";
 import { faFile } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import EditSubd from "../Post/EditModalSubd";
+import EditModal from "../Post/EditModal";
 
 function Subds(props) {
   const subds = props.subds;
@@ -30,30 +30,23 @@ function Subds(props) {
     }
   }, [props.getSubdsAction]);
 
-  const onSubmit = (id, data) => {
-    var formData = new FormData();
-    console.log(data);
-    formData.set("title", data.title);
-    formData.append("subd", data.document[0]);
-    dispatch(edit(id, formData));
-    setShow(false);
-  };
-
   const displaySubds =
     subds &&
     subds.map((subd, idx) => (
       <tbody key={idx}>
-        <EditSubd
+        <EditModal
+          subd={true}
           show={show}
           handleClose={handleClose}
           onSubmit={(data) => {
             var formData = new FormData();
             formData.set("title", data.title);
-            formData.append("subd", data.document[0]);
+            formData.append("subd", data.photo[0]);
             dispatch(editSubd(subd?._id, formData));
             setShow(false);
           }}
         />
+
         <tr className="text-center">
           <th scope="row">{idx + 1}</th>
           <td className="text-start">{subd?.title}</td>

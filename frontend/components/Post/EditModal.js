@@ -51,25 +51,30 @@ function Edit(props) {
                   )}
                 </div>
                 {/* Content */}
-                <div className="form-outline mb-4">
-                  <label className="form-label" htmlFor="content-form">
-                    Content
-                  </label>
-                  <textarea
-                    type="text"
-                    id="content-form"
-                    className="form-control"
-                    rows="12"
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                    {...register("content", {
-                      required: true,
-                    })}
-                  />
-                  {errors.content && (
-                    <span className="text-danger">Content is required</span>
-                  )}
-                </div>{" "}
+                {props.subd ? (
+                  <></>
+                ) : (
+                  <div className="form-outline mb-4">
+                    <label className="form-label" htmlFor="content-form">
+                      Content
+                    </label>
+                    <textarea
+                      type="text"
+                      id="content-form"
+                      className="form-control"
+                      rows="12"
+                      value={content}
+                      onChange={(e) => setContent(e.target.value)}
+                      {...register("content", {
+                        required: true,
+                      })}
+                    />
+                    {errors.content && (
+                      <span className="text-danger">Content is required</span>
+                    )}
+                  </div>
+                )}
+
                 {/* Image */}
                 <div className="form-outline mb-4">
                   <div className="file-drop-area">
