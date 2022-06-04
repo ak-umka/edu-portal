@@ -18,13 +18,11 @@ function AuthProvider(props) {
   };
 
   useEffect(() => {
-    let timer = setTimeout(() => checkAuth(), 5);
+    let timer = setTimeout(() => checkAuth(), 1);
 
     return () => {
       clearTimeout(timer);
     };
-    // if (!isProtected(route) || (props.loggedIn && isProtected(route))) return;
-    // if (!props.loggedIn && isProtected(route)) return Unauthorized();
   }, [props.loggedIn]);
 
   return <>{props.children}</>;

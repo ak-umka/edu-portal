@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 function CreateSubd(props) {
   const [title, setTitle] = useState();
   const [path, setPath] = useState();
+  const [alert, setAlert] = useState({ success: false, error: false });
   const {
     register,
     handleSubmit,
@@ -22,22 +23,57 @@ function CreateSubd(props) {
     formData.set("title", data.title);
     formData.append("subd", data.document[0]);
     dispatch(subdCreate(formData));
+
+    //remove this part
+    let timer = setTimeout(
+      () =>
+        setAlert({
+          success: false,
+          error: false,
+        }),
+      10000
+    );
+
+    return () => {
+      clearTimeout(timer);
+    };
   };
+
+
+  //remove this part
+  useEffect(() => {
+    if (props.status === 201)
+      return setAlert({
+        success: true,
+        error: false,
+      });
+    if (props.status === 500)
+      return setAlert({
+        success: false,
+        error: true,
+      });
+  }, [props.status]);
+
+  useEffect(() => {
+    console.log(alert);
+  }, [alert]);
+
+  useEffect(() => {
+    console.log(props.status);
+  }, [props.status]);
 
   return (
     <div className="create-subd">
-      <div className="row justify-content-center my-4">
-        <div className="col-lg-6 mb-5 mb-lg-0">
-          {subd?.title && subd?.subd ? (
-            <div className="alert alert-success" role="alert">
-              Your post is created
-            </div>
-          ) : (
-            <></>
-            
-          )}
+      {alert.success ? (
+        <div className="alert alert-success" role="alert">
+          This post successfully created
         </div>
-      </div>
+      ) : null}
+      {alert.error ? (
+        <div className="alert alert-danger" role="alert">
+          This post is failed
+        </div>
+      ) : null}
       <div className="row justify-content-center">
         <div className="col-lg-6 mb-5 mb-lg-0">
           <div className="card border-0 shadow-sm bg-white">
@@ -108,6 +144,7 @@ text/plain, application/pdf"
 const mapStateToProps = (state) => {
   return {
     subd: state.subds.subd,
+    status: state.subds.status,
   };
 };
 

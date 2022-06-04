@@ -122,17 +122,6 @@ function Post(props) {
               </form>
             </div>
           </div>
-          {/* <div className="row justify-content-center">
-            <div className="col">
-              <div className="comment">
-                {post?.comment.map((item, idx) => (
-                  <p key={idx} className="content">
-                    {item}
-                  </p>
-                ))}
-              </div>
-            </div>
-          </div> */}
         </div>
       </div>
     </div>

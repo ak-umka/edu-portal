@@ -10,6 +10,7 @@ export const CONFIRMED_EDIT_SUBD = "CONFIRMED_EDIT_SUBD";
 export const FAILED_EDIT_SUBD = "FAILED_EDIT_SUBD";
 export const CONFIRMED_DELETE_SUBD = "CONFIRMED_DELETE_SUBD";
 export const FAILED_DELETE_SUBD = "FAILED_DELETE_SUBD";
+export const STATUS = "STATUS";
 
 //get subds
 
@@ -48,12 +49,21 @@ export function subdCreate(formData) {
           type: CONFIRMED_CREATE_SUBD,
           payload: response.data,
         });
+        dispatch({
+          type: STATUS,
+          payload: response.status,
+        });
       })
       .catch((e) => {
         dispatch({
           type: FAILED_CREATE_SUBD,
           payload: e.response,
         });
+        dispatch({
+          type: STATUS,
+          payload: e.response.status,
+        });
+        console.log(e);
       });
   };
 }

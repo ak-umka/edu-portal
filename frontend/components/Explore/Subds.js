@@ -11,10 +11,12 @@ import { faFile } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import EditModal from "../Post/EditModal";
+import { useRouter } from "next/router";
 
 function Subds(props) {
   const subds = props.subds;
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
@@ -62,7 +64,10 @@ function Subds(props) {
               </a>
               <a
                 className="btn btn-link text-primary"
-                onClick={() => props.deleteSubd(subd?._id)}
+                onClick={() => {
+                  props.deleteSubd(subd?._id);
+                  router.reload();
+                }}
               >
                 Delete
               </a>
@@ -77,9 +82,8 @@ function Subds(props) {
   return (
     <div className="subds">
       <div className="container mx-auto px-4">
-        {/* <EditSubd show={show} handleClose={handleClose} onSubmit={onSubmit} /> */}
         {subds.length === 0 ? (
-          <div className="spinner d-flex align-items-center justify-content-center">
+          <div className="spinner min-vh-100 d-flex align-items-center justify-content-center">
             <Spinner />{" "}
           </div>
         ) : (

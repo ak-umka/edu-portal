@@ -7,6 +7,7 @@ import {
   FAILED_DELETE_SUBD,
   CONFIRMED_EDIT_SUBD,
   FAILED_EDIT_SUBD,
+  STATUS,
 } from "../action/subdAction";
 
 const initialState = {
@@ -18,6 +19,7 @@ const initialState = {
     creator: "",
     createdAt: "",
   },
+  status: "x",
   errorMessage: "",
   badRequest: [],
 };
@@ -39,6 +41,7 @@ export function subdReducer(state = initialState, action) {
       return {
         ...state,
         subd: action.payload,
+        status: true,
       };
     case FAILED_CREATE_SUBD:
       return {
@@ -70,6 +73,11 @@ export function subdReducer(state = initialState, action) {
       return {
         ...state,
         subd: action.payload,
+      };
+    case STATUS:
+      return {
+        ...state,
+        status: action.payload,
       };
     default:
       return state;

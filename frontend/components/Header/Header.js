@@ -6,7 +6,7 @@ function Header(props) {
   const dispatch = useDispatch();
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light">
+    <nav className="navbar navbar-expand-lg navbar-light w-100">
       <div className="container mx-auto ">
         <a className="navbar-brand m-4 text-primary" href="/">
           <strong>E-Portal</strong>
