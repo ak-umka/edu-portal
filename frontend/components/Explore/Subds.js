@@ -10,11 +10,13 @@ import Spinner from "../Loading/Loading";
 import { faFile } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import EditSubd from "../Post/EditModalSubd";
+import EditModal from "../Post/EditModal";
+import { useRouter } from "next/router";
 
 function Subds(props) {
   const subds = props.subds;
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
@@ -30,30 +32,23 @@ function Subds(props) {
     }
   }, [props.getSubdsAction]);
 
-  const onSubmit = (id, data) => {
-    var formData = new FormData();
-    console.log(data);
-    formData.set("title", data.title);
-    formData.append("subd", data.document[0]);
-    dispatch(edit(id, formData));
-    setShow(false);
-  };
-
   const displaySubds =
     subds &&
     subds.map((subd, idx) => (
       <tbody key={idx}>
-        <EditSubd
+        <EditModal
+          subd={true}
           show={show}
           handleClose={handleClose}
           onSubmit={(data) => {
             var formData = new FormData();
             formData.set("title", data.title);
-            formData.append("subd", data.document[0]);
+            formData.append("subd", data.photo[0]);
             dispatch(editSubd(subd?._id, formData));
             setShow(false);
           }}
         />
+
         <tr className="text-center">
           <th scope="row">{idx + 1}</th>
           <td className="text-start">{subd?.title}</td>
@@ -69,7 +64,10 @@ function Subds(props) {
               </a>
               <a
                 className="btn btn-link text-primary"
-                onClick={() => props.deleteSubd(subd?._id)}
+                onClick={() => {
+                  props.deleteSubd(subd?._id);
+                  router.reload();
+                }}
               >
                 Delete
               </a>
@@ -84,9 +82,8 @@ function Subds(props) {
   return (
     <div className="subds">
       <div className="container mx-auto px-4">
-        {/* <EditSubd show={show} handleClose={handleClose} onSubmit={onSubmit} /> */}
         {subds.length === 0 ? (
-          <div className="spinner d-flex align-items-center justify-content-center">
+          <div className="spinner min-vh-100 d-flex align-items-center justify-content-center">
             <Spinner />{" "}
           </div>
         ) : (

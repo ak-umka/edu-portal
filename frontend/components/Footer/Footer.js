@@ -32,7 +32,7 @@ function Footer() {
               </p>
               <p>
                 <a
-                  href="/admin/signin"
+                  href="/admin/signup"
                   className="text-decoration-none text-reset text-white"
                 >
                   Admin

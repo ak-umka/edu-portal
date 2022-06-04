@@ -52,7 +52,7 @@ function Explore(props) {
           <></>
         )}
         {posts.length === 0 ? (
-          <div className="spinner d-flex align-items-center justify-content-center">
+          <div className="spinner min-vh-100 d-flex align-items-center justify-content-center">
             <Spinner />{" "}
           </div>
         ) : (

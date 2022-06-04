@@ -56,15 +56,11 @@ footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 0.7rem;
+  height: 0.5rem;
 }
 
 .main {
   position: relative;
-  min-height: 100vh;
-}
-
-.spinner {
   min-height: 100vh;
 }
 
@@ -75,14 +71,6 @@ footer {
 .post,
 .footer p {
   color: #aaaabe;
-}
-
-.post-image {
-  min-height: 440px;
-  min-width: 520px;
-  height: 440px;
-  width: 520px;
-  border-radius: 2px;
 }
 
 .content {
@@ -116,17 +104,13 @@ span {
   margin-bottom: 100px;
 }
 
-.navbar {
-  width: 100%;
-}
-
 .hero-bg {
   background-size: contain;
   background-image: url("/img/hero/bg.svg");
   background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
 }
 
 .pagination a {
@@ -140,4 +124,15 @@ span {
 
 .card {
   min-height: 20rem !important;
+}
+
+.card:hover {
+  box-shadow: 10px 5px 5px #c0c0c0 !important;
+}
+
+.alert {
+  position: fixed;
+  bottom: 0;
+  width: 30%;
+  left: 0;
 }
