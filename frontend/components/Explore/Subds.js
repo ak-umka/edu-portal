@@ -10,7 +10,7 @@ import Spinner from "../Loading/Loading";
 import { faFile } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import EditModal from "../Post/EditModal";
+import EditModal from "../Modal/EditModal";
 import { useRouter } from "next/router";
 
 function Subds(props) {

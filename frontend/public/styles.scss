@@ -104,6 +104,13 @@ span {
   margin-bottom: 100px;
 }
 
+.schedule-bg {
+  background-size: contain;
+  background-image: url("/img/hero/bg.svg");
+  background-repeat: no-repeat;
+  height: 100%;
+}
+
 .hero-bg {
   background-size: contain;
   background-image: url("/img/hero/bg.svg");
@@ -126,8 +133,8 @@ span {
   min-height: 20rem !important;
 }
 
-.card:hover {
-  box-shadow: 10px 5px 5px #c0c0c0 !important;
+.post-card:hover {
+  box-shadow: 10px 1px 50px #c0c0c0 !important;
 }
 
 .alert {
@@ -135,4 +142,14 @@ span {
   bottom: 0;
   width: 30%;
   left: 0;
+}
+
+.vr {
+  width: 12px;
+  border-radius: 6px;
+}
+
+.vr .non-active,
+h6 {
+  color: #808080;
 }
