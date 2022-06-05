@@ -13,5 +13,11 @@ exports.roles = (function () {
     .updateAny("subd")
     .deleteAny("subd")
 
+  ac.grant("admin")
+    .extend("basic")
+    .createAny("schedule")
+    .updateAny("schedule")
+    .deleteAny("schedule")
+
   return ac;
 })();

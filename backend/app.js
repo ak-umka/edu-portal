@@ -8,6 +8,7 @@ const errorMiddleware = require('./middlewares/error-middleware');
 const router = require('./routes/auth-route');
 const postRouter = require('./routes/post-route');
 const subdRouter = require('./routes/subd-route');
+const scheduleRouter = require('./routes/schedule-route');
 
 dotenv.config();
 
@@ -20,7 +21,7 @@ app.use(cookieParser());
 
 app.use(express.static('public'));
 app.use('/images', express.static('images'));
-app.use('/api/v0/', router, postRouter, subdRouter);
+app.use('/api/v0/', router, postRouter, subdRouter, scheduleRouter);
 app.use(errorMiddleware);
 
 

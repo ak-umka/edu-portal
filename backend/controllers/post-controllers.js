@@ -71,7 +71,7 @@ class PostController {
       updateBlog.title = req.body.title;
       updateBlog.content = req.body.content;
       updateBlog.photo =
-        req.protocol + "://" + req.host + ":3001/" + req.file.path;
+        req.protocol + "://" + req.host + ":3001/" + req.file?.path;
       const result = await updateBlog.save();
       res.status(200).json(result);
     } catch (error) {
