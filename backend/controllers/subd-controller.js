@@ -68,7 +68,7 @@ class SubdController {
       const updateSubd = await subdModel.findById(req.params.id);
       updateSubd.title = req.body.title;
       updateSubd.subd =
-        req.protocol + "://" + req.host + ":3001/" + req.file.path;
+        req.protocol + "://" + req.host + ":3001/" + req.file?.path;
       const result = await updateSubd.save();
       res.status(200).json(result);
     } catch (error) {
