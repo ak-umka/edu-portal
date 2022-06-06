@@ -17,18 +17,18 @@
       },
       "AdvantagesSection":{
           "FirstColumn":{
-              "AmountOfLearners":"1257",
-              "title":"Top Courses",
+              "titleFirst":"Top",
+              "titleSecond":"Courses",
               "text":"Take courses from the world's best instructors and universities."
           },
           "SecondColumn":{
-              "AmountOfLearners":"99981",
-              "title":"Happy Learners",
+              "titleFirst":"Happy",
+              "titleSecond":"Learners",
               "text":"Learners from all around the world."
           },
           "ThirdColumn":{
-              "AmountOfLearners":"578",
-              "title":"Eminent Instructors",
+              "titleFirst":"Eminent",
+              "titleSecond":"Instructors",
               "text":"Learn your favourite course with world-class instructors."
           }
       },

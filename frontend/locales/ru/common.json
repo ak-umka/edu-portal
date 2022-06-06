@@ -17,18 +17,18 @@
       },
       "AdvantagesSection":{
           "FirstColumn":{
-              "AmountOfLearners":"1257",
-              "title":"Лучшиx курсов",
+              "titleFirst":"Лучшиx",
+              "titleSecond":"курсов",
               "text":"Пройдите курсы от лучших инструкторов и университетов мира."
           },
           "SecondColumn":{
-              "AmountOfLearners":"99981",
-              "title":"Счастливых учеников",
+              "titleFirst":"Счастливых",
+              "titleSecond":"учеников",
               "text":"Ученики со всего мира."
           },
           "ThirdColumn":{
-              "AmountOfLearners":"578",
-              "title":"Выдающихся инструкторов",
+              "titleFirst":"Выдающихся",
+              "titleSecond":"инструкторов",
               "text":"Изучите свой любимый курс с инструкторами мирового уровня."
           }
       },

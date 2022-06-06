@@ -12,11 +12,15 @@ function Footer() {
         <div className="container">
           <div className="row gx-lg-5">
             <div className="col-lg-4 mb-5 mb-lg-0">
-              <h5 className="text-primary">E-Portal</h5>
+              <Link href="/">
+                <a className="text-decoration-none text-primary" style={{fontSize:"26px"}}>E-Portal</a>
+              </Link>
             </div>
 
             <div className="col-lg-4 mb-5 mb-lg-0">
-              <h6 className="text-primary mb-2">{t("common:Footer.FirstColumn.UsefulLinks")}</h6>
+              <h6 className="text-primary mb-2">
+                {t("common:Footer.FirstColumn.UsefulLinks")}
+              </h6>
               <p>
                 <Link href="/">
                   <a className="text-decoration-none text-reset text-white">
@@ -27,25 +31,27 @@ function Footer() {
               <p>
                 <Link href="/signin">
                   <a className="text-decoration-none text-reset text-white">
-                  {t("common:Footer.FirstColumn.SignIn")}
+                    {t("common:Footer.FirstColumn.SignIn")}
                   </a>
                 </Link>
               </p>
               <p>
                 <Link href="/admin/signup">
                   <a className="text-decoration-none text-reset text-white">
-                  {t("common:Footer.FirstColumn.Admin")}
+                    {t("common:Footer.FirstColumn.Admin")}
                   </a>
                 </Link>
               </p>
             </div>
 
             <div className="col-lg-4 mb-5 mb-lg-0">
-              <h6 className="text-primary">{t("common:Footer.SecondColumn.OurLocation")}</h6>
+              <h6 className="text-primary">
+                {t("common:Footer.SecondColumn.OurLocation")}
+              </h6>
               <div className="d-flex align-items-center ">
                 <FontAwesomeIcon icon={faLocationDot} />
                 <p className="m-2 px-2">
-                {t("common:Footer.SecondColumn.Address")}
+                  {t("common:Footer.SecondColumn.Address")}
                 </p>
               </div>
               <div className="d-flex align-items-center">

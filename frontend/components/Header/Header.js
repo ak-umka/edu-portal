@@ -18,7 +18,7 @@ function Header(props) {
     <nav className="navbar navbar-expand-lg navbar-light w-100">
       <div className="container mx-auto ">
         <Link href="/">
-          <a className="navbar-brand m-4 text-primary">
+          <a className="navbar-brand m-4 text-primary" style={{fontSize:"26px"}}>
             <strong>E-Portal</strong>
           </a>
         </Link>
