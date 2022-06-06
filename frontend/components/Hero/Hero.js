@@ -10,11 +10,11 @@ function Hero() {
                 <div className="text-primary">Learn</div> in Agriculture
               </h1>
               <div className="d-flex justify-center">
-                <a className="btn btn-primary m-4" href="/article">
-                  Explore
+                <a className="btn btn-primary m-4" href="/schedule">
+                  Schedule
                 </a>
                 <a className="btn btn-outline-primary m-4" href="/subds">
-                  Learn more
+                  Assignments
                 </a>
               </div>
             </div>

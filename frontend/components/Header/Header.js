@@ -1,4 +1,3 @@
-import data from "@/public/data.json";
 import { connect, useDispatch } from "react-redux";
 import { logout } from "@/redux/action/authAction";
 
@@ -36,22 +35,27 @@ function Header(props) {
                   aria-current="page"
                   href="/create/post"
                 >
-                  Create
+                  Create Post
                 </a>
               </li>
             ) : (
               <></>
             )}
             {props.auth?.user?.role === "admin" ? (
-              <li className="nav-item">
-                <a
-                  className="nav-link active"
-                  aria-current="page"
-                  href="/create/subd"
-                >
-                  Create Subd
-                </a>
-              </li>
+              [
+                { name: "Create Assignment", link: "subd" },
+                { name: "Create Schedule", link: "schedule" },
+              ].map((item, idx) => (
+                <li className="nav-item" key={idx}>
+                  <a
+                    className="nav-link active"
+                    aria-current="page"
+                    href={`/create/${item.link}`}
+                  >
+                    {item.name}
+                  </a>
+                </li>
+              ))
             ) : (
               <></>
             )}

@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { postComment } from "@/redux/action/postsAction";
 import moment from "moment";
 import { useForm } from "react-hook-form";
-import EditModal from "./EditModal";
+import EditModal from "../Modal/EditModal";
 
 function Post(props) {
   const [show, setShow] = useState(false);
@@ -47,7 +47,6 @@ function Post(props) {
 
   const onSubmit = (data) => {
     var formData = new FormData();
-    console.log(data);
     formData.set("title", data.title);
     formData.set("content", data.content);
     formData.append("photo", data.photo[0]);

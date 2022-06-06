@@ -5,7 +5,7 @@ import Router from "next/router";
 
 function AuthProvider(props) {
   const route = useRouter().route;
-  const protectedRoutes = ["/create/post", "/create/subd"];
+  const protectedRoutes = ["/create/post", "/create/subd", "/create/schedule"];
   const isProtected = (route) => protectedRoutes.includes(route);
 
   const Unauthorized = () => {

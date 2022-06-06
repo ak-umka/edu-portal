@@ -22,7 +22,7 @@ function AdminSignUp(props) {
 
   useEffect(() => {
     if (props.errorMessage === "User successfully created") {
-      router.push("/admin/signin");
+      router.push("/signin");
     }
   }, [props.errorMessage]);
 
