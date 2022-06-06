@@ -1,8 +1,11 @@
 import data from "@/public/data.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faPhone } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
+import useTranslation from "next-translate/useTranslation";
 
 function Footer() {
+  const { t } = useTranslation();
   return (
     <footer className="footer">
       <div className="px-4 py-5 px-md-5 text-center text-lg-start">
@@ -13,44 +16,41 @@ function Footer() {
             </div>
 
             <div className="col-lg-4 mb-5 mb-lg-0">
-              <h6 className="text-primary mb-2">Useful links</h6>
+              <h6 className="text-primary mb-2">{t("common:Footer.FirstColumn.UsefulLinks")}</h6>
               <p>
-                <a
-                  href="/"
-                  className="text-decoration-none text-reset text-white"
-                >
-                  Home
-                </a>
+                <Link href="/">
+                  <a className="text-decoration-none text-reset text-white">
+                    {t("common:Footer.FirstColumn.Home")}
+                  </a>
+                </Link>
               </p>
               <p>
-                <a
-                  href="/signin"
-                  className="text-decoration-none text-reset text-white"
-                >
-                  SignIn
-                </a>
+                <Link href="/signin">
+                  <a className="text-decoration-none text-reset text-white">
+                  {t("common:Footer.FirstColumn.SignIn")}
+                  </a>
+                </Link>
               </p>
               <p>
-                <a
-                  href="/admin/signup"
-                  className="text-decoration-none text-reset text-white"
-                >
-                  Admin
-                </a>
+                <Link href="/admin/signup">
+                  <a className="text-decoration-none text-reset text-white">
+                  {t("common:Footer.FirstColumn.Admin")}
+                  </a>
+                </Link>
               </p>
             </div>
 
             <div className="col-lg-4 mb-5 mb-lg-0">
-              <h6 className="text-primary">Our location</h6>
+              <h6 className="text-primary">{t("common:Footer.SecondColumn.OurLocation")}</h6>
               <div className="d-flex align-items-center ">
                 <FontAwesomeIcon icon={faLocationDot} />
                 <p className="m-2 px-2">
-                  Nur-Sultan, A. Jangeldın kóshesi, 123А
+                {t("common:Footer.SecondColumn.Address")}
                 </p>
               </div>
               <div className="d-flex align-items-center">
                 <FontAwesomeIcon icon={faPhone} />
-                <p className="m-2 px-2">87054143355</p>
+                <p className="m-2 px-2">+7 705 414 33 55</p>
               </div>
             </div>
           </div>

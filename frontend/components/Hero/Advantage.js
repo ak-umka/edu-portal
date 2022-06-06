@@ -1,8 +1,10 @@
 import IllustrationFirst from "@/public/img/hero/IllustrationFirst.svg";
 import IllustrationSecond from "@/public/img/hero/IllustrationSecond.svg";
 import IllustrationThird from "@/public/img/hero/IllustrationThird.svg";
+import useTranslation from "next-translate/useTranslation";
 
-export function Advantage() {
+function Advantage() {
+  const { t } = useTranslation();
   return (
     <div className="advantage">
       <div className="container mx-auto">
@@ -32,10 +34,14 @@ export function Advantage() {
               Eminent <br />
               Instructors
             </h4>
-            <span>Learn your favourite course with world-class instructors.</span>
+            <span>
+              Learn your favourite course with world-class instructors.
+            </span>
           </div>
         </div>
       </div>
     </div>
   );
 }
+
+export default Advantage;

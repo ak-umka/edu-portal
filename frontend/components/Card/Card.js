@@ -1,9 +1,11 @@
 import moment from "moment";
 import Link from "next/link";
+import useTranslation from "next-translate/useTranslation";
 
 export default function Card(props) {
   const post = props.post;
   const formattedTime = moment(post?.createdAt).format("DD/MM/YYYY HH:mm");
+  const { t } = useTranslation();
 
   return (
     <div>
@@ -26,7 +28,7 @@ export default function Card(props) {
                   : post?.title}
               </strong>
             </h6>
-            <p className="card-text">Created: {formattedTime}</p>
+            <p className="card-text">{t("common:Home.Post.Created")}: {formattedTime}</p>
             <div className="text-center">
               {/* <a className="btn btn-text text-primary" href={`/posts/${post?._id}`}>
             Read more

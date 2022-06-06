@@ -5,6 +5,7 @@ import { postCreate } from "@/redux/action/postsAction";
 import FormData from "form-data";
 import { useRouter } from "next/router";
 import { Modal } from "react-bootstrap";
+import useTranslation from "next-translate/useTranslation";
 
 function Edit(props) {
   const [title, setTitle] = useState();
@@ -19,13 +20,12 @@ function Edit(props) {
   const dispatch = useDispatch();
   const postIsChanged = props.postIsChanged;
   const post = props.post;
+  const { t } = useTranslation();
 
   return (
     <>
       <Modal show={props.show} onHide={props.handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title className="text-primary">Edit</Modal.Title>
-        </Modal.Header>
+        <Modal.Header closeButton></Modal.Header>
 
         <Modal.Body>
           <div className="card border-0 shadow-sm bg-white">
@@ -34,7 +34,7 @@ function Edit(props) {
                 {/* Title */}
                 <div className="form-outline mb-4">
                   <label className="form-label" htmlFor="title-form">
-                    Title
+                    {t("common:Create.Title")}
                   </label>
                   <input
                     type="text"
@@ -47,7 +47,10 @@ function Edit(props) {
                     })}
                   />
                   {errors.title && (
-                    <span className="text-danger">Title is required</span>
+                    <span className="text-danger">
+                      {t("common:Create.Title")}
+                      {t("common:Create.IsRequired")}
+                    </span>
                   )}
                 </div>
                 {/* Content */}
@@ -56,7 +59,7 @@ function Edit(props) {
                 ) : (
                   <div className="form-outline mb-4">
                     <label className="form-label" htmlFor="content-form">
-                      Content
+                      {t("common:Create.Content")}
                     </label>
                     <textarea
                       type="text"
@@ -70,7 +73,10 @@ function Edit(props) {
                       })}
                     />
                     {errors.content && (
-                      <span className="text-danger">Content is required</span>
+                      <span className="text-danger">
+                        {t("common:Create.Content")}
+                        {t("common:Create.IsRequired")}
+                      </span>
                     )}
                   </div>
                 )}
@@ -78,9 +84,11 @@ function Edit(props) {
                 {/* Image */}
                 <div className="form-outline mb-4">
                   <div className="file-drop-area">
-                    <span className="choose-file-button">Choose files</span>
+                    <span className="choose-file-button">
+                      {t("common:Create.ChooseFiles")}
+                    </span>
                     <span className="file-message">
-                      or drag and drop files here
+                      {t("common:Create.DragAndDrop")}
                     </span>
                     <input
                       className="file-input"
@@ -94,7 +102,10 @@ function Edit(props) {
                     />
                   </div>
                   {errors.photo && (
-                    <span className="text-danger">Image is required</span>
+                    <span className="text-danger">
+                      {t("common:Create.Document")}
+                      {t("common:Create.IsRequired")}
+                    </span>
                   )}
                 </div>
                 {/* Submit  */}
@@ -103,7 +114,7 @@ function Edit(props) {
                     type="submit"
                     className="btn btn-primary btn-block mb-4"
                   >
-                    Create
+                    {t("common:ChangeButton.EditButton")}
                   </button>
                 </div>
               </form>

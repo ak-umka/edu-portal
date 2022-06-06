@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { useDispatch, connect, useStore } from "react-redux";
 import { signup } from "@/redux/action/authAction";
 import { useRouter } from "next/router";
+import Link from "next/link";
+import useTranslation from "next-translate/useTranslation";
 
 function AdminSignUp(props) {
   const [email, setEmail] = useState();
@@ -15,6 +17,7 @@ function AdminSignUp(props) {
     formState: { errors },
   } = useForm();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   function onSubmit(email, password, role) {
     dispatch(signup(email, password, role));
@@ -35,13 +38,13 @@ function AdminSignUp(props) {
               <div className="card">
                 <div className="card-body py-5 px-md-5">
                   <h2 className="text-primary text-center m-4">
-                    Sign Up as Admin
+                    {t("common:SignUpAndIn.AdminTitle")}
                   </h2>
                   <form onSubmit={handleSubmit(onSubmit)}>
                     {/* Email */}
                     <div className="form-outline mb-4">
                       <label className="form-label" htmlFor="email-form">
-                        Email
+                        {t("common:SignUpAndIn.Email")}
                       </label>
                       <input
                         type="email"
@@ -58,13 +61,16 @@ function AdminSignUp(props) {
                         })}
                       />
                       {errors.email && (
-                        <span className="text-danger">Email is required</span>
+                        <span className="text-danger">
+                          {t("common:SignUpAndIn.Email")}
+                          {t("common:SignUpAndIn.IsRequired")}
+                        </span>
                       )}
                     </div>
                     {/* Password */}
                     <div className="form-outline mb-4">
                       <label className="form-label" htmlFor="password-form">
-                        Password
+                        {t("common:SignUpAndIn.Password")}
                       </label>
                       <input
                         type="password"
@@ -79,7 +85,8 @@ function AdminSignUp(props) {
                       />
                       {errors.password && (
                         <span className="text-danger">
-                          Password is required
+                          {t("common:SignUpAndIn.Password")}
+                          {t("common:SignUpAndIn.IsRequired")}
                         </span>
                       )}
                     </div>
@@ -104,14 +111,14 @@ function AdminSignUp(props) {
                       type="submit"
                       className="btn btn-primary btn-block mb-4"
                     >
-                      Sign up
+                      {t("common:SignUpAndIn.SignUp")}
                     </button>
                   </form>
                   <p>
-                    If you haven't registered yet,{" "}
-                    <a className="link-primary" href="/signin">
-                      Sign In
-                    </a>
+                    {t("common:SignUpAndIn.MessageSignUp")}
+                    <Link className="link-primary" href="/signin">
+                      <a className="link-primary"> {t("common:SignUpAndIn.SignIn")}</a>
+                    </Link>
                   </p>
                 </div>
               </div>

@@ -13,12 +13,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import EditModal from "../Modal/EditModal";
+import useTranslation from "next-translate/useTranslation";
 
 function Schedule(props) {
   const schedules = props.schedules;
   const formattedTime = moment(schedules?.createdAt).format("DD.MM.YYYY");
   const dispatch = useDispatch();
   const router = useRouter();
+  const { t } = useTranslation();
 
   //modal
   const [show, setShow] = useState(false);
@@ -32,18 +34,10 @@ function Schedule(props) {
   }, [props.getSchedules]);
 
   const deleteScheduleAction = (id) => {
-    if (window.confirm("Are you sure you want to delete post?")) {
+    if (window.confirm(t("common:Message.Confirmation"))) {
       dispatch(deleteSchedule(id));
     }
     router.reload();
-  };
-
-  const editScheduleAction = (data, id) => {
-    var formData = new FormData();
-    formData.set("title", data.title);
-    formData.append("schedule", data.photo[0]);
-    dispatch(editSchedule(id, formData));
-    setShow(false);
   };
 
   return (
@@ -51,7 +45,7 @@ function Schedule(props) {
       <div className="container mx-aut">
         {schedules.length === 0 ? (
           <div className="spinner min-vh-100 d-flex align-items-center justify-content-center">
-            <Spinner />{" "}
+            <Spinner />
           </div>
         ) : (
           <div>
@@ -86,7 +80,9 @@ function Schedule(props) {
                   <div className="col-5">
                     <h6>{schedule?.title}</h6>
                     <Link href={schedule?.schedule}>
-                      <a className="btn btn-outline-primary mt-2">Upload</a>
+                      <a className="btn btn-outline-primary mt-2">
+                        {t("common:Schedule.Upload")}
+                      </a>
                     </Link>
                   </div>
                   {props.auth?.user?.role === "admin" ? (
