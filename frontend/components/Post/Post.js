@@ -47,7 +47,6 @@ function Post(props) {
 
   const onSubmit = (data) => {
     var formData = new FormData();
-    console.log(data);
     formData.set("title", data.title);
     formData.set("content", data.content);
     formData.append("photo", data.photo[0]);

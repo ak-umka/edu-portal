@@ -37,7 +37,7 @@ function Subds(props) {
     subds.map((subd, idx) => (
       <tbody key={idx}>
         <EditModal
-          subd={true}
+          contentNotRequired={true}
           show={show}
           handleClose={handleClose}
           onSubmit={(data) => {

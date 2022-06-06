@@ -23,7 +23,6 @@ export const FAILED_EDIT_SCHEDULE = "FAILED_EDIT_SCHEDULE";
 
 export function createSchedule(formData) {
   return (dispatch) => {
-    axiosInstance;
     axiosInstance({
       method: "post",
       url: "createSchedule",
@@ -102,10 +101,14 @@ export function deleteSchedule(id) {
   };
 }
 
-export function editSchedule(id) {
+export function editSchedule(id, formData) {
   return (dispatch) => {
-    axiosInstance
-      .put(`http://localhost:3001/api/v0/editSchedule/${id}`)
+    axiosInstance({
+      method: "put",
+      url: `editSchedule/${id}`,
+      data: formData,
+      headers: { "Content-Type": "multipart/form-data" },
+    })
       .then((response) => {
         dispatch({
           type: CONFIRMED_EDIT_SCHEDULE,

@@ -51,7 +51,7 @@ function Edit(props) {
                   )}
                 </div>
                 {/* Content */}
-                {props.subd ? (
+                {props.contentNotRequired ? (
                   <></>
                 ) : (
                   <div className="form-outline mb-4">
