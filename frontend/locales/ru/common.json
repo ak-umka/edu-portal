@@ -1,0 +1,106 @@
+{
+  "Home": {
+      "Header":{
+          "Home":"Главная",
+          "CreatePost":"Создать статью",
+          "CreateAssignment":"Создать задание",
+          "CreateSchedule":"Создать расписание",
+          "SignUp":"Регистрация",
+          "SignIn":"Войти",
+          "LogOut":"Выйти"
+      },
+      "Hero":{
+          "title":" способ обучиться сельскому хозяйств",
+          "titlePrimary":"Самый простой и быстрый",
+          "ButtonSchedule":"Расписание",
+          "ButtonAssignments":"Задания"
+      },
+      "AdvantagesSection":{
+          "FirstColumn":{
+              "titleFirst":"Лучшиx",
+              "titleSecond":"курсов",
+              "text":"Пройдите курсы от лучших инструкторов и университетов мира."
+          },
+          "SecondColumn":{
+              "titleFirst":"Счастливых",
+              "titleSecond":"учеников",
+              "text":"Ученики со всего мира."
+          },
+          "ThirdColumn":{
+              "titleFirst":"Выдающихся",
+              "titleSecond":"инструкторов",
+              "text":"Изучите свой любимый курс с инструкторами мирового уровня."
+          }
+      },
+      "Post":{
+          "title":"Лучшие статьи",
+          "ButtonPrevious":"Предыдущий",
+          "ButtonNext":"Следующий",
+          "Created":"Было создано"
+      }
+  },
+  "Schedule":{
+    "Upload":"Загрузить"
+  },
+  "Message":{
+    "Confirmation":"Вы уверены, что хотите удалить пост?"
+  },
+  "Create":{
+    "Title":"Заголовок",
+    "Content":"Контент",
+    "CourseName":"Название курса",
+    "Attachment":"Пожалуйста, прикрепите расписание",
+    "Image":"Изображение",
+    "Document":"Документ",
+    "IsRequired":"  обязателен(a)",
+    "ChooseFiles":"Выберите файл",
+    "DragAndDrop":"или перетащите файл сюда"
+  },
+  "ChangeButton":{
+    "CreateButton":"Создать",
+    "EditButton":"Редактировать",
+    "DeleteButton":"Удалить",
+    "PublishButton":"Публиковать"
+  },
+  "Assignment":{
+    "Info":"Ниже прикреплены документы, для получения информации, пожалуйста, загрузите его.",
+    "Table":{
+      "Number":"Код",
+      "Title":"Заголовок",
+      "Document":"Документ",
+      "Action":"Действие"
+    }
+  },
+  "SignUpAndIn":{
+    "title":"Лучшее предложение",
+    "titlePrimary":"для вашего будущего", 
+    "Email":"Адрес электронной почты",
+    "Password":"Пароль",
+    "SignUp":"Регистрация",
+    "SignIn":"Войти",
+    "MessageSignUp":"Если вы уже зарегистрированы, ",
+    "MessageSignIn":"Если вы еще не зарегистрированы, ",
+    "AdminTitle":"Зарегистрироваться как администратор",
+    "IsRequired":"  обязателен(a)",
+    "UserExistMessage":"Пользователь уже существует"
+  },
+  "Footer":{
+      "FirstColumn":{
+          "UsefulLinks":"Cсылки",
+          "Home":"Главная",
+          "Admin":"Админстратор",
+          "SignIn":"Войти"
+      },
+      "SecondColumn":{
+          "OurLocation":"Mестоположение",
+          "Address":"г. Нур-Султан, ул. А. Жангелдын, 123А"
+      }
+  },
+  "PostId":{
+    "MadeBy":"Сделано партнером",
+    "Info":"Если информация устарела, пожалуйста, обновите ее или удалите.",
+    "Comments":"Комментарии"
+  }
+}
+
+

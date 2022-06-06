@@ -12,11 +12,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import EditModal from "../Modal/EditModal";
 import { useRouter } from "next/router";
+import useTranslation from "next-translate/useTranslation";
 
 function Subds(props) {
   const subds = props.subds;
   const dispatch = useDispatch();
   const router = useRouter();
+  const { t } = useTranslation();
 
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
@@ -60,7 +62,7 @@ function Subds(props) {
           {props.auth?.user?.role === "admin" ? (
             <td>
               <a className="btn btn-link text-primary" onClick={handleShow}>
-                Edit
+                {t("common:ChangeButton.EditButton")}
               </a>
               <a
                 className="btn btn-link text-primary"
@@ -69,7 +71,7 @@ function Subds(props) {
                   router.reload();
                 }}
               >
-                Delete
+                {t("common:ChangeButton.DeleteButton")}
               </a>
             </td>
           ) : (
@@ -84,23 +86,20 @@ function Subds(props) {
       <div className="container mx-auto px-4">
         {subds.length === 0 ? (
           <div className="spinner min-vh-100 d-flex align-items-center justify-content-center">
-            <Spinner />{" "}
+            <Spinner />
           </div>
         ) : (
           <div className="subds-items">
-            <p>
-              There are attached document for learning information, please
-              download it.
-            </p>
+            <p>{t("common:Assignment.Info")}</p>
             <div className="row justify-content-center">
               <table className="table w-100">
                 <thead className="thead-light text-center">
                   <tr>
-                    <th scope="col">Number</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Document</th>
+                    <th scope="col">{t("common:Assignment.Table.Number")}</th>
+                    <th scope="col">{t("common:Assignment.Table.Title")}</th>
+                    <th scope="col">{t("common:Assignment.Table.Document")}</th>
                     {props.auth?.user?.role === "admin" ? (
-                      <th scope="col">Action</th>
+                      <th scope="col">{t("common:Assignment.Table.Action")}</th>
                     ) : (
                       <></>
                     )}

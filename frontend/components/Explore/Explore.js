@@ -1,9 +1,14 @@
 import Card from "../Card/Card";
 import { useDispatch, connect } from "react-redux";
-import { getPostsAction, editSubd, deleteSubd } from "@/redux/action/postsAction";
+import {
+  getPostsAction,
+  editSubd,
+  deleteSubd,
+} from "@/redux/action/postsAction";
 import { bindActionCreators } from "redux";
 import { useEffect, useState } from "react";
 import Spinner from "../Loading/Loading";
+import useTranslation from "next-translate/useTranslation";
 
 function Explore(props) {
   const posts = props.posts;
@@ -12,6 +17,7 @@ function Explore(props) {
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  const { t } = useTranslation();
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -26,7 +32,10 @@ function Explore(props) {
   const displayPostCards =
     currentPosts &&
     currentPosts.map((post, idx) => (
-      <div key={idx} className={`col-lg-3 col-12 col-md-6 d-flex justify-content-center`}>
+      <div
+        key={idx}
+        className={`col-lg-3 col-12 col-md-6 d-flex justify-content-center`}
+      >
         <Card post={post} />
       </div>
     ));
@@ -37,7 +46,7 @@ function Explore(props) {
         {props.main ? (
           <div className="row">
             <div className="col">
-              <h4 className="text-primary m-4">Top articles</h4>
+              <h4 className="text-primary m-4">{t("common:Home.Post.title")}</h4>
             </div>
             <div className="col">
               <Pagination
@@ -77,6 +86,7 @@ function Explore(props) {
 
 function Pagination({ postsPerPage, totalPosts, paginate, currentPage }) {
   const pageNumbers = [];
+  const { t } = useTranslation();
 
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
     pageNumbers.push(i);
@@ -92,7 +102,7 @@ function Pagination({ postsPerPage, totalPosts, paginate, currentPage }) {
             onClick={() => paginate(currentPage - 1)}
             aria-label="Previous"
           >
-            Previous
+            {t("common:Home.Post.ButtonPrevious")}
           </a>
         </li>
         {pageNumbers.map((number) => (
@@ -118,7 +128,7 @@ function Pagination({ postsPerPage, totalPosts, paginate, currentPage }) {
             onClick={() => paginate(currentPage + 1)}
             aria-label="Next"
           >
-            Next
+            {t("common:Home.Post.ButtonNext")}
           </a>
         </li>
       </ul>

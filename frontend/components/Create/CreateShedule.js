@@ -4,6 +4,7 @@ import { useDispatch, connect } from "react-redux";
 import FormData from "form-data";
 import { useRouter } from "next/router";
 import { createSchedule } from "@/redux/action/scheduleAction";
+import useTranslation from "next-translate/useTranslation";
 
 function CreateSchedule(props) {
   const [title, setTitle] = useState();
@@ -15,6 +16,7 @@ function CreateSchedule(props) {
   } = useForm();
   const router = useRouter();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const onSubmit = (data) => {
     var formData = new FormData();
@@ -33,7 +35,7 @@ function CreateSchedule(props) {
                 {/* Title */}
                 <div className="form-outline mb-4">
                   <label className="form-label" htmlFor="title-form">
-                    Course Name:
+                    {t("common:Create.Title")}:
                   </label>
                   <input
                     type="text"
@@ -46,19 +48,24 @@ function CreateSchedule(props) {
                     })}
                   />
                   {errors.title && (
-                    <span className="text-danger">Title is required</span>
+                    <span className="text-danger">
+                      {t("common:Create.Title")}
+                      {t("common:Create.IsRequired")}
+                    </span>
                   )}
                 </div>
 
                 {/* Document */}
                 <label className="form-label" htmlFor="title-form">
-                  Please attach schedule
+                  {t("common:Create.Attachment")}
                 </label>
                 <div className="form-outline mb-4">
                   <div className="file-drop-area">
-                    <span className="choose-file-button">Choose files</span>
+                    <span className="choose-file-button">
+                      {t("common:Create.ChooseFiles")}
+                    </span>
                     <span className="file-message">
-                      or drag and drop files here
+                      {t("common:Create.DragAndDrop")}
                     </span>
                     <input
                       className="file-input"
@@ -74,7 +81,10 @@ text/plain, application/pdf"
                     />
                   </div>
                   {errors.document && (
-                    <span className="text-danger">Document is required</span>
+                    <span className="text-danger">
+                      {t("common:Create.Document")}
+                      {t("common:Create.IsRequired")}
+                    </span>
                   )}
                 </div>
                 {/* Submit  */}
@@ -83,7 +93,7 @@ text/plain, application/pdf"
                     type="submit"
                     className="btn btn-primary btn-block mb-4"
                   >
-                    Create
+                    {t("common:ChangeButton.CreateButton")}
                   </button>
                 </div>
               </form>

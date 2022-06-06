@@ -3,11 +3,14 @@ import { useForm } from "react-hook-form";
 import { useDispatch, connect } from "react-redux";
 import { login } from "@/redux/action/authAction";
 import { useRouter } from "next/router";
+import Link from "next/link";
+import useTranslation from "next-translate/useTranslation";
 
 function SignIn(props) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const router = useRouter();
+  const { t } = useTranslation();
 
   const {
     register,
@@ -34,15 +37,9 @@ function SignIn(props) {
           <div className="row gx-lg-5 align-items-center">
             <div className="col-lg-6 mb-5 mb-lg-0">
               <h1 className="my-5 display-3 fw-bold ls-tight">
-                The best offer <br />
-                <span className="text-primary">for your business</span>
+                {t("common:SignUpAndIn.title")} <br />
+                <span className="text-primary">{t("common:SignUpAndIn.titlePrimary")} </span>
               </h1>
-              <p style={{ color: "hsl(217, 10%, 50.8%)" }}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Eveniet, itaque accusantium odio, soluta, corrupti aliquam
-                quibusdam tempora at cupiditate quis eum maiores libero
-                veritatis? Dicta facilis sint aliquid ipsum atque?
-              </p>
             </div>
 
             <div className="col-lg-6 mb-5 mb-lg-0">
@@ -52,7 +49,7 @@ function SignIn(props) {
                     {/* Email */}
                     <div className="form-outline mb-4">
                       <label className="form-label" htmlFor="email-form">
-                        Email
+                        {t("common:SignUpAndIn.Email")}
                       </label>
                       <input
                         type="email"
@@ -69,14 +66,17 @@ function SignIn(props) {
                         })}
                       />
                       {errors.email && (
-                        <span className="text-danger">Email is required</span>
+                        <span className="text-danger">
+                          {t("common:SignUpAndIn.Email")}
+                          {t("common:SignUpAndIn.IsRequired")}
+                        </span>
                       )}
                     </div>
 
                     {/* Password */}
                     <div className="form-outline mb-4">
                       <label className="form-label" htmlFor="password-form">
-                        Password
+                        {t("common:SignUpAndIn.Password")}
                       </label>
                       <input
                         type="password"
@@ -91,7 +91,8 @@ function SignIn(props) {
                       />
                       {errors.password && (
                         <span className="text-danger">
-                          Password is required
+                          {t("common:SignUpAndIn.Password")}
+                          {t("common:SignUpAndIn.IsRequired")}
                         </span>
                       )}
                     </div>
@@ -101,14 +102,17 @@ function SignIn(props) {
                       type="submit"
                       className="btn btn-primary btn-block mb-4"
                     >
-                      Sign in
+                      {t("common:SignUpAndIn.SignIn")}
                     </button>
                   </form>
                   <p>
-                    If you haven't registered yet,{" "}
-                    <a className="link-primary" href="/signup">
-                      Sign Up
-                    </a>
+                    {t("common:SignUpAndIn.MessageSignIn")}
+                    <Link href="/signup">
+                      <a className="link-primary">
+                        {" "}
+                        {t("common:SignUpAndIn.SignUp")}
+                      </a>
+                    </Link>
                   </p>
                 </div>
               </div>

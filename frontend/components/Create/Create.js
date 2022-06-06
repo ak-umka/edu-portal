@@ -4,11 +4,13 @@ import { useDispatch, connect } from "react-redux";
 import { postCreate } from "@/redux/action/postsAction";
 import FormData from "form-data";
 import { useRouter } from "next/router";
+import useTranslation from "next-translate/useTranslation";
 
 function Create(props) {
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
   const [photo, setPhoto] = useState();
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -44,7 +46,7 @@ function Create(props) {
                 {/* Title */}
                 <div className="form-outline mb-4">
                   <label className="form-label" htmlFor="title-form">
-                    Title
+                    {t("common:Create.Title")}
                   </label>
                   <input
                     type="text"
@@ -57,13 +59,16 @@ function Create(props) {
                     })}
                   />
                   {errors.title && (
-                    <span className="text-danger">Title is required</span>
+                    <span className="text-danger">
+                      {t("common:Create.Title")}
+                      {t("common:Create.IsRequired")}
+                    </span>
                   )}
                 </div>
                 {/* Content */}
                 <div className="form-outline mb-4">
                   <label className="form-label" htmlFor="content-form">
-                    Content
+                    {t("common:Create.Content")}
                   </label>
                   <textarea
                     type="text"
@@ -77,15 +82,20 @@ function Create(props) {
                     })}
                   />
                   {errors.content && (
-                    <span className="text-danger">Content is required</span>
+                    <span className="text-danger">
+                      {t("common:Create.Content")}
+                      {t("common:Create.IsRequired")}
+                    </span>
                   )}
                 </div>{" "}
                 {/* Image */}
                 <div className="form-outline mb-4">
                   <div className="file-drop-area">
-                    <span className="choose-file-button">Choose files</span>
+                    <span className="choose-file-button">
+                      {t("common:Create.ChooseFiles")}
+                    </span>
                     <span className="file-message">
-                      or drag and drop files here
+                      {t("common:Create.DragAndDrop")}
                     </span>
                     <input
                       className="file-input"
@@ -100,7 +110,10 @@ function Create(props) {
                     />
                   </div>
                   {errors.photo && (
-                    <span className="text-danger">Image is required</span>
+                    <span className="text-danger">
+                      {t("common:Create.Image")}
+                      {t("common:Create.IsRequired")}
+                    </span>
                   )}
                 </div>
                 {/* Submit  */}
@@ -109,7 +122,7 @@ function Create(props) {
                     type="submit"
                     className="btn btn-primary btn-block mb-4"
                   >
-                    Create
+                    {t("common:ChangeButton.CreateButton")}
                   </button>
                 </div>
               </form>

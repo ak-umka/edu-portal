@@ -1,0 +1,104 @@
+{
+  "Home": {
+      "Header":{
+          "Home":"Home",
+          "CreatePost":"Create Article",
+          "CreateAssignment":"Create Assignment",
+          "CreateSchedule":"Create Schedule",
+          "SignUp":"Sign Up",
+          "SignIn":"Sign In",
+          "LogOut":"Log out"
+      },
+      "Hero":{
+          "title":" way to Learn in Agriculture",
+          "titlePrimary":"The easiest and fastest",
+          "ButtonSchedule":"Schedule",
+          "ButtonAssignments":"Assignments"
+      },
+      "AdvantagesSection":{
+          "FirstColumn":{
+              "titleFirst":"Top",
+              "titleSecond":"Courses",
+              "text":"Take courses from the world's best instructors and universities."
+          },
+          "SecondColumn":{
+              "titleFirst":"Happy",
+              "titleSecond":"Learners",
+              "text":"Learners from all around the world."
+          },
+          "ThirdColumn":{
+              "titleFirst":"Eminent",
+              "titleSecond":"Instructors",
+              "text":"Learn your favourite course with world-class instructors."
+          }
+      },
+      "Post":{
+          "title":"Top articles",
+          "ButtonPrevious":"Previous",
+          "ButtonNext":"Next",
+          "Created":"Created"
+      }
+  },
+  "Schedule":{
+    "Upload":"Upload"
+  },
+  "Message":{
+    "Confirmation":"Are you sure you want to delete post?"
+  },
+  "Create":{
+    "Title":"Title",
+    "Content":"Content",
+    "CourseName":"Course Name",
+    "Attachment":"Please attach schedule",
+    "Image":"Image",
+    "Document":"Document",
+    "IsRequired":" is required",
+    "ChooseFiles":"Choose file",
+    "DragAndDrop":"or drag and drop file here"
+  },
+  "ChangeButton":{
+    "CreateButton":"Create",
+    "EditButton":"Edit",
+    "DeleteButton":"Delete",
+    "PublishButton":"Publish"
+  },
+  "Assignment":{
+    "Info":"There are attached document for learning information, please download it.",
+    "Table":{
+      "Number":"ID",
+      "Title":"Title",
+      "Document":"Document",
+      "Action":"Action"
+    }
+  },
+  "SignUpAndIn":{
+    "title":"The best offer",
+    "titlePrimary":"for your future", 
+    "Email":"Email address",
+    "Password":"Password",
+    "SignUp":"Sign Up",
+    "SignIn":"Sign In",
+    "MessageSignUp":"If you've registered already, ",
+    "MessageSignIn":"If you've not registered already, ",
+    "AdminTitle":"Sign Up as Admin",
+    "IsRequired":" is required",
+    "UserExistMessage":"User already exists"
+  },
+  "Footer":{
+      "FirstColumn":{
+          "UsefulLinks":"Useful links",
+          "Home":"Home",
+          "Admin":"Admin",
+          "SignIn":"Sign In"
+      },
+      "SecondColumn":{
+          "OurLocation":"Our location",
+          "Address":"Nur-Sultan, A. Jangeldın kóshesi, 123А"
+      }
+  },
+  "PostId":{
+    "MadeBy":"Made by partner",
+    "Info":"If information was outdated, please update it or delete it.",
+    "Comments":"Comments"
+  }
+}
