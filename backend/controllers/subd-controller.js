@@ -9,7 +9,7 @@ class SubdController {
       const newSubd = new subdModel({
         title: req.body.title,
         subd: req.protocol + "://" + req.host + ":3001/" + req.file?.path,
-        creator: req.user,
+        creator: req.firstname + " " + req.lastname,
         createdAt: new Date().toISOString(),
       });
       await newSubd.save();

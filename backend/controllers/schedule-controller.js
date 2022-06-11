@@ -7,7 +7,7 @@ class ScheduleController {
         const newSchedule = new scheModel({
           title: req.body.title,
           schedule: req.protocol + "://" + req.host + ":3001/" + req.file?.path,
-          creator: req.user,
+          creator: req.firstname + " " + req.lastname,
           createdAt: new Date().toISOString(),
         });
         await newSchedule.save();

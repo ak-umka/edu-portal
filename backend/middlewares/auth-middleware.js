@@ -7,6 +7,8 @@ const auth = async (req, res, next) => {
         req.user = decoded?.id;
         req.role = decoded?.role;
         req.email = decoded?.email;
+        req.firstname = decoded?.firstname;
+        req.lastname = decoded?.lastname;
         // req.user.role = decoded?.role;
         // console.log (decoded)
         
