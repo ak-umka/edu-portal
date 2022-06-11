@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const path = require("path");
+const nextTranslate = require("next-translate");
+const withPlugins = require("next-compose-plugins");
 
 const nextConfig = {
   sassOptions: {
@@ -7,7 +9,7 @@ const nextConfig = {
   },
   webpack(config) {
     config.module.rules.push({
-      test: /\.svg$/,
+      test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
       use: ["@svgr/webpack"],
     });
@@ -16,4 +18,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = withPlugins([[nextConfig], [nextTranslate]]);

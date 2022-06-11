@@ -7,7 +7,8 @@ import { useRouter } from "next/router";
 import { postComment } from "@/redux/action/postsAction";
 import moment from "moment";
 import { useForm } from "react-hook-form";
-import EditModal from "./EditModal";
+import EditModal from "../Modal/EditModal";
+import useTranslation from "next-translate/useTranslation";
 
 function Post(props) {
   const [show, setShow] = useState(false);
@@ -25,6 +26,7 @@ function Post(props) {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -40,14 +42,12 @@ function Post(props) {
   }
 
   const deletePost = () => {
-    if (window.confirm("Are you sure you want to delete post?"))
-      props.deletePost(id);
+    if (window.confirm(t("common:Message.Confirmation"))) props.deletePost(id);
     router.push("/");
   };
 
   const onSubmit = (data) => {
     var formData = new FormData();
-    console.log(data);
     formData.set("title", data.title);
     formData.set("content", data.content);
     formData.append("photo", data.photo[0]);
@@ -62,10 +62,10 @@ function Post(props) {
         {props.auth?.user?.role === "admin" ||
         post?.creator === props.auth?.user?.id ? (
           <div className="col d-flex justify-content-between">
-            <h5>If information was outdated, please update it or delete it </h5>
+            <h5>{t("common:PostId.Info")} </h5>
             <div>
               <a className="btn btn-text text-primary" onClick={deletePost}>
-                DELETE
+                {t("common:ChangeButton.DeleteButton")}
               </a>
               <a
                 className="btn btn-text text-primary"
@@ -73,7 +73,7 @@ function Post(props) {
                 data-bs-target="#exampleModal"
                 onClick={handleShow}
               >
-                EDIT
+                {t("common:ChangeButton.EditButton")}
               </a>
             </div>
           </div>
@@ -83,7 +83,7 @@ function Post(props) {
         <div className="row justify-content-center">
           <div className="col-11">
             <div className="comment">
-              <h6>Comments</h6>
+              <h6> {t("common:PostId.Comments")}</h6>
 
               {/* Comment */}
               <form onSubmit={handleSubmit(SubmitForm)}>
@@ -110,11 +110,11 @@ function Post(props) {
                         type="submit"
                         className="btn btn-primary btn-block"
                       >
-                        Publish
+                        {t("common:ChangeButton.PublishButton")}
                       </button>
                     ) : (
                       <button className="btn btn-primary btn-block" disabled>
-                        Publish
+                        {t("common:ChangeButton.PublishButton")}
                       </button>
                     )}
                   </div>

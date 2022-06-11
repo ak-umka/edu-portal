@@ -3,11 +3,14 @@ import { useForm } from "react-hook-form";
 import { useDispatch, connect } from "react-redux";
 import { signup } from "@/redux/action/authAction";
 import { useRouter } from "next/router";
+import Link from "next/link";
+import useTranslation from "next-translate/useTranslation";
 
 function SignUp(props) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const router = useRouter();
+  const { t } = useTranslation();
 
   const {
     register,
@@ -34,25 +37,25 @@ function SignUp(props) {
           <div className="row gx-lg-5 align-items-center">
             <div className="col-lg-6 mb-5 mb-lg-0">
               <h1 className="my-5 display-3 fw-bold ls-tight">
-                The best offer <br />
-                <span className="text-primary">for your business</span>
+                {t("common:SignUpAndIn.title")} <br />
+                <span className="text-primary">
+                  {t("common:SignUpAndIn.titlePrimary")}{" "}
+                </span>
               </h1>
-              <p style={{ color: "hsl(217, 10%, 50.8%)" }}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Eveniet, itaque accusantium odio, soluta, corrupti aliquam
-                quibusdam tempora at cupiditate quis eum maiores libero
-                veritatis? Dicta facilis sint aliquid ipsum atque?
-              </p>
             </div>
 
             <div className="col-lg-6 mb-5 mb-lg-0">
               <div className="card">
                 <div className="card-body py-5 px-md-5">
                   <form onSubmit={handleSubmit(onSubmit)}>
-                    {props.errorMessage && <div>User already exists</div>}
+                    {props.errorMessage && (
+                      <div className="mb-4 text-danger">
+                        {t("common:SignUpAndIn.UserExistMessage")}
+                      </div>
+                    )}
                     {/* Email */}
                     <label className="form-label" htmlFor="email">
-                      Email address
+                      {t("common:SignUpAndIn.Email")}
                     </label>
                     <div className="form-outline mb-4">
                       <input
@@ -70,13 +73,16 @@ function SignUp(props) {
                         })}
                       />
                       {errors.email && (
-                        <span className="text-danger">Email is required</span>
+                        <span className="text-danger">
+                          {t("common:SignUpAndIn.Email")}
+                          {t("common:SignUpAndIn.IsRequired")}
+                        </span>
                       )}
                     </div>
 
                     {/* Password */}
                     <label className="form-label" htmlFor="password">
-                      Password
+                      {t("common:SignUpAndIn.Password")}
                     </label>
                     <div className="form-outline mb-4">
                       <input
@@ -92,7 +98,8 @@ function SignUp(props) {
                       />
                       {errors.password && (
                         <span className="text-danger">
-                          Password is required
+                          {t("common:SignUpAndIn.Password")}
+                          {t("common:SignUpAndIn.IsRequired")}
                         </span>
                       )}
                     </div>
@@ -102,14 +109,17 @@ function SignUp(props) {
                       type="submit"
                       className="btn btn-primary btn-block mb-4"
                     >
-                      Sign up
+                      {t("common:SignUpAndIn.SignUp")}
                     </button>
                   </form>
                   <p>
-                    If you've registered already,{" "}
-                    <a className="link-primary" href="/signin">
-                      Sign In
-                    </a>
+                    {t("common:SignUpAndIn.MessageSignUp")}
+                    <Link href="/signin">
+                      <a className="link-primary">
+                        {" "}
+                        {t("common:SignUpAndIn.SignIn")}
+                      </a>
+                    </Link>
                   </p>
                 </div>
               </div>

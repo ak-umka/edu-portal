@@ -2,7 +2,7 @@ import Header from "@/components/Header/Header";
 import Explore from "@/components/Explore/Explore";
 import Footer from "@/components/Footer/Footer";
 import Hero from "@/components/Hero/Hero";
-import { Advantage } from "@/components/Hero/Advantage";
+import Advantage  from "@/components/Hero/Advantage";
 
 export default function Home() {
   return (
