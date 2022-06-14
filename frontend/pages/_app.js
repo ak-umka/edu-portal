@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { checkAutoLogin } from "@/redux/selector/authSelector";
 import { useEffect } from "react";
 import AuthProvider from "@/components/AuthProvider/AuthProvider";
+import Message from "@/components/Message/Message";
 
 function MyApp({ Component, pageProps }) {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ function MyApp({ Component, pageProps }) {
       <Provider store={store}>
         <AuthProvider>
           <Component {...pageProps} />
+          <Message />
         </AuthProvider>
       </Provider>
     </div>
