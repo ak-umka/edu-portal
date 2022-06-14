@@ -24,7 +24,7 @@ export const GET_USERS = "GET_USERS";
 
 //signup finction
 
-export function signup(email, password, role) {
+export function signup(email, password, role, firstName, lastName) {
   return (dispatch) => {
     return axios
       .post(`http://localhost:3001/api/v0/signup`, email, password, role)

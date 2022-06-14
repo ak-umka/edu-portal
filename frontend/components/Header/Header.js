@@ -18,7 +18,10 @@ function Header(props) {
     <nav className="navbar navbar-expand-lg navbar-light w-100">
       <div className="container mx-auto ">
         <Link href="/">
-          <a className="navbar-brand m-4 text-primary" style={{fontSize:"26px"}}>
+          <a
+            className="navbar-brand m-4 text-primary"
+            style={{ fontSize: "26px" }}
+          >
             <strong>A-Engineer</strong>
           </a>
         </Link>
@@ -100,10 +103,13 @@ function Header(props) {
           <div className="navbar-end ">
             <div className="navbar-item ">
               <Link href={path} locale="en">
-                <a  className="text-secondary m-2 text-decoration-none">EN</a>
+                <a className="text-secondary m-2 text-decoration-none">EN</a>
               </Link>
               <Link href={path} locale="ru">
-                <a className="text-secondary text-decoration-none">RU</a>
+                <a className="text-secondary m-2 text-decoration-none">RU</a>
+              </Link>
+              <Link href={path} locale="kz">
+                <a className="text-secondary text-decoration-none">KZ</a>
               </Link>
             </div>
           </div>

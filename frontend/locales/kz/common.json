@@ -1,0 +1,108 @@
+{
+    "Home": {
+        "Header":{
+            "Home":"Басты бет",
+            "CreatePost":"Мақала құру",
+            "CreateAssignment":"Тапсырманы құру",
+            "CreateSchedule":"Сабақ кестесін құру",
+            "SignUp":"Тіркелу",
+            "SignIn":"Кіру",
+            "LogOut":"Шығу"
+        },
+        "Hero":{
+            "title":" ауыл шаруашылығын үйрену жолы",
+            "titlePrimary":"Ең оңай және жылдам",
+            "ButtonSchedule":"Сабақ кестесі",
+            "ButtonAssignments":"Тапсырмалар",
+            "ButtonBlogs":"Блог"
+        },
+        "AdvantagesSection":{
+            "FirstColumn":{
+                "titleFirst":"Үздік",
+                "titleSecond":"Курстар",
+                "text":"Әлемнің ең жақсы нұсқаушылары мен университеттерінің курстарын алыңыз."
+            },
+            "SecondColumn":{
+                "titleFirst":"Бақытты",
+                "titleSecond":"Оқушылар",
+                "text":"Бүкіл дүние жүзінен келген оқушылар."
+            },
+            "ThirdColumn":{
+                "titleFirst":"Көрнекті",
+                "titleSecond":"Оқытушылар",
+                "text":"Сүйікті курсыңызды әлемдік деңгейдегі нұсқаушылармен бірге үйреніңіз."
+            }
+        },
+        "Post":{
+            "title":"Үздік мақалалар",
+            "ButtonPrevious":"Алдыңғы",
+            "ButtonNext":"Келесі",
+            "Created":"Құрылған"
+        }
+    },
+    "Schedule":{
+      "Upload":"Жүктеу"
+    },
+    "Message":{
+      "Confirmation":"Постты шынымен жойғыңыз келе ме?"
+    },
+    "Create":{
+      "Title":"Аты",
+      "Content":"Мазмұны",
+      "CourseName":"Курс аты",
+      "Attachment":"Кестені тіркеңіз",
+      "Image":"Сурет",
+      "Document":"Құжат",
+      "IsRequired":" міндетті түрде қажет",
+      "ChooseFiles":"Файлды таңдау",
+      "DragAndDrop":"немесе файлды осы жерге сүйреп апарыңыз"
+    },
+    "ChangeButton":{
+      "CreateButton":"Create",
+      "EditButton":"Edit",
+      "DeleteButton":"Жою",
+      "PublishButton":"Publish"
+    },
+    "Assignment":{
+      "Info":"Оқу ақпараты үшін құжат тіркелген, оны жүктеп алыңыз",
+      "Table":{
+        "Number":"Коды",
+        "Title":"Аты",
+        "Document":"Құжаты",
+        "Action":"Тапсырмаға қатысты орындалатын әрекеттер",
+        "Author":"Авторы"
+      }
+    },
+    "SignUpAndIn":{
+      "title":"Ең үздік ұсыныс",
+      "titlePrimary":"сіздің болашағыңызға", 
+      "Email":"Электрондық пошта",
+      "Password":"Құпиясөз",
+      "SignUp":"Тіркелу",
+      "SignIn":"Кіру",
+      "MessageSignUp":"Егер сіз бұрыннан тіркелген болсаңыз, ",
+      "MessageSignIn":"Егер сіз әлі тіркелмеген болсаңыз, ",
+      "AdminTitle":"Администратор ретінде тіркелу",
+      "IsRequired":" міндетті түрде қажет",
+      "UserExistMessage":"Осындай пайдаланушы бар ",
+      "Firstname":"Аты-жөні",
+      "Lastname":"Тегі"
+    },
+    "Footer":{
+        "FirstColumn":{
+            "UsefulLinks":"Пайдалы сілтемелер",
+            "Home":"Басты бет",
+            "Admin":"Администратор",
+            "SignIn":"Кіру"
+        },
+        "SecondColumn":{
+            "OurLocation":"Біздің орналасқан жеріміз",
+            "Address":"Нұр-Сұлтан қаласы, Ә. Жангелдінің көшесі, 123А"
+        }
+    },
+    "PostId":{
+      "MadeBy":"Бұл серіктеспен жасаған",
+      "Info":"Егер ақпарат ескірген болса, оны жаңартыңыз немесе жойыңыз.",
+      "Comments":"Пікірлер"
+    }
+  }

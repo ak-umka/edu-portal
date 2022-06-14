@@ -50,20 +50,17 @@ function AdminSignUp(props) {
                       </label>
                       <input
                         type="text"
-                        id="text-form"
+                        id="first-name"
                         className="form-control"
                         value={firstname}
                         onChange={(e) => setFirstname(e.target.value)}
                         {...register("firstname", {
                           required: true,
-                          pattern: {
-                            value: /^[A-Z0-9]*$/i,
-                            message: "Invalid firstname address",
-                          },
                         })}
                       />
                       {errors.firstname && (
                         <span className="text-danger">
+                          {t("common:SignUpAndIn.Firstname")}
                           {t("common:SignUpAndIn.IsRequired")}
                         </span>
                       )}
@@ -75,20 +72,17 @@ function AdminSignUp(props) {
                       </label>
                       <input
                         type="text"
-                        id="text-form"
+                        id="last-name"
                         className="form-control"
                         value={lastname}
                         onChange={(e) => setLastname(e.target.value)}
                         {...register("lastname", {
                           required: true,
-                          pattern: {
-                            value: /^[A-Z0-9]*$/i,
-                            message: "Invalid lastname address",
-                          },
                         })}
                       />
                       {errors.firstname && (
                         <span className="text-danger">
+                          {t("common:SignUpAndIn.Lastname")}
                           {t("common:SignUpAndIn.IsRequired")}
                         </span>
                       )}
@@ -169,7 +163,10 @@ function AdminSignUp(props) {
                   <p>
                     {t("common:SignUpAndIn.MessageSignUp")}
                     <Link className="link-primary" href="/signin">
-                      <a className="link-primary"> {t("common:SignUpAndIn.SignIn")}</a>
+                      <a className="link-primary">
+                        {" "}
+                        {t("common:SignUpAndIn.SignIn")}
+                      </a>
                     </Link>
                   </p>
                 </div>
