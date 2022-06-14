@@ -17,10 +17,6 @@ function Message(props) {
     OpenAlert();
   }, [props?.message]);
 
-  useEffect(() => {
-    console.log(show);
-  }, [show]);
-
   if (show) {
     return (
       <div>
