@@ -83,7 +83,9 @@
     "MessageSignIn":"If you've not registered already, ",
     "AdminTitle":"Sign Up as Admin",
     "IsRequired":" is required",
-    "UserExistMessage":"User already exists"
+    "UserExistMessage":"User already exists",
+    "Firstname":"First Name",
+    "Lastname":"Last Name"
   },
   "Footer":{
       "FirstColumn":{

@@ -83,7 +83,9 @@
     "MessageSignIn":"Если вы еще не зарегистрированы, ",
     "AdminTitle":"Зарегистрироваться как администратор",
     "IsRequired":"  обязателен(a)",
-    "UserExistMessage":"Пользователь уже существует"
+    "UserExistMessage":"Пользователь уже существует",
+    "Firstname":"Имя",
+    "Lastname":"Фамилия"
   },
   "Footer":{
       "FirstColumn":{
