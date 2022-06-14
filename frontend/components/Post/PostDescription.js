@@ -3,7 +3,7 @@ import useTranslation from "next-translate/useTranslation";
 
 function PostDescription(props) {
   const post = props.post;
-  console.log(post);
+  // console.log(post);
   const { t } = useTranslation();
   
   return (
