@@ -13,7 +13,8 @@
           "title":" способ обучиться сельскому хозяйств",
           "titlePrimary":"Самый простой и быстрый",
           "ButtonSchedule":"Расписание",
-          "ButtonAssignments":"Задания"
+          "ButtonAssignments":"Задания",
+          "ButtonBlogs":"Блог"
       },
       "AdvantagesSection":{
           "FirstColumn":{

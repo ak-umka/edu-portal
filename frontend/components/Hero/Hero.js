@@ -30,6 +30,13 @@ function Hero() {
                     </a>
                   </Link>
                 </div>
+                <div className="col">
+                  <Link href="/article">
+                    <a className="btn btn-primary">
+                      {t("common:Home.Hero.ButtonBlogs")}
+                    </a>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
