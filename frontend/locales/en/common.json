@@ -13,7 +13,8 @@
           "title":" way to Learn in Agriculture",
           "titlePrimary":"The easiest and fastest",
           "ButtonSchedule":"Schedule",
-          "ButtonAssignments":"Assignments"
+          "ButtonAssignments":"Assignments",
+          "ButtonBlogs":"Blog"
       },
       "AdvantagesSection":{
           "FirstColumn":{
@@ -68,7 +69,8 @@
       "Number":"ID",
       "Title":"Title",
       "Document":"Document",
-      "Action":"Action"
+      "Action":"Action",
+      "Author":"Author"
     }
   },
   "SignUpAndIn":{
@@ -82,7 +84,9 @@
     "MessageSignIn":"If you've not registered already, ",
     "AdminTitle":"Sign Up as Admin",
     "IsRequired":" is required",
-    "UserExistMessage":"User already exists"
+    "UserExistMessage":"User already exists",
+    "Firstname":"First Name",
+    "Lastname":"Last Name"
   },
   "Footer":{
       "FirstColumn":{

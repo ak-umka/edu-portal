@@ -9,6 +9,8 @@ import useTranslation from "next-translate/useTranslation";
 function AdminSignUp(props) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [firstname, setFirstname] = useState();
+  const [lastname, setLastname] = useState();
   const [role, setRole] = useState("admin");
   const router = useRouter();
   const {
@@ -19,8 +21,8 @@ function AdminSignUp(props) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  function onSubmit(email, password, role) {
-    dispatch(signup(email, password, role));
+  function onSubmit(email, password, role, firstname, lastname) {
+    dispatch(signup(email, password, role, firstname, lastname));
   }
 
   useEffect(() => {
@@ -41,6 +43,56 @@ function AdminSignUp(props) {
                     {t("common:SignUpAndIn.AdminTitle")}
                   </h2>
                   <form onSubmit={handleSubmit(onSubmit)}>
+                    {/* Firstname */}
+                    <div className="form-outline mb-4">
+                      <label className="form-label">
+                        {t("common:SignUpAndIn.Firstname")}
+                      </label>
+                      <input
+                        type="text"
+                        id="text-form"
+                        className="form-control"
+                        value={firstname}
+                        onChange={(e) => setFirstname(e.target.value)}
+                        {...register("firstname", {
+                          required: true,
+                          pattern: {
+                            value: /^[A-Z0-9]*$/i,
+                            message: "Invalid firstname address",
+                          },
+                        })}
+                      />
+                      {errors.firstname && (
+                        <span className="text-danger">
+                          {t("common:SignUpAndIn.IsRequired")}
+                        </span>
+                      )}
+                    </div>
+                    {/* Lastname */}
+                    <div className="form-outline mb-4">
+                      <label className="form-label">
+                        {t("common:SignUpAndIn.Lastname")}
+                      </label>
+                      <input
+                        type="text"
+                        id="text-form"
+                        className="form-control"
+                        value={lastname}
+                        onChange={(e) => setLastname(e.target.value)}
+                        {...register("lastname", {
+                          required: true,
+                          pattern: {
+                            value: /^[A-Z0-9]*$/i,
+                            message: "Invalid lastname address",
+                          },
+                        })}
+                      />
+                      {errors.firstname && (
+                        <span className="text-danger">
+                          {t("common:SignUpAndIn.IsRequired")}
+                        </span>
+                      )}
+                    </div>
                     {/* Email */}
                     <div className="form-outline mb-4">
                       <label className="form-label" htmlFor="email-form">

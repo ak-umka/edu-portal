@@ -73,8 +73,14 @@ footer {
   color: #aaaabe;
 }
 
-.content {
+.content-desc {
   padding: 3% 5%;
+  text-align: justify;
+  line-height: 30px;
+}
+
+.content-title {
+  padding: 0% 5%;
 }
 
 .comment {

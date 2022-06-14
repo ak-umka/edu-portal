@@ -13,7 +13,8 @@
           "title":" способ обучиться сельскому хозяйств",
           "titlePrimary":"Самый простой и быстрый",
           "ButtonSchedule":"Расписание",
-          "ButtonAssignments":"Задания"
+          "ButtonAssignments":"Задания",
+          "ButtonBlogs":"Блог"
       },
       "AdvantagesSection":{
           "FirstColumn":{
@@ -68,7 +69,8 @@
       "Number":"Код",
       "Title":"Заголовок",
       "Document":"Документ",
-      "Action":"Действие"
+      "Action":"Действие",
+      "Author":"Автор"
     }
   },
   "SignUpAndIn":{
@@ -82,7 +84,9 @@
     "MessageSignIn":"Если вы еще не зарегистрированы, ",
     "AdminTitle":"Зарегистрироваться как администратор",
     "IsRequired":"  обязателен(a)",
-    "UserExistMessage":"Пользователь уже существует"
+    "UserExistMessage":"Пользователь уже существует",
+    "Firstname":"Имя",
+    "Lastname":"Фамилия"
   },
   "Footer":{
       "FirstColumn":{
