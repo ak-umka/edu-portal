@@ -53,7 +53,7 @@ function Subds(props) {
 
         <tr className="text-center">
           <th scope="row">{idx + 1}</th>
-          <td className="text-start">{subd?.title}</td>
+          <td className="text-center">{subd?.title}</td>
           <td>
             <Link href={subd?.subd}>
               <FontAwesomeIcon icon={faFile} className="text-primary" />
@@ -77,6 +77,7 @@ function Subds(props) {
           ) : (
             <></>
           )}
+           <td className="text-center">{subd?.creator}</td>
         </tr>
       </tbody>
     ));
@@ -103,6 +104,7 @@ function Subds(props) {
                     ) : (
                       <></>
                     )}
+                    <th scope="col">{t("common:Assignment.Table.Author")}</th>
                   </tr>
                 </thead>
                 {displaySubds}

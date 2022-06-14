@@ -68,7 +68,8 @@
       "Number":"ID",
       "Title":"Title",
       "Document":"Document",
-      "Action":"Action"
+      "Action":"Action",
+      "Author":"Author"
     }
   },
   "SignUpAndIn":{

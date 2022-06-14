@@ -68,7 +68,8 @@
       "Number":"Код",
       "Title":"Заголовок",
       "Document":"Документ",
-      "Action":"Действие"
+      "Action":"Действие",
+      "Author":"Автор"
     }
   },
   "SignUpAndIn":{

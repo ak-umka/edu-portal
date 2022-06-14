@@ -13,7 +13,7 @@ function Footer() {
           <div className="row gx-lg-5">
             <div className="col-lg-4 mb-5 mb-lg-0">
               <Link href="/">
-                <a className="text-decoration-none text-primary" style={{fontSize:"26px"}}>E-Portal</a>
+                <a className="text-decoration-none text-primary" style={{fontSize:"26px"}}>A-Engineer</a>
               </Link>
             </div>
 
