@@ -2,20 +2,21 @@ const ApiError = require("../exceptions/api-error");
 const scheModel = require("../models/schedule-model");
 
 class ScheduleController {
-  async createSchedule(req, res, next) {
-    try {
-      const newSchedule = new scheModel({
-        title: req.body.title,
-        schedule: req.protocol + "://" + req.host + ":3001/" + req.file?.path,
-        creator: req.user,
-        createdAt: new Date().toISOString(),
-      });
-      await newSchedule.save();
-      res.status(201).json(newSchedule);
-    } catch (error) {
-      next(error);
+    async createSchedule(req, res, next) {
+      try {
+        const newSchedule = new scheModel({
+          title: req.body.title,
+          schedule: req.protocol + "://" + req.host + ":3001/" + req.file?.path,
+          creator: req.firstname + " " + req.lastname,
+          createdAt: new Date().toISOString(),
+        });
+        await newSchedule.save();
+        res.status(201).json(newSchedule);
+      } catch (error) {
+        next(error);
+      }
     }
-  }
+  
 
   async getSchedules(req, res, next) {
     try {

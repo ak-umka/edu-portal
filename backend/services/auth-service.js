@@ -7,14 +7,14 @@ const ApiError = require('../exceptions/api-error');
 const bcrypt = require('bcrypt');
 
 class AuthService {
-    async signup (email, password, role) {
+    async signup (email, password, role, firstname, lastname) {
         const checkUser = await userModel.findOne({email: email});
         if (checkUser) {
             throw ApiError.BadRequestError('User already exists');
         }
 
         const hashedPassword = await bcrypt.hash(password, 3);
-        const user = await userModel.create({email, password: hashedPassword, role: role || 'basic'});
+        const user = await userModel.create({email, password: hashedPassword, role: role || 'basic', firstname, lastname});
         
         const userDto = new UserDto(user);
         const tokens = TokenService.generateToken({...userDto});

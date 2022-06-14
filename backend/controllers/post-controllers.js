@@ -11,10 +11,10 @@ class PostController {
         title: req.body.title,
         photo: req.protocol + "://" + req.host + ":3001/" + req.file?.path,
         content: req.body.content,
-        creator: req.user,
+        creator: req.firstname + " " + req.lastname,
         createdAt: new Date().toISOString(),
       });
-      console.log(req.raw);
+      console.log(req.user);
       await newPost.save();
       res.status(201).json(newPost);
     } catch (error) {
