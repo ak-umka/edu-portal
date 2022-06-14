@@ -159,3 +159,10 @@ span {
 h6 {
   color: #808080;
 }
+
+.btn-hero {
+  height: calc(2em * 2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

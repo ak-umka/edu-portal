@@ -18,21 +18,21 @@ function Hero() {
               <div className="row justify-center mt-4">
                 <div className="col">
                   <Link href="/schedule">
-                    <a className="btn btn-primary">
+                    <a className="btn btn-hero btn-primary">
                       {t("common:Home.Hero.ButtonSchedule")}
                     </a>
                   </Link>
                 </div>
                 <div className="col">
                   <Link href="/subds">
-                    <a className="btn btn-primary">
+                    <a className="btn btn-hero btn-primary">
                       {t("common:Home.Hero.ButtonAssignments")}
                     </a>
                   </Link>
                 </div>
                 <div className="col">
                   <Link href="/article">
-                    <a className="btn btn-primary">
+                    <a className="btn btn-hero btn-primary">
                       {t("common:Home.Hero.ButtonBlogs")}
                     </a>
                   </Link>
