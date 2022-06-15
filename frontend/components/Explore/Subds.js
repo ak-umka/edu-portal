@@ -13,12 +13,20 @@ import Link from "next/link";
 import EditModal from "../Modal/EditModal";
 import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
+import Pagination from "../Pagination/Pagination";
 
 function Subds(props) {
   const subds = props.subds;
   const dispatch = useDispatch();
   const router = useRouter();
   const { t } = useTranslation();
+
+  //pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [subdPerPage, setSubdPerPage] = useState(10);
+  const indexOfLastSubd = currentPage * subdPerPage;
+  const indexOfFirstSubd = indexOfLastSubd - subdPerPage;
+  const currentSubds = subds.slice(indexOfFirstSubd, indexOfLastSubd);
 
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
@@ -35,8 +43,8 @@ function Subds(props) {
   }, [props.getSubdsAction]);
 
   const displaySubds =
-    subds &&
-    subds.map((subd, idx) => (
+    currentSubds &&
+    currentSubds.map((subd, idx) => (
       <tbody key={idx}>
         <EditModal
           contentNotRequired={true}
@@ -77,7 +85,7 @@ function Subds(props) {
           ) : (
             <></>
           )}
-           <td className="text-center">{subd?.creator}</td>
+          <td className="text-center">{subd?.creator}</td>
         </tr>
       </tbody>
     ));
@@ -110,13 +118,13 @@ function Subds(props) {
                 {displaySubds}
               </table>
             </div>
-            <div className="d-flex justify-content-center">
-              {/* <Pagination
-              postsPerPage={postPerPage}
-              totalPosts={posts.length}
-              paginate={paginate}
-              currentPage={currentPage}
-            /> */}
+            <div className=" d-flex justify-content-center min-vh-75 align-items-end">
+              <Pagination
+                postsPerPage={subdPerPage}
+                totalPosts={subds.length}
+                paginate={paginate}
+                currentPage={currentPage}
+              />
             </div>
           </div>
         )}
@@ -125,56 +133,6 @@ function Subds(props) {
   );
 }
 
-function Pagination({ postsPerPage, totalPosts, paginate, currentPage }) {
-  const pageNumbers = [];
-
-  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
-    pageNumbers.push(i);
-  }
-
-  return (
-    <nav>
-      <ul className="pagination justify-content-end">
-        <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
-          <a
-            className="page-link"
-            to={currentPage - 1}
-            onClick={() => paginate(currentPage - 1)}
-            aria-label="Previous"
-          >
-            Previous
-          </a>
-        </li>
-        {pageNumbers.map((number) => (
-          <li
-            className={`page-item ${currentPage === number ? "active" : ""}`}
-            key={number}
-          >
-            <a onClick={() => paginate(number)} className={`page-link`}>
-              {number}
-            </a>
-          </li>
-        ))}
-        <li
-          className={`page-item ${
-            currentPage === Math.ceil(totalPosts / postsPerPage)
-              ? "disabled"
-              : ""
-          }`}
-        >
-          <a
-            className="page-link"
-            to={currentPage + 1}
-            onClick={() => paginate(currentPage + 1)}
-            aria-label="Next"
-          >
-            Next
-          </a>
-        </li>
-      </ul>
-    </nav>
-  );
-}
 const mapStateToProps = (state) => {
   return {
     subds: state.subds.subds,

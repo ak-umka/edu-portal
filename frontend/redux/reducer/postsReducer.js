@@ -9,6 +9,7 @@ import {
   COMMENTS_ERROR,
   CONFIRMED_EDIT_POST,
   FAILED_EDIT_POST,
+  STATUS
 } from "@/redux/action/postsAction";
 
 const initialState = {
@@ -25,6 +26,7 @@ const initialState = {
   },
   errorMessage: [],
   comment: [],
+  status: "",
 };
 
 export function postsReducer(state = initialState, action) {
@@ -87,6 +89,11 @@ export function postsReducer(state = initialState, action) {
       return {
         ...state,
         post: action.payload,
+      };
+    case STATUS:
+      return {
+        ...state,
+        status: action.payload,
       };
     default:
       return state;

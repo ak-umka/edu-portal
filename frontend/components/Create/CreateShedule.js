@@ -5,6 +5,8 @@ import FormData from "form-data";
 import { useRouter } from "next/router";
 import { createSchedule } from "@/redux/action/scheduleAction";
 import useTranslation from "next-translate/useTranslation";
+import messageAction from "@/redux/action/messageAction";
+import { bindActionCreators } from "redux";
 
 function CreateSchedule(props) {
   const [title, setTitle] = useState();
@@ -24,6 +26,18 @@ function CreateSchedule(props) {
     formData.append("schedule", data.document[0]);
     dispatch(createSchedule(formData));
   };
+
+  useEffect(() => {
+    switch (props.status) {
+      case 201:
+        props.messageAction("Schedule is created", "success");
+        break;
+      case 400:
+        props.messageAction("Bad Request", "error");
+      case 500:
+        props.messageAction("Internal Server Error", "error");
+    }
+  }, [props.status]);
 
   return (
     <div className="create-schedule">
@@ -108,8 +122,14 @@ text/plain, application/pdf"
 const mapStateToProps = (state) => {
   return {
     schedule: state.schedule.schedule,
-    // status: state.subds.status,
+    status: state.schedule.status,
+    message: state.message.message,
+    type: state.message.type,
   };
 };
 
-export default connect(mapStateToProps)(CreateSchedule);
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ messageAction }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateSchedule);

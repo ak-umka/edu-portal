@@ -1,5 +1,5 @@
 const i18n = {
-  locales: ["en", "ru"],
+  locales: ["en", "ru", "kz"],
   defaultLocale: "en",
   pages: {
     "*": ["common"],

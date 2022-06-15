@@ -7,6 +7,7 @@ import {
   FAILED_DELETE_SCHEDULE,
   CONFIRMED_EDIT_SCHEDULE,
   FAILED_EDIT_SCHEDULE,
+  STATUS
 } from "../action/scheduleAction";
 
 const initialState = {
@@ -19,6 +20,7 @@ const initialState = {
     id: "",
   },
   error: [],
+  status: "",
 };
 
 export function scheduleReducer(state = initialState, action) {
@@ -64,6 +66,11 @@ export function scheduleReducer(state = initialState, action) {
     case FAILED_EDIT_SCHEDULE:
       return {
         error: action.payload,
+      };
+    case STATUS:
+      return {
+        ...state,
+        status: action.payload,
       };
     default:
       return state;

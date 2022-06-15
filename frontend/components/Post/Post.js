@@ -9,6 +9,7 @@ import moment from "moment";
 import { useForm } from "react-hook-form";
 import EditModal from "../Modal/EditModal";
 import useTranslation from "next-translate/useTranslation";
+import { Comment } from "./Comment";
 
 function Post(props) {
   const [show, setShow] = useState(false);
@@ -37,8 +38,10 @@ function Post(props) {
     props.getUsersData();
   }, []);
 
-  function SubmitForm(comment) {
-    dispatch(postComment(id, comment));
+  function SubmitForm(data) {
+    var formData = new FormData();
+    formData.set("comment", data.comment);
+    dispatch(postComment(id, formData));
   }
 
   const deletePost = () => {
@@ -120,6 +123,11 @@ function Post(props) {
                   </div>
                 </div>
               </form>
+              <div className="display-comments">
+                {post?.comment?.map((comment) => (
+                  <Comment comment={comment} key={comment.id} />
+                ))}
+              </div>
             </div>
           </div>
         </div>

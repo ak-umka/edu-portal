@@ -79,11 +79,19 @@ export function deleteSubd(id) {
           type: CONFIRMED_DELETE_SUBD,
           payload: response.data,
         });
+        dispatch({
+          type: STATUS,
+          payload: response.status,
+        });
       })
       .catch((error) => {
         dispatch({
           type: FAILED_DELETE_SUBD,
           payload: error.response,
+        });
+        dispatch({
+          type: STATUS,
+          payload: response.status,
         });
       });
   };
@@ -104,11 +112,19 @@ export function editSubd(id, formData) {
           type: CONFIRMED_EDIT_SUBD,
           payload: response.data,
         });
+        dispatch({
+          type: STATUS,
+          payload: response.status,
+        });
       })
       .catch((error) => {
         dispatch({
           type: FAILED_EDIT_SUBD,
           payload: error.response,
+        });
+        dispatch({
+          type: STATUS,
+          payload: response.status,
         });
       });
   };

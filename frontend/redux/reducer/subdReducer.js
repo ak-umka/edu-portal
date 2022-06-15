@@ -19,7 +19,7 @@ const initialState = {
     creator: "",
     createdAt: "",
   },
-  status: "x",
+  status: "",
   errorMessage: "",
   badRequest: [],
 };
@@ -41,7 +41,6 @@ export function subdReducer(state = initialState, action) {
       return {
         ...state,
         subd: action.payload,
-        status: true,
       };
     case FAILED_CREATE_SUBD:
       return {

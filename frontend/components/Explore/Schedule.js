@@ -14,6 +14,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import EditModal from "../Modal/EditModal";
 import useTranslation from "next-translate/useTranslation";
+import Pagination from "../Pagination/Pagination";
 
 function Schedule(props) {
   const schedules = props.schedules;
@@ -21,6 +22,20 @@ function Schedule(props) {
   const dispatch = useDispatch();
   const router = useRouter();
   const { t } = useTranslation();
+
+  //pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [schedulePerPage, setSchedulePerPage] = useState(10);
+  const indexOfLastSchedule = currentPage * schedulePerPage;
+  const indexOfFirstSchedule = indexOfLastSchedule - schedulePerPage;
+  const currentSchedule = schedules.slice(
+    indexOfFirstSchedule,
+    indexOfLastSchedule
+  );
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   //modal
   const [show, setShow] = useState(false);
@@ -49,8 +64,8 @@ function Schedule(props) {
           </div>
         ) : (
           <div>
-            {schedules &&
-              schedules.map((schedule, idx) => (
+            {currentSchedule &&
+              currentSchedule.map((schedule, idx) => (
                 <div className="row align-item-center m-4" key={idx}>
                   <EditModal
                     contentNotRequired={true}
@@ -109,6 +124,14 @@ function Schedule(props) {
                   )}
                 </div>
               ))}
+            <div className=" d-flex justify-content-center min-vh-75 align-items-end">
+              <Pagination
+                postsPerPage={schedulePerPage}
+                totalPosts={schedules.length}
+                paginate={paginate}
+                currentPage={currentPage}
+              />
+            </div>
           </div>
         )}
       </div>

@@ -21,6 +21,9 @@ export const FAILED_DELETE_SCHEDULE = "FAILED_DELETE_SCHEDULE";
 export const CONFIRMED_EDIT_SCHEDULE = "CONFIRMED_EDIT_SCHEDULE";
 export const FAILED_EDIT_SCHEDULE = "FAILED_EDIT_SCHEDULE";
 
+//status
+export const STATUS = "STATUS";
+
 export function createSchedule(formData) {
   return (dispatch) => {
     axiosInstance({
@@ -34,11 +37,19 @@ export function createSchedule(formData) {
           type: CONFIRMED_CREATE_SCHEDULE,
           payload: response.data,
         });
+        dispatch({
+          type: STATUS,
+          payload: response.status,
+        });
       })
       .catch((error) => {
         dispatch({
           type: FAILED_CREATE_SCHEDULE,
           payload: error.response,
+        });
+        dispatch({
+          type: STATUS,
+          payload: error.response.status,
         });
       });
   };
@@ -91,11 +102,19 @@ export function deleteSchedule(id) {
           type: CONFIRMED_DELETE_SCHEDULE,
           payload: response.data,
         });
+        dispatch({
+          type: STATUS,
+          payload: response.status,
+        });
       })
       .catch((error) => {
         dispatch({
           type: FAILED_DELETE_SCHEDULE,
           payload: error.response,
+        });
+        dispatch({
+          type: STATUS,
+          payload: error.response.status,
         });
       });
   };
@@ -114,11 +133,19 @@ export function editSchedule(id, formData) {
           type: CONFIRMED_EDIT_SCHEDULE,
           payload: response.data,
         });
+        dispatch({
+          type: STATUS,
+          payload: response.status,
+        });
       })
       .catch((error) => {
         dispatch({
           type: FAILED_EDIT_SCHEDULE,
           payload: error.response,
+        });
+        dispatch({
+          type: STATUS,
+          payload: error.response.status,
         });
       });
   };

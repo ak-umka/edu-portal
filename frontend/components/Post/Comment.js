@@ -3,10 +3,16 @@ export function Comment(props) {
   return (
     <div className="comment">
       <div className="container">
-        <p>
-          <strong>{comment?.author}</strong>
-        </p>
-        <p>{comment?.comment}</p>
+        <div className="d-flex">
+          <div className="col-4">
+            <h5>{comment?.comment}</h5>
+          </div>
+          <div className="col-4 text-center">
+            <p>
+              <strong>{comment?.author}</strong>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -22,9 +22,10 @@ export const REFRESH_TOKEN = "REFRESH_TOKEN";
 //
 export const GET_USERS = "GET_USERS";
 
+
 //signup finction
 
-export function signup(email, password, role) {
+export function signup(email, password, role, firstName, lastName) {
   return (dispatch) => {
     return axios
       .post(`http://localhost:3001/api/v0/signup`, email, password, role)
@@ -59,6 +60,10 @@ export function login(email, password, role) {
         localStorage.setItem("token", response.data.accessToken);
         dispatch(LoginConfirmed(response.data));
         if (!user.accessToken) return dispatch(refresh());
+        dispatch({
+          type: STATUS,
+          payload: response.status,
+        });
       })
       .catch((error) => {
         dispatch(LoginFailed(error.response));
