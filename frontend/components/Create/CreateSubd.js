@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
 import messageAction from "@/redux/action/messageAction";
 import { bindActionCreators } from "redux";
-import Message from "../Message/Message";
 
 function CreateSubd(props) {
   const [title, setTitle] = useState();
@@ -27,29 +26,23 @@ function CreateSubd(props) {
     formData.set("title", data.title);
     formData.append("subd", data.document[0]);
     dispatch(subdCreate(formData));
-    
   };
 
   useEffect(() => {
-    // switch(props.status) {
-    //   case 201:
-    //     router.push("/subd");
-    //     break;
-    //   case 400:
-    //     props.messageAction("Subd created failed", "error");
-    // }
-    if (props.status === 201) {
-      props.messageAction("Subd created successfully", "success");
-    }
-    if (props.status === 500) {
-      props.messageAction("Subd created failed", "error");
+    switch (props.status) {
+      case 201:
+        props.messageAction("Subd is created", "success");
+        break;
+      case 400:
+        props.messageAction("Bad Request", "error");
+      case 500:
+        props.messageAction("Internal Server Error", "error");
     }
   }, [props.status]);
 
   return (
     <div className="create-subd">
       <div className="row justify-content-center">
-
         <div className="col-lg-6 mb-5 mb-lg-0">
           <div className="card border-0 shadow-sm bg-white">
             <div className="card-body py-5 px-md-5">

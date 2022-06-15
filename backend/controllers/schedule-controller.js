@@ -30,8 +30,8 @@ class ScheduleController {
 
       const schedule = await scheModel
         .find()
-        .limit(12)
-        .skip(12 * req.query.page);
+        // .limit(12)
+        // .skip(12 * req.query.page);
       if (!schedule.length) {
         return next(ApiError.NotFoundError("No posts found"));
       }

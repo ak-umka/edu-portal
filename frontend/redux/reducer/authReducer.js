@@ -6,6 +6,7 @@ import {
   LOGOUT,
   REFRESH_TOKEN,
   GET_USERS,
+  STATUS
 } from "../action/authAction";
 
 const initialState = {

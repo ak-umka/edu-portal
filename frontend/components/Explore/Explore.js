@@ -2,18 +2,17 @@ import Card from "../Card/Card";
 import { useDispatch, connect } from "react-redux";
 import {
   getPostsAction,
-  editSubd,
-  deleteSubd,
 } from "@/redux/action/postsAction";
 import { bindActionCreators } from "redux";
 import { useEffect, useState } from "react";
 import Spinner from "../Loading/Loading";
 import useTranslation from "next-translate/useTranslation";
+import Pagination from "../Pagination/Pagination";
 
 function Explore(props) {
   const posts = props.posts;
   const [currentPage, setCurrentPage] = useState(1);
-  const [postPerPage, setPostPerPage] = useState(props.main ? 12 : 24);
+  const [postPerPage, setPostPerPage] = useState( 8);
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
@@ -68,71 +67,19 @@ function Explore(props) {
           <div className="row">{displayPostCards}</div>
         )}
         {!props.main ? (
-          <div className="article-pagination d-flex justify-content-center">
-            {/* <Pagination
+          <div className="d-flex min-vh-50 align-items-end justify-content-center">
+            <Pagination
               postsPerPage={postPerPage}
               totalPosts={posts.length}
               paginate={paginate}
               currentPage={currentPage}
-            /> */}
+            />
           </div>
         ) : (
           <></>
         )}
       </div>
     </div>
-  );
-}
-
-function Pagination({ postsPerPage, totalPosts, paginate, currentPage }) {
-  const pageNumbers = [];
-  const { t } = useTranslation();
-
-  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
-    pageNumbers.push(i);
-  }
-
-  return (
-    <nav>
-      <ul className="pagination justify-content-end">
-        <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
-          <a
-            className="page-link"
-            to={currentPage - 1}
-            onClick={() => paginate(currentPage - 1)}
-            aria-label="Previous"
-          >
-            {t("common:Home.Post.ButtonPrevious")}
-          </a>
-        </li>
-        {pageNumbers.map((number) => (
-          <li
-            className={`page-item ${currentPage === number ? "active" : ""}`}
-            key={number}
-          >
-            <a onClick={() => paginate(number)} className={`page-link`}>
-              {number}
-            </a>
-          </li>
-        ))}
-        <li
-          className={`page-item ${
-            currentPage === Math.ceil(totalPosts / postsPerPage)
-              ? "disabled"
-              : ""
-          }`}
-        >
-          <a
-            className="page-link"
-            to={currentPage + 1}
-            onClick={() => paginate(currentPage + 1)}
-            aria-label="Next"
-          >
-            {t("common:Home.Post.ButtonNext")}
-          </a>
-        </li>
-      </ul>
-    </nav>
   );
 }
 

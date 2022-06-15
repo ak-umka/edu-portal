@@ -5,6 +5,8 @@ import { postCreate } from "@/redux/action/postsAction";
 import FormData from "form-data";
 import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
+import messageAction from "@/redux/action/messageAction";
+import { bindActionCreators } from "redux";
 
 function Create(props) {
   const [title, setTitle] = useState();
@@ -18,8 +20,6 @@ function Create(props) {
   } = useForm();
   const router = useRouter();
   const dispatch = useDispatch();
-  const postIsChanged = props.postIsChanged;
-  const post = props.post;
 
   const onSubmit = (data) => {
     const token = localStorage.getItem("token");
@@ -35,6 +35,18 @@ function Create(props) {
       router.push(`/posts/${props.post?._id}`);
     }
   }, [props.postIsChanged, props.post]);
+
+  useEffect(() => {
+    switch (props.status) {
+      case 201:
+        props.messageAction("Schedule is created", "success");
+        break;
+      case 400:
+        props.messageAction("Bad Request", "error");
+      case 500:
+        props.messageAction("Internal Server Error", "error");
+    }
+  }, [props.status]);
 
   return (
     <div className="create">
@@ -138,7 +150,14 @@ const mapStateToProps = (state) => {
   return {
     postIsChanged: state.posts.postIsChanged,
     post: state.posts.post,
+    status: state.posts.status,
+    message: state.message.message,
+    type: state.message.type,
   };
 };
 
-export default connect(mapStateToProps)(Create);
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ messageAction }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Create);

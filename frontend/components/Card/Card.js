@@ -12,7 +12,7 @@ export default function Card(props) {
       <Link href={`/posts/${post?._id}`}>
         <div
           className="post-card card border-0 shadow-sm mb-5 bg-white rounded-3"
-          style={{ width: "14rem" }}
+          style={{ width: "16rem" }}
         >
           <img
             src={post?.photo}

@@ -13,6 +13,7 @@ export const FAILED_DELETE_POST = "FAILED_DELETE_POST";
 export const CONFIRMED_GET_POST = "CONFIRMED_GET_POST";
 export const COMMENTS = "COMMENTS";
 export const COMMENTS_ERROR = "COMMENTS_ERROR";
+export const STATUS = "STATUS";
 
 //get posts
 
@@ -87,11 +88,19 @@ export function postCreate(formData) {
           type: CONFIRMED_CREATE_POST,
           payload: response.data,
         });
+        dispatch({
+          type: STATUS,
+          payload: response.status,
+        });
       })
       .catch((e) => {
         dispatch({
           type: FAILED_CREATE_POST,
           payload: e.response,
+        });
+        dispatch({
+          type: STATUS,
+          payload: e.response.status,
         });
       });
   };
@@ -106,11 +115,19 @@ export function deletePost(postId) {
           type: CONFIRMED_DELETE_POST,
           payload: response.data,
         });
+        dispatch({
+          type: STATUS,
+          payload: response.status,
+        });
       })
       .catch((error) => {
         dispatch({
           type: FAILED_DELETE_POST,
           payload: error.response,
+        });
+        dispatch({
+          type: STATUS,
+          payload: error.response.status,
         });
       });
   };
@@ -131,11 +148,19 @@ export function edit(id, formData) {
           type: CONFIRMED_EDIT_POST,
           payload: response.data,
         });
+        dispatch({
+          type: STATUS,
+          payload: response.status,
+        });
       })
       .catch((error) => {
         dispatch({
           type: FAILED_EDIT_POST,
           payload: error.response,
+        });
+        dispatch({
+          type: STATUS,
+          payload: error.response.status,
         });
       });
   };
