@@ -15,5 +15,5 @@ To run frontend use this command:
 
 ```
 cd frontend
-npm run dev
+yarn dev
 ```
